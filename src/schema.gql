@@ -1,0 +1,123 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Sucursal {
+  R11Id: ID!
+  R11NumSuc: String!
+  R11Nom: String!
+}
+
+type Usuario {
+  R12Id: String!
+  R12Ni: String!
+  R12Nom: String!
+  R12Suc_id: String!
+  R12Rol: String!
+  R12Activ: Boolean!
+  sucursal: Sucursal!
+}
+
+type Categoria {
+  R14Id: String!
+  R14Nom: String!
+  R14Activ: Boolean!
+}
+
+type Producto {
+  R13Id: String!
+  R13Nom: String!
+  R13Cat_id: ID!
+  R13Activ: Boolean!
+  R13Coop_id: String!
+  categoria: Categoria!
+}
+
+type Cooperativa {
+  R17Id: ID!
+  R17Nom: String!
+  R17Activ: Boolean!
+  R17Logo: String!
+  sucursales: [Sucursal!]!
+}
+
+type LimitePrudencial {
+  R18Id: String!
+  R18Importe: Int!
+  R18Coop_id: String!
+  cooperativa: Cooperativa!
+}
+
+type Query {
+  productos: [Producto!]!
+  usuarios(role: ValidRoles): [Usuario!]!
+  usuario(ni: String!): Usuario!
+  findLastLimitePrudencial: LimitePrudencial!
+  cooperativas: [Cooperativa!]!
+  cooperativa(id: ID!): Cooperativa!
+  sucursales: [Sucursal!]!
+  sucursal(id: ID!): Sucursal!
+  categorias: [Categoria!]!
+  categoria(id: ID!): Categoria!
+}
+
+enum ValidRoles {
+  admin
+  ejecutivo
+  supervisor
+  superUser
+}
+
+type Mutation {
+  createProducto(createProductoInput: CreateProductoInput!): Producto!
+  updateProducto(updateProductoInput: UpdateProductoInput!): Producto!
+  activateProducto(name: String!): Producto!
+  desactivateProducto(id: ID!): Producto!
+  createUsuario(createUsuarioInput: CreateUsuarioInput!): Usuario!
+  desactivateUser(id: ID!): Usuario!
+  activateUser(userNI: String!): Usuario!
+  createLimitePrudencial(createLimitePrudencialInput: CreateLimitePrudencialInput!): LimitePrudencial!
+  createCooperativa(createCooperativaInput: CreateCooperativaInput!): Cooperativa!
+  updateCooperativa(updateCooperativaInput: UpdateCooperativaInput!): Cooperativa!
+  activateCooperativa(id: ID!): Cooperativa!
+  desactivateCooperativa(id: ID!): Cooperativa!
+  createCategoria(createCategoriaInput: CreateCategoriaInput!): Categoria!
+}
+
+input CreateProductoInput {
+  R13Nom: String!
+  R13Cat_id: ID!
+}
+
+input UpdateProductoInput {
+  R13Nom: String
+  R13Cat_id: ID
+  id: ID!
+}
+
+input CreateUsuarioInput {
+  R12Ni: String!
+  R12Nom: String!
+  R12Password: String!
+  R12Rol: ValidRoles!
+  R12Suc_id: ID!
+}
+
+input CreateLimitePrudencialInput {
+  R18Importe: Int!
+}
+
+input CreateCooperativaInput {
+  R17Nom: String!
+  R17Logo: String!
+}
+
+input UpdateCooperativaInput {
+  R17Nom: String
+  R17Logo: String
+  id: ID!
+}
+
+input CreateCategoriaInput {
+  R14Nom: String!
+}
