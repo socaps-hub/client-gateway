@@ -79,7 +79,7 @@ type Mutation {
   createLimitePrudencial(createLimitePrudencialInput: CreateLimitePrudencialInput!): LimitePrudencial!
   createCooperativa(createCooperativaInput: CreateCooperativaInput!): Cooperativa!
   updateCooperativa(updateCooperativaInput: UpdateCooperativaInput!): Cooperativa!
-  activateCooperativa(id: ID!): Cooperativa!
+  activateCooperativa(name: String!): Cooperativa!
   desactivateCooperativa(id: ID!): Cooperativa!
   createCategoria(createCategoriaInput: CreateCategoriaInput!): Categoria!
 }

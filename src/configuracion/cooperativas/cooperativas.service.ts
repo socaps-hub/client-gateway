@@ -28,8 +28,8 @@ export class CooperativasService {
     return this._client.send( cooperativasPatterns.UPDATE, { id, updateCooperativaInput } )
   }
 
-  activate(id: string) {
-    return this._client.send( cooperativasPatterns.ACTIVATE, { id } )
+  activate(name: string) {
+    return this._client.send( cooperativasPatterns.ACTIVATE, { name } )
   }
 
   desactivate(id: string) {
