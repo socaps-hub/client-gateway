@@ -33,6 +33,6 @@ export class CooperativasService {
   }
 
   desactivate(id: string) {
-    return this._client.send( cooperativasPatterns.ACTIVATE, { id } )
+    return this._client.send( cooperativasPatterns.DESACTIVATE, { id } )
   }
 }
