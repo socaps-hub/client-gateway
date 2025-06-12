@@ -5,6 +5,7 @@ import { AuthGraphQLGuard } from 'src/auth/guards/auth-graphql.guard';
 import { GetUser } from 'src/auth/decorators/user.decorator';
 import { Usuario } from 'src/supervision/usuarios/entities/usuario.entity';
 import { Sucursal } from './entities/sucursal.entity';
+import { CreateSucursaleInput } from './dto/inputs/create-sucursale.input';
 
 @Resolver(() => Sucursal)
 @UseGuards( AuthGraphQLGuard )
@@ -12,10 +13,13 @@ export class SucursalesResolver {
 
   constructor(private readonly sucursalesService: SucursalesService) {}
 
-  // @Mutation(() => Sucursale)
-  // createSucursale(@Args('createSucursaleInput') createSucursaleInput: CreateSucursaleInput) {
-  //   return this.sucursalesService.create(createSucursaleInput);
-  // }
+  @Mutation(() => Sucursal)
+  createSucursal(
+    @Args('createSucursalInput') createSucursalInput: CreateSucursaleInput,
+    @GetUser('graphql') user: Usuario
+  ) {
+    return this.sucursalesService.create(createSucursalInput, user);
+  }
 
   @Query(() => [Sucursal], { name: 'sucursales' })
   findAll(
