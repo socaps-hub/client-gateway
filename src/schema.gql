@@ -38,8 +38,15 @@ type Cooperativa {
   R17Nom: String!
   R17Activ: Boolean!
   R17Logo: String!
+  R17Creada_en: DateTime!
   sucursales: [Sucursal!]!
+  usuarios: [Usuario!]!
 }
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type LimitePrudencial {
   R18Id: String!
@@ -54,8 +61,10 @@ type Query {
   usuario(ni: String!): Usuario!
   findLastLimitePrudencial: LimitePrudencial!
   cooperativas: [Cooperativa!]!
+  cooperativasWithEjecutivosOnly: [Cooperativa!]!
   cooperativa(id: ID!): Cooperativa!
   sucursales: [Sucursal!]!
+  sucursalesByCoopId(id: ID!): [Sucursal!]!
   sucursal(id: ID!): Sucursal!
   categorias: [Categoria!]!
   categoria(id: ID!): Categoria!
@@ -74,6 +83,7 @@ type Mutation {
   activateProducto(name: String!): Producto!
   desactivateProducto(id: ID!): Producto!
   createUsuario(createUsuarioInput: CreateUsuarioInput!): Usuario!
+  updateUsuario(updateUsuarioInput: UpdateUsuarioInput!): Usuario!
   desactivateUser(id: ID!): Usuario!
   activateUser(userNI: String!): Usuario!
   createLimitePrudencial(createLimitePrudencialInput: CreateLimitePrudencialInput!): LimitePrudencial!
@@ -102,6 +112,17 @@ input CreateUsuarioInput {
   R12Password: String!
   R12Rol: ValidRoles!
   R12Suc_id: ID!
+  R12Coop_id: ID!
+}
+
+input UpdateUsuarioInput {
+  R12Ni: String
+  R12Nom: String
+  R12Password: String
+  R12Rol: ValidRoles
+  R12Suc_id: ID
+  R12Coop_id: ID
+  id: ID!
 }
 
 input CreateLimitePrudencialInput {

@@ -22,6 +22,10 @@ export class SucursalesService {
     return this._client.send( sucursalesPatterns.GET_ALL, { user } );
   }
 
+  findAllByCoopId(id: string) {
+    return this._client.send( sucursalesPatterns.GET_ALL_BY_COOP_ID, { id } );
+  }
+
   findOne(id: string, user: Usuario) {
     return this._client.send( sucursalesPatterns.GET_BY_ID, { id, user } );
   }

@@ -6,6 +6,7 @@ import { GetUser } from 'src/auth/decorators/user.decorator';
 import { ValidRolesArgs } from './dto/args/roles.arg';
 import { Usuario } from './entities/usuario.entity';
 import { CreateUsuarioInput } from './dto/inputs/create-usuario.input';
+import { UpdateUsuarioInput } from './dto/inputs/update-usuario.input';
 
 @Resolver(() => Usuario)
 @UseGuards( AuthGraphQLGuard )
@@ -16,9 +17,8 @@ export class UsuariosResolver {
   @Mutation(() => Usuario)
   createUsuario(
     @Args('createUsuarioInput') createUsuarioInput: CreateUsuarioInput,
-    @GetUser('graphql') user: Usuario
   ) {
-    return this.usuariosService.create(createUsuarioInput, user);
+    return this.usuariosService.create( createUsuarioInput );
   }
 
   @Query(() => [Usuario], { name: 'usuarios' })
@@ -36,10 +36,12 @@ export class UsuariosResolver {
     return this.usuariosService.findByNI(ni, true);
   }
 
-  // @Mutation(() => Usuario)
-  // updateUsuario(@Args('updateUsuarioInput') updateUsuarioInput: UpdateUsuarioInput) {
-  //   return this.usuariosService.update(updateUsuarioInput.id, updateUsuarioInput);
-  // }
+  @Mutation(() => Usuario)
+  updateUsuario(
+    @Args('updateUsuarioInput') updateUsuarioInput: UpdateUsuarioInput
+  ) {
+    return this.usuariosService.update(updateUsuarioInput);
+  }
 
   @Mutation(() => Usuario)
   desactivateUser(

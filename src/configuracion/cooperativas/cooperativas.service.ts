@@ -19,6 +19,10 @@ export class CooperativasService {
   findAll() {
     return this._client.send( cooperativasPatterns.GET_ALL, {} )
   }
+  
+  findAllWithEjecutivos() {
+    return this._client.send( cooperativasPatterns.GET_ALL_WITH_EJECUTIVOS, {} )
+  }
 
   findOne(id: string) {
     return this._client.send( cooperativasPatterns.GET_BY_ID, { id } )

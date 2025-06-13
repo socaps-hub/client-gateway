@@ -5,6 +5,7 @@ import { Usuario } from 'src/supervision/usuarios/entities/usuario.entity';
 import { ValidRoles } from 'src/auth/enums/valid-roles.enum';
 import { usuariosPatterns } from 'src/common/constants/usuarios/usuariosPatterns';
 import { CreateUsuarioInput } from './dto/inputs/create-usuario.input';
+import { UpdateUsuarioInput } from './dto/inputs/update-usuario.input';
 
 @Injectable()
 export class UsuariosService {
@@ -13,8 +14,8 @@ export class UsuariosService {
     @Inject(NATS_SERVICE) private readonly client: ClientProxy
   ) {}
 
-  create(createUsuarioInput: CreateUsuarioInput, usuario: Usuario) {
-    return this.client.send( usuariosPatterns.CREATE, { createUsuarioInput, usuario } );
+  create(createUsuarioInput: CreateUsuarioInput) {
+    return this.client.send( usuariosPatterns.CREATE, { createUsuarioInput } );
   }
 
   findAll(role: ValidRoles, usuario: Usuario) {
@@ -27,6 +28,10 @@ export class UsuariosService {
 
   findByID(id: string) {
     return this.client.send( usuariosPatterns.GET_BY_ID, { id } );
+  }
+
+  update(updateUsuarioInput: UpdateUsuarioInput) {
+    return this.client.send( usuariosPatterns.UPDATE, updateUsuarioInput);
   }
 
   desactivate(id: string) {
