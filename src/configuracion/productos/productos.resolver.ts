@@ -2,12 +2,12 @@ import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ParseUUIDPipe, UseGuards } from '@nestjs/common';
 
 import { ProductosService } from './productos.service';
-import { Usuario } from 'src/supervision/usuarios/entities/usuario.entity';
-import { Producto } from './entities/producto.entity';
 import { GetUser } from 'src/auth/decorators/user.decorator';
 import { AuthGraphQLGuard } from 'src/auth/guards/auth-graphql.guard';
 import { CreateProductoInput } from './dto/inputs/create-producto.input';
 import { UpdateProductoInput } from './dto/inputs/update-producto.input';
+import { Usuario } from '../usuarios/entities/usuario.entity';
+import { Producto } from './entities/producto.entity';
 
 @Resolver(() => Producto)
 @UseGuards( AuthGraphQLGuard )
@@ -18,9 +18,8 @@ export class ProductosResolver {
   @Mutation(() => Producto)
   createProducto(
     @Args('createProductoInput') createProductoInput: CreateProductoInput,
-    @GetUser('graphql') user: Usuario
   ) {
-    return this.productosService.create(createProductoInput, user);
+    return this.productosService.create(createProductoInput);
   }
 
   @Query(() => [Producto], { name: 'productos' })
@@ -33,17 +32,16 @@ export class ProductosResolver {
   @Mutation(() => Producto)
   updateProducto(
     @Args('updateProductoInput') updateProductoInput: UpdateProductoInput,
-    @GetUser() user: Usuario
   ) {
-    return this.productosService.update(updateProductoInput.id, updateProductoInput, user);
+    return this.productosService.update(updateProductoInput.id, updateProductoInput);
   }
 
   @Mutation(() => Producto)
   activateProducto(
     @Args('name', { type: () => String }) name: string,
-    @GetUser() user: Usuario
+    @Args('coopId', { type: () => String }) coopId: string,
   ) {
-    return this.productosService.activate(name, user);
+    return this.productosService.activate(name, coopId);
   }
 
   @Mutation(() => Producto)

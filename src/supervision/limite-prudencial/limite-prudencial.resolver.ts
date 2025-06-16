@@ -3,10 +3,10 @@ import { UseGuards } from '@nestjs/common';
 
 import { LimitePrudencialService } from './limite-prudencial.service';
 import { LimitePrudencial } from './entities/limite-prudencial.entity';
-import { Usuario } from '../usuarios/entities/usuario.entity';
 import { CreateLimitePrudencialInput } from './dto/inputs/create-limite-prudencial.input';
 import { AuthGraphQLGuard } from 'src/auth/guards/auth-graphql.guard';
 import { GetUser } from 'src/auth/decorators/user.decorator';
+import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 
 @Resolver(() => LimitePrudencial)
 @UseGuards( AuthGraphQLGuard )

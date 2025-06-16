@@ -1,9 +1,9 @@
 export const usuariosPatterns = {
-    CREATE: 'supervision.usuarios.create',
-    GET_ALL: 'supervision.usuarios.getAll',
-    GET_BY_NI: 'supervision.usuarios.getByNI',
-    GET_BY_ID: 'supervision.usuarios.getByID',
-    UPDATE: 'supervision.usuarios.update',
-    DESACTIVATE: 'supervision.usuarios.desactivate',
-    ACTIVATE: 'supervision.usuarios.activate',
+    CREATE: 'config.usuarios.create',
+    GET_ALL: 'config.usuarios.getAll',
+    GET_BY_NI: 'config.usuarios.getByNI',
+    GET_BY_ID: 'config.usuarios.getByID',
+    UPDATE: 'config.usuarios.update',
+    DESACTIVATE: 'config.usuarios.desactivate',
+    ACTIVATE: 'config.usuarios.activate',
 }

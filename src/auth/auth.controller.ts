@@ -5,8 +5,8 @@ import { LoginUserDto } from './dto/login-user.dto';
 import { AuthGuard } from './guards/auth.guard';
 import { GetUser } from './decorators/user.decorator';
 import { Token } from './decorators/token.decorator';
-import { Usuario } from '../supervision/usuarios/entities/usuario.entity';
 import { catchError } from 'rxjs';
+import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 
 @Controller('auth')
 export class AuthController {

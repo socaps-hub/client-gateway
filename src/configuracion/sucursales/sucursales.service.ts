@@ -1,10 +1,10 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { Usuario } from "src/supervision/usuarios/entities/usuario.entity";
 import { Sucursal } from "./entities/sucursal.entity";
 import { ClientProxy } from "@nestjs/microservices";
 import { NATS_SERVICE } from "src/config/services";
 import { sucursalesPatterns } from "src/common/constants";
 import { CreateSucursaleInput } from "./dto/inputs/create-sucursale.input";
+import { Usuario } from "../usuarios/entities/usuario.entity";
 
 
 @Injectable()

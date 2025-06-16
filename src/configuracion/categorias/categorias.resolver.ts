@@ -5,8 +5,8 @@ import { CategoriasService } from './categorias.service';
 import { Categoria } from './entities/categoria.entity';
 import { CreateCategoriaInput } from './dto/inputs/create-categoria.input';
 import { AuthGraphQLGuard } from 'src/auth/guards/auth-graphql.guard';
-import { Usuario } from 'src/supervision/usuarios/entities/usuario.entity';
 import { GetUser } from 'src/auth/decorators/user.decorator';
+import { Usuario } from '../usuarios/entities/usuario.entity';
 
 @Resolver(() => Categoria)
 @UseGuards( AuthGraphQLGuard )

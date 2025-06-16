@@ -3,6 +3,8 @@ import { NatsModule } from 'src/transports/nats.module';
 import { CooperativasModule } from './cooperativas/cooperativas.module';
 import { SucursalesModule } from './sucursales/sucursales.module';
 import { CategoriasModule } from './categorias/categorias.module';
+import { UsuariosModule } from './usuarios/usuarios.module';
+import { ProductosModule } from './productos/productos.module';
 
 @Module({
     imports: [
@@ -10,6 +12,8 @@ import { CategoriasModule } from './categorias/categorias.module';
         SucursalesModule,
         NatsModule,
         CategoriasModule,
+        UsuariosModule,
+        ProductosModule,
     ]
 })
 export class ConfiguracionModule {}

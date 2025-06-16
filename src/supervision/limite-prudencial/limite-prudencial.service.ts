@@ -2,8 +2,8 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { NATS_SERVICE } from 'src/config';
 import { CreateLimitePrudencialInput } from './dto/inputs/create-limite-prudencial.input';
-import { Usuario } from '../usuarios/entities/usuario.entity';
 import { limitePrudencialPatterns } from 'src/common/constants/limite-prudencial/limite-prudencialPatterns';
+import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 
 @Injectable()
 export class LimitePrudencialService {

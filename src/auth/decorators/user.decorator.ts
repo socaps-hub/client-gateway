@@ -1,6 +1,6 @@
 import { createParamDecorator, ExecutionContext, InternalServerErrorException } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
-import { Usuario } from '../../supervision/usuarios/entities/usuario.entity';
+import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 
 export const GetUser = createParamDecorator(
   (type: 'rest'|'graphql', context: ExecutionContext) => {

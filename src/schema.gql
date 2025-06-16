@@ -41,6 +41,7 @@ type Cooperativa {
   R17Creada_en: DateTime!
   sucursales: [Sucursal!]!
   usuarios: [Usuario!]!
+  productos: [Producto!]!
 }
 
 """
@@ -56,9 +57,6 @@ type LimitePrudencial {
 }
 
 type Query {
-  productos: [Producto!]!
-  usuarios(role: ValidRoles): [Usuario!]!
-  usuario(ni: String!): Usuario!
   findLastLimitePrudencial: LimitePrudencial!
   cooperativas: [Cooperativa!]!
   cooperativasWithEjecutivosOnly: [Cooperativa!]!
@@ -68,6 +66,9 @@ type Query {
   sucursal(id: ID!): Sucursal!
   categorias: [Categoria!]!
   categoria(id: ID!): Categoria!
+  usuarios(role: ValidRoles): [Usuario!]!
+  usuario(ni: String!): Usuario!
+  productos: [Producto!]!
 }
 
 enum ValidRoles {
@@ -78,14 +79,6 @@ enum ValidRoles {
 }
 
 type Mutation {
-  createProducto(createProductoInput: CreateProductoInput!): Producto!
-  updateProducto(updateProductoInput: UpdateProductoInput!): Producto!
-  activateProducto(name: String!): Producto!
-  desactivateProducto(id: ID!): Producto!
-  createUsuario(createUsuarioInput: CreateUsuarioInput!): Usuario!
-  updateUsuario(updateUsuarioInput: UpdateUsuarioInput!): Usuario!
-  desactivateUser(id: ID!): Usuario!
-  activateUser(userNI: String!): Usuario!
   createLimitePrudencial(createLimitePrudencialInput: CreateLimitePrudencialInput!): LimitePrudencial!
   createCooperativa(createCooperativaInput: CreateCooperativaInput!): Cooperativa!
   updateCooperativa(updateCooperativaInput: UpdateCooperativaInput!): Cooperativa!
@@ -93,36 +86,14 @@ type Mutation {
   desactivateCooperativa(id: ID!): Cooperativa!
   createSucursal(createSucursalInput: CreateSucursaleInput!): Sucursal!
   createCategoria(createCategoriaInput: CreateCategoriaInput!): Categoria!
-}
-
-input CreateProductoInput {
-  R13Nom: String!
-  R13Cat_id: ID!
-}
-
-input UpdateProductoInput {
-  R13Nom: String
-  R13Cat_id: ID
-  id: ID!
-}
-
-input CreateUsuarioInput {
-  R12Ni: String!
-  R12Nom: String!
-  R12Password: String!
-  R12Rol: ValidRoles!
-  R12Suc_id: ID!
-  R12Coop_id: ID!
-}
-
-input UpdateUsuarioInput {
-  R12Ni: String
-  R12Nom: String
-  R12Password: String
-  R12Rol: ValidRoles
-  R12Suc_id: ID
-  R12Coop_id: ID
-  id: ID!
+  createUsuario(createUsuarioInput: CreateUsuarioInput!): Usuario!
+  updateUsuario(updateUsuarioInput: UpdateUsuarioInput!): Usuario!
+  desactivateUser(id: ID!): Usuario!
+  activateUser(userNI: String!): Usuario!
+  createProducto(createProductoInput: CreateProductoInput!): Producto!
+  updateProducto(updateProductoInput: UpdateProductoInput!): Producto!
+  activateProducto(name: String!, coopId: String!): Producto!
+  desactivateProducto(id: ID!): Producto!
 }
 
 input CreateLimitePrudencialInput {
@@ -148,4 +119,36 @@ input CreateSucursaleInput {
 
 input CreateCategoriaInput {
   R14Nom: String!
+}
+
+input CreateUsuarioInput {
+  R12Ni: String!
+  R12Nom: String!
+  R12Password: String!
+  R12Rol: ValidRoles!
+  R12Suc_id: ID!
+  R12Coop_id: ID!
+}
+
+input UpdateUsuarioInput {
+  R12Ni: String
+  R12Nom: String
+  R12Password: String
+  R12Rol: ValidRoles
+  R12Suc_id: ID
+  R12Coop_id: ID
+  id: ID!
+}
+
+input CreateProductoInput {
+  R13Nom: String!
+  R13Cat_id: ID!
+  R13Coop_id: ID!
+}
+
+input UpdateProductoInput {
+  R13Nom: String
+  R13Cat_id: ID
+  R13Coop_id: ID
+  id: ID!
 }
