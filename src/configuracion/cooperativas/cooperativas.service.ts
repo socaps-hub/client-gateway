@@ -4,6 +4,7 @@ import { NATS_SERVICE } from 'src/config';
 import { CreateCooperativaInput } from './dto/inputs/create-cooperativa.input';
 import { UpdateCooperativaInput } from './dto/inputs/update-cooperativa.input';
 import { cooperativasPatterns } from 'src/common/constants/cooperativas/cooperativasPatterns';
+import { ValidRoles } from 'src/auth/enums/valid-roles.enum';
 
 @Injectable()
 export class CooperativasService {
@@ -16,8 +17,8 @@ export class CooperativasService {
     return this._client.send( cooperativasPatterns.CREATE, createCooperativaInput )
   }
 
-  findAll() {
-    return this._client.send( cooperativasPatterns.GET_ALL, {} )
+  findAll( role: ValidRoles ) {
+    return this._client.send( cooperativasPatterns.GET_ALL, { role } )
   }
   
   findAllWithEjecutivos() {

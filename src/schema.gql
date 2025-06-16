@@ -58,7 +58,7 @@ type LimitePrudencial {
 
 type Query {
   findLastLimitePrudencial: LimitePrudencial!
-  cooperativas: [Cooperativa!]!
+  cooperativas(role: ValidRoles): [Cooperativa!]!
   cooperativasWithEjecutivosOnly: [Cooperativa!]!
   cooperativa(id: ID!): Cooperativa!
   sucursales: [Sucursal!]!

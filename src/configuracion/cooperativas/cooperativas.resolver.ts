@@ -6,6 +6,7 @@ import { CreateCooperativaInput } from './dto/inputs/create-cooperativa.input';
 import { UpdateCooperativaInput } from './dto/inputs/update-cooperativa.input';
 import { ParseUUIDPipe, UseGuards } from '@nestjs/common';
 import { AuthGraphQLGuard } from 'src/auth/guards/auth-graphql.guard';
+import { ValidRolesArgs } from '../usuarios/dto/args/roles.arg';
 
 @Resolver(() => Cooperativa)
 @UseGuards(AuthGraphQLGuard)
@@ -20,8 +21,10 @@ export class CooperativasResolver {
   }
 
   @Query(() => [Cooperativa], { name: 'cooperativas' })
-  findAll() {
-    return this.cooperativasService.findAll();
+  findAll(
+    @Args() validRoles: ValidRolesArgs
+  ) {
+    return this.cooperativasService.findAll( validRoles.role );
   }
 
   @Query(() => [Cooperativa], { name: 'cooperativasWithEjecutivosOnly' })
