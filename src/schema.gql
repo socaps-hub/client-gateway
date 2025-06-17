@@ -33,21 +33,21 @@ type Producto {
   categoria: Categoria!
 }
 
+type Grupo {
+  R02Id: String!
+  R02Nom: String!
+}
+
 type Cooperativa {
   R17Id: ID!
   R17Nom: String!
   R17Activ: Boolean!
   R17Logo: String!
-  R17Creada_en: DateTime!
   sucursales: [Sucursal!]!
   usuarios: [Usuario!]!
   productos: [Producto!]!
+  grupos: [Grupo!]!
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type LimitePrudencial {
   R18Id: String!
@@ -58,6 +58,7 @@ type LimitePrudencial {
 
 type Query {
   findLastLimitePrudencial: LimitePrudencial!
+  grupos(coopId: ID!): [Grupo!]!
   cooperativas(role: ValidRoles): [Cooperativa!]!
   cooperativasWithEjecutivosOnly: [Cooperativa!]!
   cooperativa(id: ID!): Cooperativa!
@@ -80,6 +81,9 @@ enum ValidRoles {
 
 type Mutation {
   createLimitePrudencial(createLimitePrudencialInput: CreateLimitePrudencialInput!): LimitePrudencial!
+  createGrupo(createGrupoInput: CreateGrupoInput!): Grupo!
+  updateGrupo(updateGrupoInput: UpdateGrupoInput!): Grupo!
+  removeGrupo(id: ID!): Grupo!
   createCooperativa(createCooperativaInput: CreateCooperativaInput!): Cooperativa!
   updateCooperativa(updateCooperativaInput: UpdateCooperativaInput!): Cooperativa!
   activateCooperativa(name: String!): Cooperativa!
@@ -98,6 +102,17 @@ type Mutation {
 
 input CreateLimitePrudencialInput {
   R18Importe: Int!
+}
+
+input CreateGrupoInput {
+  R02Nom: String!
+  R02Coop_id: ID!
+}
+
+input UpdateGrupoInput {
+  R02Nom: String
+  R02Coop_id: ID
+  id: ID!
 }
 
 input CreateCooperativaInput {

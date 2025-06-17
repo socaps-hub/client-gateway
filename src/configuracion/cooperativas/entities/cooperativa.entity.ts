@@ -2,6 +2,7 @@ import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { Producto } from 'src/configuracion/productos/entities/producto.entity';
 import { Sucursal } from 'src/configuracion/sucursales/entities/sucursal.entity';
 import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
+import { Grupo } from 'src/supervision/grupos/entities/grupo.entity';
 
 @ObjectType()
 export class Cooperativa {
@@ -18,7 +19,7 @@ export class Cooperativa {
   @Field( () => String )
   R17Logo: string
   
-  @Field( () => Date )
+  // @Field( () => Date )
   R17Creada_en: Date
 
   @Field( () => [Sucursal])
@@ -26,8 +27,11 @@ export class Cooperativa {
   
   @Field( () => [Usuario])
   usuarios: Usuario[]
-
+  
   @Field( () => [Producto])
   productos: Producto[]
+
+  @Field( () => [Grupo] )
+  grupos: Grupo[]
 
 }
