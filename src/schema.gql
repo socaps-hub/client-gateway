@@ -33,11 +33,20 @@ type Producto {
   categoria: Categoria!
 }
 
+type Elemento {
+  R04Id: ID!
+  R04R_id: ID!
+  R04Nom: String!
+  R04Imp: String!
+  rubro: Rubro
+}
+
 type Rubro {
   R03Id: ID!
   R03G_id: ID!
   R03Nom: String!
   grupo: Grupo
+  elementos: [Elemento!]
 }
 
 type Grupo {
@@ -69,14 +78,6 @@ type LimitePrudencial {
   R18Importe: Int!
   R18Coop_id: String!
   cooperativa: Cooperativa!
-}
-
-type Elemento {
-  R04Id: ID!
-  R04R_id: ID!
-  R04Nom: String!
-  R04Imp: String!
-  rubro: Rubro
 }
 
 type Query {
