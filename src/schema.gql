@@ -56,9 +56,18 @@ type LimitePrudencial {
   cooperativa: Cooperativa!
 }
 
+type Rubro {
+  R03Id: ID!
+  R03G_id: ID!
+  R03Nom: String!
+  grupo: Grupo
+}
+
 type Query {
   findLastLimitePrudencial: LimitePrudencial!
   grupos(coopId: ID!): [Grupo!]!
+  rubros(coopId: String!): [Rubro!]!
+  rubro(id: ID!): Rubro!
   cooperativas(role: ValidRoles): [Cooperativa!]!
   cooperativasWithEjecutivosOnly: [Cooperativa!]!
   cooperativa(id: ID!): Cooperativa!
@@ -84,6 +93,9 @@ type Mutation {
   createGrupo(createGrupoInput: CreateGrupoInput!): Grupo!
   updateGrupo(updateGrupoInput: UpdateGrupoInput!): Grupo!
   removeGrupo(id: ID!): Grupo!
+  createRubro(createRubroInput: CreateRubroInput!): Rubro!
+  updateRubro(updateRubroInput: UpdateRubroInput!): Rubro!
+  removeRubro(id: ID!): Rubro!
   createCooperativa(createCooperativaInput: CreateCooperativaInput!): Cooperativa!
   updateCooperativa(updateCooperativaInput: UpdateCooperativaInput!): Cooperativa!
   activateCooperativa(name: String!): Cooperativa!
@@ -112,6 +124,17 @@ input CreateGrupoInput {
 input UpdateGrupoInput {
   R02Nom: String
   R02Coop_id: ID
+  id: ID!
+}
+
+input CreateRubroInput {
+  R03G_id: ID!
+  R03Nom: String!
+}
+
+input UpdateRubroInput {
+  R03G_id: ID
+  R03Nom: String
   id: ID!
 }
 
