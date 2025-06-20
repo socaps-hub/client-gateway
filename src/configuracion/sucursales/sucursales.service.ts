@@ -5,6 +5,7 @@ import { NATS_SERVICE } from "src/config/services";
 import { sucursalesPatterns } from "src/common/constants";
 import { CreateSucursaleInput } from "./dto/inputs/create-sucursale.input";
 import { Usuario } from "../usuarios/entities/usuario.entity";
+import { UpdateSucursalInput } from "./dto/inputs/update-sucursale.input";
 
 
 @Injectable()
@@ -30,9 +31,9 @@ export class SucursalesService {
     return this._client.send( sucursalesPatterns.GET_BY_ID, { id, user } );
   }
 
-  // update(id: number, updateSucursaleInput: UpdateSucursaleInput) {
-  //   return `This action updates a #${id} sucursale`;
-  // }
+  update(updateSucursalInput: UpdateSucursalInput) {
+    return this._client.send( sucursalesPatterns.UPDATE, { updateSucursalInput } );
+  }
 
   // remove(id: number) {
   //   return `This action removes a #${id} sucursale`;
