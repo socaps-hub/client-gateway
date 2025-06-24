@@ -13,8 +13,8 @@ export class ProductosService {
         @Inject(NATS_SERVICE) private readonly _client: ClientProxy
     ) {}
 
-    getProductos( user: Usuario ) {
-        return this._client.send( productsPatterns.GET_ALL , {usuario: user})
+    getProductos( user: Usuario, categoriaId?: string ) {
+        return this._client.send( productsPatterns.GET_ALL , { usuario: user, categoriaId } )
     }
 
     create( createProductoInput: CreateProductoInput ) {

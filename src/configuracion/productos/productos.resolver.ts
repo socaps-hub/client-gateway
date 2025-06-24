@@ -24,9 +24,10 @@ export class ProductosResolver {
 
   @Query(() => [Producto], { name: 'productos' })
   findAll(
-    @GetUser('graphql') user: Usuario
+    @GetUser('graphql') user: Usuario,
+    @Args('categoriaId', { type: () => String, nullable: true }) categoriaId?: string,
   ) {
-    return this.productosService.getProductos(user);
+    return this.productosService.getProductos(user, categoriaId);
   }
 
   @Mutation(() => Producto)
