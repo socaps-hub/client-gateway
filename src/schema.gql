@@ -112,6 +112,24 @@ type Prestamo {
   cooperativa: Cooperativa
 }
 
+type EvaluacionFase1 {
+  R05Id: ID!
+  R05P_num: String!
+  R05E_id: String!
+  R05Res: ResFaseI!
+  R05Ev_por: String!
+  R05Ev_en: String!
+  elemento: Elemento
+  evaluador: Usuario
+  prestamo: Prestamo
+}
+
+enum ResFaseI {
+  C
+  I
+  NA
+}
+
 type Query {
   findLastLimitePrudencial: LimitePrudencial!
   grupos(coopId: ID!): [Grupo!]!
@@ -121,6 +139,7 @@ type Query {
   elemento(id: ID!): Elemento!
   prestamos: [Prestamo!]!
   prestamo(id: String!): Prestamo!
+  evaluacionesFase1(prestamoId: ID!): [EvaluacionFase1!]!
   cooperativas(role: ValidRoles): [Cooperativa!]!
   cooperativasWithEjecutivosOnly: [Cooperativa!]!
   cooperativa(id: ID!): Cooperativa!
@@ -155,6 +174,8 @@ type Mutation {
   createPrestamo(createPrestamoInput: CreatePrestamoInput!): Prestamo!
   updatePrestamo(updatePrestamoInput: UpdatePrestamoInput!): Prestamo!
   removePrestamo(id: String!): Prestamo!
+  createEvaluacionFase1(createEvaluacionFase1Input: CreateEvaluacionFase1Input!): EvaluacionFase1!
+  updateEvaluacionFase1(updateEvaluacionFase1Input: UpdateEvaluacionFase1Input!): EvaluacionFase1!
   createCooperativa(createCooperativaInput: CreateCooperativaInput!): Cooperativa!
   updateCooperativa(updateCooperativaInput: UpdateCooperativaInput!): Cooperativa!
   activateCooperativa(name: String!): Cooperativa!
@@ -263,6 +284,19 @@ input UpdatePrestamoInput {
   R01Est: String
   R01Activ: Boolean
   R01Coop_id: ID
+  id: ID!
+}
+
+input CreateEvaluacionFase1Input {
+  R05P_num: ID!
+  R05E_id: ID!
+  R05Res: ResFaseI!
+}
+
+input UpdateEvaluacionFase1Input {
+  R05P_num: ID
+  R05E_id: ID
+  R05Res: ResFaseI
   id: ID!
 }
 
