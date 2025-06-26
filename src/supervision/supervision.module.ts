@@ -4,6 +4,7 @@ import { LimitePrudencialModule } from './limite-prudencial/limite-prudencial.mo
 import { GruposModule } from './grupos/grupos.module';
 import { RubrosModule } from './rubros/rubros.module';
 import { ElementosModule } from './elementos/elementos.module';
+import { FaseILevantamientoModule } from './fase-i-levantamiento/fase-i-levantamiento.module';
 
 @Module({
   imports: [
@@ -16,6 +17,8 @@ import { ElementosModule } from './elementos/elementos.module';
     RubrosModule,
 
     ElementosModule,
+
+    FaseILevantamientoModule,
   ],
   providers: []
 })
