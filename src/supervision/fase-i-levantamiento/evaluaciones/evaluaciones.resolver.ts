@@ -1,6 +1,6 @@
 import { Resolver, Mutation, Args, Query, ID } from '@nestjs/graphql';
 import { ParseUUIDPipe, UseGuards } from '@nestjs/common';
-import { firstValueFrom } from 'rxjs';
+import { catchError, firstValueFrom } from 'rxjs';
 
 import { CreateEvaluacionFase1Input } from './dto/create-evaluacion-fase1.input';
 import { UpdateEvaluacionFase1Input } from './dto/update-evaluacion-fase1.input';
@@ -9,6 +9,7 @@ import { AuthGraphQLGuard } from 'src/auth/guards/auth-graphql.guard';
 import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 import { EvaluacionesService } from './evaluaciones.service';
 import { GetUser } from 'src/auth/decorators/user.decorator';
+import { BooleanResponse } from 'src/common/dto/boolean-response.object';
 
 @Resolver(() => EvaluacionFase1)
 @UseGuards(AuthGraphQLGuard)
@@ -25,6 +26,21 @@ export class EvaluacionesResolver {
     return await firstValueFrom(
       this.evaluacionesService.create(input, user)
     );
+  }
+
+  @Mutation(() => BooleanResponse)
+  async createEvaluacionesFase1(
+    @Args({ name: 'inputs', type: () => [CreateEvaluacionFase1Input] }) inputs: CreateEvaluacionFase1Input[],
+    @GetUser('graphql') user: Usuario,
+  ) {
+    // return this.evaluacionesService.createManyEvaluaciones(inputs, user)
+    //   .then(success => ({ success }))
+    //   .catch(() => ({ success: false }));
+    return await firstValueFrom(
+      this.evaluacionesService.createManyEvaluaciones(inputs, user)
+    )
+      .then( success => ({ success }))
+      .catch( () => ({ success: false }) )
   }
 
   @Query(() => [EvaluacionFase1], { name: 'evaluacionesFase1' })

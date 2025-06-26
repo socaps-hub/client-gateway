@@ -21,6 +21,13 @@ export class EvaluacionesService {
     );
   }
 
+  createManyEvaluaciones(inputs: CreateEvaluacionFase1Input[], user: Usuario) {
+    return this.client.send<boolean>(
+      evaluacionesFase1Patterns.CREATE_MANY,
+      { inputs, user },
+    );
+  }
+
   findAll(prestamoId: string, user: Usuario) {
     return this.client.send(
       evaluacionesFase1Patterns.GET_ALL,

@@ -35,6 +35,10 @@ export function mapR01ToPrestamo(data: any): Prestamo {
     sucursal: data.sucursal ?? null,
     supervisor: data.supervisor ?? null,
     ejecutivo: data.ejecutivo ?? null,
+
+    // Evaluaciones / Resumen
+    evaluacionesF1: data.evaluacionesF1 || [],
+    resumenF1: data.resumenF1 ? data.resumenF1 : undefined,
   };
 
   // console.log('Prestamo que se va a retornar', prestamo);
