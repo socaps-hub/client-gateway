@@ -12,6 +12,8 @@ import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 import { GetUser } from 'src/auth/decorators/user.decorator';
 import { firstValueFrom } from 'rxjs';
 import { plainToInstance } from 'class-transformer';
+import { UpdateAllPrestamoArgs } from './dto/args/update-all-prestamo.arg';
+import { BooleanResponse } from 'src/common/dto/boolean-response.object';
 
 @Resolver(() => Prestamo)
 @UseGuards(AuthGraphQLGuard)
@@ -64,9 +66,21 @@ export class SolicitudesResolver {
     return mapR01ToPrestamo(prestamo);
   }
 
+  @Mutation(() => BooleanResponse)
+  async updateAllPrestamo(
+    @Args('updateAllPrestamoArgs') updateAllPrestamoArgs: UpdateAllPrestamoArgs,
+    @GetUser('graphql') user: Usuario,
+  ) {
+    return await firstValueFrom(
+      this.solicitudesService.updateAll({ ...updateAllPrestamoArgs, user })
+    )
+      .then( success => success)
+      .catch( (err) => err )
+  }
+
   @Mutation(() => Prestamo)
   async removePrestamo(
-    @Args('id') id: string,
+    @Args('R01NUM') id: string,
     @GetUser('graphql') user: Usuario,
   ): Promise<Prestamo> {
     const prestamo = await firstValueFrom(

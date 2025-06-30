@@ -6,6 +6,8 @@ import { CreatePrestamoInput } from './dto/create-solicitud.input';
 import { UpdatePrestamoInput } from './dto/update-solicitud.input';
 import { solicitudesPatterns } from 'src/common/constants/solicitudes/solicitudesPatterns';
 import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
+import { CreateEvaluacionFase1Input } from '../evaluaciones/dto/create-evaluacion-fase1.input';
+import { CreateResumenFase1Input } from '../evaluaciones/resumen/dto/create-resumen-fase1.input';
 
 @Injectable()
 export class SolicitudesService {
@@ -28,6 +30,18 @@ export class SolicitudesService {
 
   update(updatePrestamoInput: UpdatePrestamoInput, user: Usuario) {
     return this.client.send(solicitudesPatterns.UPDATE, { updatePrestamoInput, user });
+  }
+
+  updateAll(
+    payload: {
+      currentId: string
+      prestamo: UpdatePrestamoInput;
+      evaluaciones: CreateEvaluacionFase1Input[];
+      resumen: CreateResumenFase1Input;
+      user: Usuario;
+    }
+  ) {
+    return this.client.send(solicitudesPatterns.UPDATE_ALL, payload );
   }
 
   remove(id: string, user: Usuario) {
