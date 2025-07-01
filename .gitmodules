@@ -1,0 +1,3 @@
+[submodule "auth-ms"]
+	path = auth-ms
+	url = https://github.com/socaps-hub/auth-ms.git
