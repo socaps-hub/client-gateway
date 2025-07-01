@@ -26,6 +26,7 @@ export function mapR01ToPrestamo(data: any): Prestamo {
     R01ObsM: data.R01ObsM ?? '',
     R01ObsB: data.R01ObsB ?? '',
     R01ObsT: data.R01ObsT ?? '',
+    R01Notas: data.R01Notas ?? '',
     R01Est: data.R01Est,
     R01Activ: data.R01Activ,
     R01Coop_id: data.R01Coop_id,
