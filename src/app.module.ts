@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { NatsModule } from './transports/nats.module';
 import { SupervisionModule } from './supervision/supervision.module';
 import { ConfiguracionModule } from './configuracion/configuracion.module';
+import { HealthCheckModule } from './health-check/health-check.module';
 
 @Module({
   imports: [
@@ -30,6 +31,8 @@ import { ConfiguracionModule } from './configuracion/configuracion.module';
     ConfiguracionModule,
 
     ConfiguracionModule,
+
+    HealthCheckModule,
   ],
   controllers: [],
   providers: [],
