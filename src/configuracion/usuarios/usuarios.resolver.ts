@@ -7,6 +7,8 @@ import { ValidRolesArgs } from './dto/args/roles.arg';
 import { Usuario } from './entities/usuario.entity';
 import { CreateUsuarioInput } from './dto/inputs/create-usuario.input';
 import { UpdateUsuarioInput } from './dto/inputs/update-usuario.input';
+import { ChangePasswordInput } from './dto/inputs/change-password.input';
+import { firstValueFrom } from 'rxjs';
 
 @Resolver(() => Usuario)
 @UseGuards( AuthGraphQLGuard )
@@ -53,5 +55,15 @@ export class UsuariosResolver {
   activateUser(
     @Args('userNI', { type: () => String }) userNI: string) {
     return this.usuariosService.activate(userNI.toUpperCase());
+  }
+
+  @Mutation(() => Boolean)
+  async changePassword(
+    @Args('data') data: ChangePasswordInput,
+    @GetUser('graphql') user: Usuario,
+  ): Promise<boolean> {
+    return await firstValueFrom(
+      this.usuariosService.changePassword(data, user)
+    )
   }
 }

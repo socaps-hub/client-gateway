@@ -6,6 +6,8 @@ import { usuariosPatterns } from 'src/common/constants/usuarios/usuariosPatterns
 import { CreateUsuarioInput } from './dto/inputs/create-usuario.input';
 import { UpdateUsuarioInput } from './dto/inputs/update-usuario.input';
 import { Usuario } from './entities/usuario.entity';
+import { ChangePasswordInput } from './dto/inputs/change-password.input';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class UsuariosService {
@@ -40,5 +42,9 @@ export class UsuariosService {
 
   activate(userNI: string) {
     return this.client.send( usuariosPatterns.ACTIVATE, { userNI } );
+  }
+
+  changePassword( input: ChangePasswordInput, user: Usuario ): Observable<boolean> {
+    return this.client.send( usuariosPatterns.CHANGE_PASSWORD, { input, user } );
   }
 }

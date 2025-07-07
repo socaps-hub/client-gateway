@@ -6,4 +6,5 @@ export const usuariosPatterns = {
     UPDATE: 'config.usuarios.update',
     DESACTIVATE: 'config.usuarios.desactivate',
     ACTIVATE: 'config.usuarios.activate',
+    CHANGE_PASSWORD: 'config.usuarios.changePassword',
 }
