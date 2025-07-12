@@ -14,6 +14,7 @@ import { firstValueFrom } from 'rxjs';
 import { plainToInstance } from 'class-transformer';
 import { UpdateAllPrestamoArgs } from './dto/args/update-all-prestamo.arg';
 import { BooleanResponse } from 'src/common/dto/boolean-response.object';
+import { ValidEstadosArgs } from './dto/args/prestamos-by-estado.arg';
 
 @Resolver(() => Prestamo)
 @UseGuards(AuthGraphQLGuard)
@@ -53,6 +54,17 @@ export class SolicitudesResolver {
       this.solicitudesService.findById(id, user)
     )
     return mapR01ToPrestamo(prestamo);
+  }
+
+  @Query(() => [Prestamo])
+  async prestamosByEstado(
+    @Args() validEstados: ValidEstadosArgs,
+    @GetUser('graphql') user: Usuario,
+  ): Promise<Prestamo[]> {
+    const lista = await firstValueFrom(
+      this.solicitudesService.findByEstado(validEstados.estado, user)
+    )
+    return lista.map(mapR01ToPrestamo);
   }
 
   @Mutation(() => Prestamo)

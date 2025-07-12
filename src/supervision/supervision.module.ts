@@ -5,6 +5,7 @@ import { GruposModule } from './grupos/grupos.module';
 import { RubrosModule } from './rubros/rubros.module';
 import { ElementosModule } from './elementos/elementos.module';
 import { FaseILevantamientoModule } from './fase-i-levantamiento/fase-i-levantamiento.module';
+import { FaseIiSeguimientoModule } from './fase-ii-seguimiento/fase-ii-seguimiento.module';
 
 @Module({
   imports: [
@@ -19,6 +20,8 @@ import { FaseILevantamientoModule } from './fase-i-levantamiento/fase-i-levantam
     ElementosModule,
 
     FaseILevantamientoModule,
+
+    FaseIiSeguimientoModule,
   ],
   providers: []
 })

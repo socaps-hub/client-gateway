@@ -8,6 +8,7 @@ import { solicitudesPatterns } from 'src/common/constants/solicitudes/solicitude
 import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 import { CreateEvaluacionFase1Input } from '../evaluaciones/dto/create-evaluacion-fase1.input';
 import { CreateResumenFase1Input } from '../evaluaciones/resumen/dto/create-resumen-fase1.input';
+import { ValidEstados } from './enums/valid-estados.enum';
 
 @Injectable()
 export class SolicitudesService {
@@ -26,6 +27,10 @@ export class SolicitudesService {
 
   findById(id: string, user: Usuario) {
     return this.client.send(solicitudesPatterns.GET_BY_ID, { id, user });
+  }
+
+  findByEstado(estado: ValidEstados, user: Usuario) {
+    return this.client.send(solicitudesPatterns.GET_BY_ESTADO, { estado, user })
   }
 
   update(updatePrestamoInput: UpdatePrestamoInput, user: Usuario) {
