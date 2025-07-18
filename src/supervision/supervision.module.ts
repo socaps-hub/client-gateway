@@ -6,6 +6,7 @@ import { RubrosModule } from './rubros/rubros.module';
 import { ElementosModule } from './elementos/elementos.module';
 import { FaseILevantamientoModule } from './fase-i-levantamiento/fase-i-levantamiento.module';
 import { FaseIiSeguimientoModule } from './fase-ii-seguimiento/fase-ii-seguimiento.module';
+import { FaseIiiDesembolsoModule } from './fase-iii-desembolso/fase-iii-desembolso.module';
 
 @Module({
   imports: [
@@ -22,6 +23,8 @@ import { FaseIiSeguimientoModule } from './fase-ii-seguimiento/fase-ii-seguimien
     FaseILevantamientoModule,
 
     FaseIiSeguimientoModule,
+
+    FaseIiiDesembolsoModule,
   ],
   providers: []
 })

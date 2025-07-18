@@ -5,6 +5,8 @@ import { CreateGrupoInput } from './dto/create-grupo.input';
 import { ParseUUIDPipe, UseGuards } from '@nestjs/common';
 import { AuthGraphQLGuard } from 'src/auth/guards/auth-graphql.guard';
 import { UpdateGrupoInput } from './dto/update-grupo.input';
+import { GetUser } from 'src/auth/decorators/user.decorator';
+import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 
 @Resolver(() => Grupo)
 @UseGuards( AuthGraphQLGuard )
@@ -25,10 +27,20 @@ export class GruposResolver {
     return this.gruposService.findAll( coopId );
   }
 
-  // @Query(() => Grupo, { name: 'grupo' })
-  // findOne(@Args('id', { type: () => Int }) id: number) {
-  //   return this.gruposService.findOne(id);
-  // }
+  @Query(() => [Grupo], { name: 'adminGroups' })
+  findAllAdminGroups(
+    @Args('coopId', { type: () => ID }, ParseUUIDPipe) coopId: string
+  ) {
+    return this.gruposService.findAllAdminGroups( coopId );
+  }
+
+  @Query(() => Grupo, { name: 'grupoByName' })
+  findByName(
+    @Args('name', { type: () => String }) name: string,
+    @GetUser('graphql') user: Usuario,
+  ) {
+    return this.gruposService.findByName(name, user);
+  }
 
   @Mutation(() => Grupo)
   updateGrupo(

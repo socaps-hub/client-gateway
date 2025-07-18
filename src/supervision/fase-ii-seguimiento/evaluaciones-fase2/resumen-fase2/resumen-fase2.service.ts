@@ -32,8 +32,6 @@ export class ResumenFase2Service {
     }
 
     deleteByPrestamo(prestamoId: string, user: Usuario) {
-        console.log(prestamoId);
-        
         return this.client.send(resumenFase2Patterns.DELETE_BY_PRESTAMO, { prestamoId, user })    
     }
 }

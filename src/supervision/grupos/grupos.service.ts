@@ -4,6 +4,7 @@ import { NATS_SERVICE } from 'src/config';
 import { CreateGrupoInput } from './dto/create-grupo.input';
 import { gruposPatterns } from 'src/common/constants/grupos/gruposPatterns';
 import { UpdateGrupoInput } from './dto/update-grupo.input';
+import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 
 @Injectable()
 export class GruposService {
@@ -18,6 +19,14 @@ export class GruposService {
 
   findAll(coopId: string) {
     return this.client.send( gruposPatterns.GET_ALL, { coopId });
+  }
+
+  findAllAdminGroups(coopId: string) {
+    return this.client.send( gruposPatterns.GET_ALL_ADMIN_GROUPS, { coopId });
+  }
+
+  findByName(name: string, user: Usuario) {
+    return this.client.send( gruposPatterns.GET_BY_NAME, { name, user });
   }
   
   update( updateGrupoInput: UpdateGrupoInput ) {
