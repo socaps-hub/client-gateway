@@ -30,7 +30,7 @@ async function bootstrap() {
   await app.listen(envs.port);
 
   console.log('Health Check configured')  
-  console.log('Cambio 1')  
+  console.log('Cambio 2')  
   
   logger.log(`Gateway running on port ${ envs.port }`)
 }
