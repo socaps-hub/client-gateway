@@ -44,6 +44,8 @@ export function mapR01ToPrestamo(data: any): Prestamo {
     resumenF2: data.resumenF2 ? data.resumenF2 : undefined,
     evaluacionesF3: data.evaluacionesF3 || [],
     resumenF3: data.resumenF3 ? data.resumenF3 : undefined,
+    evaluacionesF4: data.evaluacionesF4 || [],
+    resumenF4: data.resumenF4 ? data.resumenF4 : undefined,
   };
 
   // console.log('Prestamo que se va a retornar', prestamo);

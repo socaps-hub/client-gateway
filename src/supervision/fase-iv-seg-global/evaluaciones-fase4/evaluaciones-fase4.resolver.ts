@@ -10,12 +10,26 @@ import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 import { GetUser } from 'src/auth/decorators/user.decorator';
 import { BooleanResponse } from 'src/common/dto/boolean-response.object';
 import { firstValueFrom } from 'rxjs';
+import { CreateEvaluacionResumenFase4Input } from './resumen-fase4/dto/inputs/create-evaluacion-resumen-fase4.input';
+import { SaveEvaluacionesFase4Args } from './dto/args/save-evaluaciones-fase4.args';
 
 @Resolver(() => EvaluacionFase4)
 @UseGuards(AuthGraphQLGuard)
 export class EvaluacionesFase4Resolver {
 
   constructor(private readonly service: EvaluacionesFase4Service) { }
+
+  @Mutation(() => BooleanResponse)
+  async saveEvaluacionesFase4(
+    @Args('saveEvaluacionesFase4Args') saveEvaluacionesFase4Args: SaveEvaluacionesFase4Args,
+    @GetUser('graphql') user: Usuario,
+  ): Promise<BooleanResponse> {
+    return await firstValueFrom(
+      this.service.saveEvaluacionesFase4(saveEvaluacionesFase4Args, user)
+    )
+      .then( success => success)
+      .catch( (err) => err )
+  }
 
   @Mutation(() => BooleanResponse)
   async createEvaluacionesFase4(
