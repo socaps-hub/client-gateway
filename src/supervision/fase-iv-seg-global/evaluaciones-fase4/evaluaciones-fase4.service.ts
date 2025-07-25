@@ -36,4 +36,8 @@ export class EvaluacionesFase4Service {
   deleteByPrestamo(prestamoId: string, user: Usuario){
     return this.client.send(evaluacionFase4Patterns.DELETE_BY_PRESTAMO, { prestamoId, user })    
   }
+
+  pasoMasivoAFase4(user: Usuario){
+    return this.client.send(evaluacionFase4Patterns.PASO_MASIVO, user )    
+  }
 }
