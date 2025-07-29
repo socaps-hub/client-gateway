@@ -7,6 +7,8 @@ import { Sucursal } from './entities/sucursal.entity';
 import { CreateSucursaleInput } from './dto/inputs/create-sucursale.input';
 import { Usuario } from '../usuarios/entities/usuario.entity';
 import { UpdateSucursalInput } from './dto/inputs/update-sucursale.input';
+import { BooleanResponse } from 'src/common/dto/boolean-response.object';
+import { CreateManySucursalesFromExcelArgs } from './dto/args/create-many-from-excel.arg';
 
 @Resolver(() => Sucursal)
 @UseGuards( AuthGraphQLGuard )
@@ -50,6 +52,13 @@ export class SucursalesResolver {
     @Args('updateSucursalInput') updateSucursalInput: UpdateSucursalInput
   ) {
     return this.sucursalesService.update( updateSucursalInput );
+  }
+
+  @Mutation(() => BooleanResponse, { name: 'createManySucursalesFromExcel' })
+  createManyFromExcel(
+    @Args('createManyFromExcelArgs') createManyFromExcelArgs: CreateManySucursalesFromExcelArgs,
+  ) {
+    return this.sucursalesService.createManyFromExcel(createManyFromExcelArgs.data, createManyFromExcelArgs.coopId);
   }
 
   // @Mutation(() => Sucursale)

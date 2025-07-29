@@ -6,6 +6,7 @@ import { sucursalesPatterns } from "src/common/constants";
 import { CreateSucursaleInput } from "./dto/inputs/create-sucursale.input";
 import { Usuario } from "../usuarios/entities/usuario.entity";
 import { UpdateSucursalInput } from "./dto/inputs/update-sucursale.input";
+import { CreateSucursalImportDto } from "./dto/inputs/create-sucursal-import.dto";
 
 
 @Injectable()
@@ -33,6 +34,10 @@ export class SucursalesService {
 
   update(updateSucursalInput: UpdateSucursalInput) {
     return this._client.send( sucursalesPatterns.UPDATE, { updateSucursalInput } );
+  }
+
+  createManyFromExcel(data: CreateSucursalImportDto[], coopId: string) {
+    return this._client.send( sucursalesPatterns.CREATE_MANY_FROM_EXCEL, { data, coopId } );
   }
 
   // remove(id: number) {
