@@ -5,4 +5,5 @@ export const productsPatterns = {
     UPDATE_PRODUCT: 'config.productos.update',
     ACTIVATE_PRODUCT: 'config.productos.activate',
     DESACTIVATE_PRODUCT: 'config.productos.desactivate',
+    CREATE_MANY_FROM_EXCEL: 'config.productos.createManyFromExcel',
 }

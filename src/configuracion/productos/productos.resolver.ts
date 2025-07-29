@@ -8,6 +8,10 @@ import { CreateProductoInput } from './dto/inputs/create-producto.input';
 import { UpdateProductoInput } from './dto/inputs/update-producto.input';
 import { Usuario } from '../usuarios/entities/usuario.entity';
 import { Producto } from './entities/producto.entity';
+import { BooleanResponse } from 'src/common/dto/boolean-response.object';
+import { CreateProductoImportDto } from './dto/inputs/create-producto-import.dto';
+import { firstValueFrom } from 'rxjs';
+import { CreateManyFromExcelArgs } from './dto/args/create-many-from-excel.arg';
 
 @Resolver(() => Producto)
 @UseGuards( AuthGraphQLGuard )
@@ -50,6 +54,15 @@ export class ProductosResolver {
     @Args('id', { type: () => ID }, ParseUUIDPipe) id: string
   ) {
     return this.productosService.desactivate(id);
+  }
+
+  @Mutation(() => BooleanResponse)
+  async createManyFromExcel(
+    @Args('createManyFromExcelArgs') createManyFromExcelArgs: CreateManyFromExcelArgs,
+  ) {
+    return await firstValueFrom(
+      this.productosService.createManyFromExcel(createManyFromExcelArgs.data, createManyFromExcelArgs.coopId)
+    );
   }
 
 }

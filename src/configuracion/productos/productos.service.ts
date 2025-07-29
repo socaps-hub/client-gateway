@@ -5,6 +5,7 @@ import { CreateProductoInput } from './dto/inputs/create-producto.input';
 import { productsPatterns } from '../../common/constants';
 import { UpdateProductoInput } from './dto/inputs/update-producto.input';
 import { Usuario } from '../usuarios/entities/usuario.entity';
+import { CreateProductoImportDto } from './dto/inputs/create-producto-import.dto';
 
 @Injectable()
 export class ProductosService {
@@ -30,7 +31,10 @@ export class ProductosService {
     }
 
     desactivate( id: string ) {
-        return this._client.send(productsPatterns.DESACTIVATE_PRODUCT, { id })
+        return this._client.send(productsPatterns.DESACTIVATE_PRODUCT, { id })    }
+    
+    createManyFromExcel( data: CreateProductoImportDto[], coopId: string ) {
+        return this._client.send(productsPatterns.CREATE_MANY_FROM_EXCEL, { data, coopId })
     }
     
 }
