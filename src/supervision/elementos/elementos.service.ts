@@ -5,6 +5,7 @@ import { UpdateElementoInput } from './dto/update-elemento.input';
 import { firstValueFrom } from 'rxjs';
 import { NATS_SERVICE } from 'src/config';
 import { elementosPatterns } from 'src/common/constants/elementos/elementosPatterns';
+import { CreateManyElementoFromExcelDto } from './dto/create-many-elementos-from-excel.dto';
 
 @Injectable()
 export class ElementosService {
@@ -31,5 +32,9 @@ export class ElementosService {
 
     async remove(id: string) {        
         return this.client.send(elementosPatterns.REMOVE, { id })
+    }
+
+    createManyFromExcel( data: CreateManyElementoFromExcelDto[],  rubroId: string ) {        
+        return this.client.send(elementosPatterns.CREATE_MANY_FROM_EXCEL, { data, rubroId })
     }
 }
