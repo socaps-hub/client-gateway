@@ -8,6 +8,7 @@ import { UpdateUsuarioInput } from './dto/inputs/update-usuario.input';
 import { Usuario } from './entities/usuario.entity';
 import { ChangePasswordInput } from './dto/inputs/change-password.input';
 import { Observable } from 'rxjs';
+import { CreateUsuarioImportDto } from './dto/inputs/create-usuario-import.dto';
 
 @Injectable()
 export class UsuariosService {
@@ -46,5 +47,9 @@ export class UsuariosService {
 
   changePassword( input: ChangePasswordInput, user: Usuario ): Observable<boolean> {
     return this.client.send( usuariosPatterns.CHANGE_PASSWORD, { input, user } );
+  }
+
+  createManyFromExcel( data: CreateUsuarioImportDto[], coopId: string ): Observable<boolean> {
+    return this.client.send( usuariosPatterns.CREATE_MANY_FROM_EXCEL, { data, coopId } );
   }
 }

@@ -9,6 +9,8 @@ import { CreateUsuarioInput } from './dto/inputs/create-usuario.input';
 import { UpdateUsuarioInput } from './dto/inputs/update-usuario.input';
 import { ChangePasswordInput } from './dto/inputs/change-password.input';
 import { firstValueFrom } from 'rxjs';
+import { BooleanResponse } from 'src/common/dto/boolean-response.object';
+import { CreateManyUsuariosFromExcelArgs } from './dto/args/create-many-usuario-from-excel.arg';
 
 @Resolver(() => Usuario)
 @UseGuards( AuthGraphQLGuard )
@@ -65,5 +67,12 @@ export class UsuariosResolver {
     return await firstValueFrom(
       this.usuariosService.changePassword(data, user)
     )
+  }
+
+  @Mutation(() => BooleanResponse)
+  createManyUsuariosFromExcel(
+    @Args('createManyUsuariosFromExcelArgs') createManyUsuariosFromExcelArgs: CreateManyUsuariosFromExcelArgs,
+  ) {
+    return this.usuariosService.createManyFromExcel(createManyUsuariosFromExcelArgs.data, createManyUsuariosFromExcelArgs.coopId);
   }
 }

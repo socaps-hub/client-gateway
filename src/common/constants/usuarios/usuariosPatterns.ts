@@ -7,4 +7,5 @@ export const usuariosPatterns = {
     DESACTIVATE: 'config.usuarios.desactivate',
     ACTIVATE: 'config.usuarios.activate',
     CHANGE_PASSWORD: 'config.usuarios.changePassword',
+    CREATE_MANY_FROM_EXCEL: 'config.usuarios.createManyFromExcel',
 }
