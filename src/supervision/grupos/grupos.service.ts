@@ -5,6 +5,7 @@ import { CreateGrupoInput } from './dto/create-grupo.input';
 import { gruposPatterns } from 'src/common/constants/grupos/gruposPatterns';
 import { UpdateGrupoInput } from './dto/update-grupo.input';
 import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
+import { CreateManyGruposFromExcelDto } from './dto/create-many-grupos-from-excel.dto';
 
 @Injectable()
 export class GruposService {
@@ -35,6 +36,10 @@ export class GruposService {
 
   remove( id: string ) {
     return this.client.send( gruposPatterns.REMOVE, { id });    
+  }
+
+  createManyFromExcel( data: CreateManyGruposFromExcelDto[], coopId: string ) {
+    return this.client.send( gruposPatterns.CREATE_MANY_FROM_EXCEL, { data, coopId });    
   }
 
 }

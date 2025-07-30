@@ -7,6 +7,8 @@ import { AuthGraphQLGuard } from 'src/auth/guards/auth-graphql.guard';
 import { UpdateGrupoInput } from './dto/update-grupo.input';
 import { GetUser } from 'src/auth/decorators/user.decorator';
 import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
+import { BooleanResponse } from 'src/common/dto/boolean-response.object';
+import { CreateManyGruposFromExcelArgs } from './dto/args/create-many-grupos-from-excel.arg';
 
 @Resolver(() => Grupo)
 @UseGuards( AuthGraphQLGuard )
@@ -54,5 +56,12 @@ export class GruposResolver {
     @Args('id', { type: () => ID }, ParseUUIDPipe) id: string
   ) {
     return this.gruposService.remove(id);
+  }
+
+  @Mutation(() => BooleanResponse)
+  createManyGruposFromExcel(
+    @Args('createManyGruposFromExcelArgs') createManyGruposFromExcelArgs: CreateManyGruposFromExcelArgs,
+  ) {
+    return this.gruposService.createManyFromExcel(createManyGruposFromExcelArgs.data, createManyGruposFromExcelArgs.coopId);
   }
 }

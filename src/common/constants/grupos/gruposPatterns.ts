@@ -6,4 +6,5 @@ export const gruposPatterns = {
     GET_ALL_ADMIN_GROUPS: 'supervision.grupos.getAdminGroups',
     UPDATE: 'supervision.grupos.update',
     REMOVE: 'supervision.grupos.remove',
+    CREATE_MANY_FROM_EXCEL: 'supervision.grupos.createManyFromExcel',
 }
