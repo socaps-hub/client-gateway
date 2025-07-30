@@ -5,4 +5,5 @@ export const rubrosPatterns = {
     GET_BY_ID: 'supervision.rubros.getById',
     UPDATE: 'supervision.rubros.update',
     REMOVE: 'supervision.rubros.remove',
+    CREATE_MANY_FROM_EXCEL: 'supervision.rubros.createManyFromExcel',
 }

@@ -4,6 +4,7 @@ import { NATS_SERVICE } from 'src/config';
 import { CreateRubroInput } from './dto/create-rubro.input';
 import { UpdateRubroInput } from './dto/update-rubro.input';
 import { rubrosPatterns } from 'src/common/constants/rubros/rubrosPatterns';
+import { CreateManyRubrosFromExcelDto } from './dto/create-many-rubros-from-excel.dto';
 
 @Injectable()
 export class RubrosService {
@@ -29,5 +30,9 @@ export class RubrosService {
 
   remove(id: string) {
     return this.client.send( rubrosPatterns.REMOVE , { id } );
+  }
+
+  createManyFromExcel(data: CreateManyRubrosFromExcelDto[], coopId: string) {
+    return this.client.send( rubrosPatterns.CREATE_MANY_FROM_EXCEL , { data, coopId } );
   }
 }

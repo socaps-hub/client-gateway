@@ -6,6 +6,8 @@ import { Rubro } from './entities/rubro.entity';
 import { CreateRubroInput } from './dto/create-rubro.input';
 import { UpdateRubroInput } from './dto/update-rubro.input';
 import { AuthGraphQLGuard } from 'src/auth/guards/auth-graphql.guard';
+import { BooleanResponse } from 'src/common/dto/boolean-response.object';
+import { CreateManyRubrosFromExcelArgs } from './dto/args/create-many-rubros-from-excel.arg';
 
 @Resolver(() => Rubro)
 @UseGuards( AuthGraphQLGuard )
@@ -46,5 +48,12 @@ export class RubrosResolver {
     @Args('id', { type: () => ID }, ParseUUIDPipe) id: string
   ) {
     return this.rubrosService.remove(id);
+  }
+
+  @Mutation(() => BooleanResponse)
+  createManyRubrosFromExcel(
+    @Args('createManyRubrosFromExcelArgs') createManyRubrosFromExcelArgs: CreateManyRubrosFromExcelArgs,
+  ) {
+    return this.rubrosService.createManyFromExcel(createManyRubrosFromExcelArgs.data, createManyRubrosFromExcelArgs.coopId);
   }
 }
