@@ -19,4 +19,8 @@ export class ReportesSisconcreService {
         return this.client.send( reportesPatterns.GET_FASE1_DETALLE_ANOMALIAS, { input });
     }
 
+    getDetalleAnomaliasInteralF1( input: FiltroFechasInput ) {
+        return this.client.send( reportesPatterns.GET_FASE1_DETALLE_ANOMALIAS_INTEGRAL, { input });
+    }
+
 }

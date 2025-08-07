@@ -5,6 +5,7 @@ import { ReporteSegmentadoFase1Response } from './dto/fase1/reporte-segmentado-f
 import { UseGuards } from '@nestjs/common';
 import { AuthGraphQLGuard } from 'src/auth/guards/auth-graphql.guard';
 import { DetalleAnomaliasF1Response } from './dto/fase1/detalle-anomalias-f1.output';
+import { AnomaliasResumenResponseF1 } from './dto/fase1/detalle-anomalias-integral-f1.output';
 
 @Resolver()
 @UseGuards( AuthGraphQLGuard )
@@ -24,6 +25,13 @@ export class ReportesSisconcreResolver {
     @Args('input') input: FiltroFechasInput,
   ) {
     return this.reportesSisconcreService.getDetalleAnomaliasF1(input);
+  }
+
+  @Query(() => AnomaliasResumenResponseF1)
+  async detalleAnomaliasIntegralF1(
+    @Args('input') input: FiltroFechasInput,
+  ) {
+    return this.reportesSisconcreService.getDetalleAnomaliasInteralF1(input);
   }
 
 }
