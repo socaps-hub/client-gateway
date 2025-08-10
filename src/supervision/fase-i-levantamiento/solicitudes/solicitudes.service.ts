@@ -21,8 +21,8 @@ export class SolicitudesService {
     return this.client.send(solicitudesPatterns.CREATE, { createPrestamoInput, user });
   }
 
-  findAll(user: Usuario) {
-    return this.client.send(solicitudesPatterns.GET_ALL, { user });
+  findAll(user: Usuario, filterBySucursal: boolean = true) {
+    return this.client.send(solicitudesPatterns.GET_ALL, { user, filterBySucursal });
   }
 
   findById(id: string, user: Usuario) {

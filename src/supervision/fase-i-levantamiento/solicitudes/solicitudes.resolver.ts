@@ -37,10 +37,11 @@ export class SolicitudesResolver {
 
   @Query(() => [Prestamo])
   async prestamos(
+    @Args('filterBySucursal', { type: () => Boolean, nullable: true, defaultValue: true }) filterBySucursal: boolean,
     @GetUser('graphql') user: Usuario,
   ): Promise<Prestamo[]> {
     const lista = await firstValueFrom(
-      this.solicitudesService.findAll(user)
+      this.solicitudesService.findAll(user, filterBySucursal)
     )
     return lista.map(mapR01ToPrestamo);
   }
