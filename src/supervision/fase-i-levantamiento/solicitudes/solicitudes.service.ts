@@ -29,8 +29,8 @@ export class SolicitudesService {
     return this.client.send(solicitudesPatterns.GET_BY_ID, { id, user });
   }
 
-  findByEstado(estado: ValidEstados, user: Usuario) {
-    return this.client.send(solicitudesPatterns.GET_BY_ESTADO, { estado, user })
+  findByEstado(estado: ValidEstados, user: Usuario, filterBySucursal: boolean = true) {
+    return this.client.send(solicitudesPatterns.GET_BY_ESTADO, { estado, user, filterBySucursal })
   }
 
   update(updatePrestamoInput: UpdatePrestamoInput, user: Usuario) {

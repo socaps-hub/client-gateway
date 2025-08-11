@@ -32,4 +32,9 @@ export class ReportesSisconcreService {
         return this.client.send( reportesPatterns.GET_FASE1_DETALLE_ANOMALIAS_EJECUTIVOS_INTEGRAL, { input, user });
     }
 
+    // * FASE 2
+    getResultadosSeguimientoF2( input: FiltroFechasInput , user: Usuario) {
+        return this.client.send( reportesPatterns.GET_FASE2_RESULTADOS_SEGUIMIENTO, { input, user });
+    }
+
 }
