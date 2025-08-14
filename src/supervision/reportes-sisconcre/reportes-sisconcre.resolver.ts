@@ -11,6 +11,8 @@ import { GetUser } from 'src/auth/decorators/user.decorator';
 import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 import { DetalleAnomaliasIntegralEjecutivosResponseF1 } from './dto/fase1/detalle-anomalias-integral-f1-ejecutivos.output';
 import { ReporteFase2Response } from './dto/fase2/resultados-seguimiento.dto';
+import { ReporteFase3Response } from './dto/fase3/revision-desembolsos.dto';
+import { DetalleAnomaliasF3Response } from './dto/fase3/anomalias-desembolso.dto';
 
 @Resolver()
 @UseGuards( AuthGraphQLGuard )
@@ -65,6 +67,23 @@ export class ReportesSisconcreResolver {
     @GetUser('graphql') user: Usuario
   ) {
     return this.reportesSisconcreService.getResultadosSeguimientoF2(input, user);
+  }
+
+  // * REPORTES FASE 3
+  @Query(() => ReporteFase3Response)
+  async revisionDesembolsosF3(
+    @Args('input') input: FiltroFechasInput,
+    @GetUser('graphql') user: Usuario
+  ) {
+    return this.reportesSisconcreService.getRevisionDesembolsosF3(input, user);
+  }
+
+  @Query(() => DetalleAnomaliasF3Response)
+  async detalleAnomaliasF3(
+    @Args('input') input: FiltroFechasInput,
+    @GetUser('graphql') user: Usuario
+  ) {
+    return this.reportesSisconcreService.getDetalleAnomaliasF3(input, user);
   }
 
 }

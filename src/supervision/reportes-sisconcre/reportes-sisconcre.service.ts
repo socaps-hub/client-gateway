@@ -37,4 +37,13 @@ export class ReportesSisconcreService {
         return this.client.send( reportesPatterns.GET_FASE2_RESULTADOS_SEGUIMIENTO, { input, user });
     }
 
+    // * FASE 3
+    getRevisionDesembolsosF3( input: FiltroFechasInput , user: Usuario) {
+        return this.client.send( reportesPatterns.GET_FASE3_REVISION_DESEMBOLSOS, { input, user });
+    }
+
+    getDetalleAnomaliasF3( input: FiltroFechasInput , user: Usuario) {
+        return this.client.send( reportesPatterns.GET_FASE3_DETALLE_ANOMALIAS_F3, { input, user });
+    }
+
 }

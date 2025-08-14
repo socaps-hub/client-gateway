@@ -8,4 +8,8 @@ export const reportesPatterns = {
 
     // * Fase 2
     GET_FASE2_RESULTADOS_SEGUIMIENTO: 'reportes.fase2.resultadosSeguimientoF2',
+
+    // * Fase 3
+    GET_FASE3_REVISION_DESEMBOLSOS: 'reportes.fase3.revisionDesembolsosF3',
+    GET_FASE3_DETALLE_ANOMALIAS_F3: 'reportes.fase3.detalleAnomaliasF3',
 }
