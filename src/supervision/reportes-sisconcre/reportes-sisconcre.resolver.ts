@@ -13,6 +13,7 @@ import { DetalleAnomaliasIntegralEjecutivosResponseF1 } from './dto/fase1/detall
 import { ReporteFase2Response } from './dto/fase2/resultados-seguimiento.dto';
 import { ReporteFase3Response } from './dto/fase3/revision-desembolsos.dto';
 import { DetalleAnomaliasF3Response } from './dto/fase3/anomalias-desembolso.dto';
+import { ReporteFase4Response } from './dto/fase4/reporte-global.dto';
 
 @Resolver()
 @UseGuards( AuthGraphQLGuard )
@@ -84,6 +85,15 @@ export class ReportesSisconcreResolver {
     @GetUser('graphql') user: Usuario
   ) {
     return this.reportesSisconcreService.getDetalleAnomaliasF3(input, user);
+  }
+
+  // * REPORTES FASE 4
+  @Query(() => ReporteFase4Response)
+  async reporteGlobalF4(
+    @Args('input') input: FiltroFechasInput,
+    @GetUser('graphql') user: Usuario
+  ) {
+    return this.reportesSisconcreService.getReporteGlobalF4(input, user);
   }
 
 }

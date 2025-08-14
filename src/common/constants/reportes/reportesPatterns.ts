@@ -12,4 +12,7 @@ export const reportesPatterns = {
     // * Fase 3
     GET_FASE3_REVISION_DESEMBOLSOS: 'reportes.fase3.revisionDesembolsosF3',
     GET_FASE3_DETALLE_ANOMALIAS_F3: 'reportes.fase3.detalleAnomaliasF3',
+    
+    // * Fase 4
+    GET_FASE4_REPORTE_GLOBAL: 'reportes.fase4.reporteGlobalF4',
 }
