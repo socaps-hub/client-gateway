@@ -14,6 +14,8 @@ import { ReporteFase2Response } from './dto/fase2/resultados-seguimiento.dto';
 import { ReporteFase3Response } from './dto/fase3/revision-desembolsos.dto';
 import { DetalleAnomaliasF3Response } from './dto/fase3/anomalias-desembolso.dto';
 import { ReporteFase4Response } from './dto/fase4/reporte-global.dto';
+import { HistoricoResponseDto } from './dto/historicos/historico-response.dto';
+import { HistoricoFiltroInput } from './dto/historicos/inputs/filtro-historico-reporte.input';
 
 @Resolver()
 @UseGuards( AuthGraphQLGuard )
@@ -94,6 +96,15 @@ export class ReportesSisconcreResolver {
     @GetUser('graphql') user: Usuario
   ) {
     return this.reportesSisconcreService.getReporteGlobalF4(input, user);
+  }
+
+  // * HISTORICOS
+  @Query(() => HistoricoResponseDto)
+  async historicos(
+    @Args('input') input: HistoricoFiltroInput,
+    @GetUser('graphql') user: Usuario
+  ) {
+    return this.reportesSisconcreService.getHistoricos(input, user);
   }
 
 }

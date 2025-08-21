@@ -15,4 +15,7 @@ export const reportesPatterns = {
     
     // * Fase 4
     GET_FASE4_REPORTE_GLOBAL: 'reportes.fase4.reporteGlobalF4',
+
+    // * HISTORICOS
+    GET_HISTORICOS: 'reportes.historicos',
 }

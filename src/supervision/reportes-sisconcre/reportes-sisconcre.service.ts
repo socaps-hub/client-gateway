@@ -4,6 +4,7 @@ import { reportesPatterns } from 'src/common/constants/reportes/reportesPatterns
 import { FiltroFechasInput } from 'src/common/dto/filtro-fechas.input';
 import { NATS_SERVICE } from 'src/config';
 import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
+import { HistoricoFiltroInput } from './dto/historicos/inputs/filtro-historico-reporte.input';
 
 @Injectable()
 export class ReportesSisconcreService {
@@ -49,6 +50,11 @@ export class ReportesSisconcreService {
     // * FASE 4
     getReporteGlobalF4( input: FiltroFechasInput , user: Usuario) {
         return this.client.send( reportesPatterns.GET_FASE4_REPORTE_GLOBAL, { input, user });
+    }
+    
+    // * HISTORICOS
+    getHistoricos(input: HistoricoFiltroInput, user: Usuario) {
+        return this.client.send(reportesPatterns.GET_HISTORICOS, { input, user });
     }
 
 }
