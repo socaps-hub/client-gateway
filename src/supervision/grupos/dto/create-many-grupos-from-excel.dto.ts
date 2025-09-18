@@ -1,5 +1,6 @@
-import { Field, InputType } from "@nestjs/graphql";
 import { IsString } from "class-validator";
+import { Field, InputType } from "@nestjs/graphql";
+import { GrupoTipo } from "../enums/grupo-type-enum";
 
 
 @InputType()
@@ -8,5 +9,9 @@ export class CreateManyGruposFromExcelDto {
     @Field(() => String)
     @IsString()
     Nombre: string;
+
+    @Field(() => GrupoTipo)
+    @IsString()
+    Tipo: GrupoTipo;
 
 }

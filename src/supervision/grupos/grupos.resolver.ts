@@ -9,6 +9,7 @@ import { GetUser } from 'src/auth/decorators/user.decorator';
 import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 import { BooleanResponse } from 'src/common/dto/boolean-response.object';
 import { CreateManyGruposFromExcelArgs } from './dto/args/create-many-grupos-from-excel.arg';
+import { GrupoTipo } from './enums/grupo-type-enum';
 
 @Resolver(() => Grupo)
 @UseGuards( AuthGraphQLGuard )
@@ -24,9 +25,10 @@ export class GruposResolver {
 
   @Query(() => [Grupo], { name: 'grupos' })
   findAll(
-    @Args('coopId', { type: () => ID }, ParseUUIDPipe) coopId: string
+    @Args('coopId', { type: () => ID }, ParseUUIDPipe) coopId: string,
+    @Args('type', { type: () => GrupoTipo, nullable: true, defaultValue: GrupoTipo.SISCONCRE }) type: GrupoTipo
   ) {
-    return this.gruposService.findAll( coopId );
+    return this.gruposService.findAll( coopId , type);
   }
 
   @Query(() => [Grupo], { name: 'adminGroups' })

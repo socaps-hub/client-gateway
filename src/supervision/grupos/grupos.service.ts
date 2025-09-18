@@ -6,6 +6,7 @@ import { gruposPatterns } from 'src/common/constants/grupos/gruposPatterns';
 import { UpdateGrupoInput } from './dto/update-grupo.input';
 import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 import { CreateManyGruposFromExcelDto } from './dto/create-many-grupos-from-excel.dto';
+import { GrupoTipo } from './enums/grupo-type-enum';
 
 @Injectable()
 export class GruposService {
@@ -18,8 +19,8 @@ export class GruposService {
     return this.client.send( gruposPatterns.CREATE, { createGrupoInput });
   }
 
-  findAll(coopId: string) {
-    return this.client.send( gruposPatterns.GET_ALL, { coopId });
+  findAll(coopId: string, type: GrupoTipo) {
+    return this.client.send( gruposPatterns.GET_ALL, { coopId, type });
   }
 
   findAllAdminGroups(coopId: string) {
