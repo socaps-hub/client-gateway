@@ -10,6 +10,8 @@ import { BooleanResponse } from 'src/common/dto/boolean-response.object';
 import { GetUser } from 'src/auth/decorators/user.decorator';
 import { Movimiento } from './entities/movimiento.entity';
 import { UpdateMovimientoArgs } from './dto/inputs/update-movimiento.input';
+import { CreateFase2Input } from './dto/inputs/create-fase2.input';
+import { ValidEstadosArgs } from 'src/supervision/fase-i-levantamiento/solicitudes/dto/args/prestamos-by-estado.arg';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -38,12 +40,32 @@ export class MovimientosResolver {
 
   }
 
+  @Mutation(() => BooleanResponse)
+  async createOrUpdateFase2(
+    @Args('input') input: CreateFase2Input,
+    @GetUser('graphql') user: Usuario,
+  ) {
+    return await firstValueFrom(
+      this.movimientosService.createOrUpdateFase2( input, user )
+    )
+      .then( success => success)
+      .catch( (err) => err )
+  }
+
   @Query(() => [Movimiento])
   movimientos(
     @Args('filterBySucursal', { type: () => Boolean, nullable: true, defaultValue: true }) filterBySucursal: boolean,
     @GetUser('graphql') user: Usuario,
   ) {
     return this.movimientosService.getAll( user, filterBySucursal )
+  }
+
+  @Query(() => [Movimiento])
+  movimientosByEstado(
+    @Args() args: ValidEstadosArgs,
+    @GetUser('graphql') user: Usuario,
+  ) {
+    return this.movimientosService.findByEstado( args.estado, user, args.filterBySucursal )
   }
 
   @Query(() => Movimiento)

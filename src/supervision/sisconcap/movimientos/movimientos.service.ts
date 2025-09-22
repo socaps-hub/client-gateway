@@ -5,6 +5,8 @@ import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 import { movimientosPatterns } from 'src/common/constants/movimientos/movimientosPatterns';
 import { CreateFase1Input } from './dto/inputs/create-fase1.input';
 import { UpdateMovimientoArgs } from './dto/inputs/update-movimiento.input';
+import { CreateFase2Input } from './dto/inputs/create-fase2.input';
+import { ValidEstados } from 'src/supervision/fase-i-levantamiento/solicitudes/enums/valid-estados.enum';
 
 @Injectable()
 export class MovimientosService {
@@ -17,12 +19,20 @@ export class MovimientosService {
         return this.client.send( movimientosPatterns.CREATE_FASE1, { input, user } )
     }
 
+    createOrUpdateFase2( input: CreateFase2Input, user: Usuario ) {
+        return this.client.send( movimientosPatterns.CREATE_OR_UPDATE_FASE2, { input, user } )
+    }
+
     getAll( user: Usuario, filterBySucursal: boolean = true ) {
         return this.client.send( movimientosPatterns.GET_ALL, { user, filterBySucursal } )
     }
 
     getByFolio( folio: number, user: Usuario ) {
         return this.client.send( movimientosPatterns.GET_BY_FOLIO, { folio, user } )
+    }
+
+    findByEstado(estado: ValidEstados, user: Usuario, filterBySucursal: boolean = true) {
+        return this.client.send( movimientosPatterns.GET_BY_ESTADO, { estado, user, filterBySucursal } )
     }
 
     updateFase1( input: UpdateMovimientoArgs, user: Usuario ){
