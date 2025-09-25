@@ -48,4 +48,8 @@ export class MovimientosService {
         return this.client.send( movimientosPatterns.REMOVE, { folio, user } )
     }
 
+    cancelFase3AndFase2( folio: number, user: Usuario ) {
+        return this.client.send( movimientosPatterns.CANCEL_FASE3_FASE2, { folio, user } )
+    }
+
 }

@@ -8,4 +8,5 @@ export const movimientosPatterns = {
     GET_BY_ESTADO: 'supervision.movimientos.getByEstado',
     UPDATE_MOVIMIENTO_F1: 'supervision.movimientos.updateFase1',
     REMOVE: 'supervision.movimientos.remove',
+    CANCEL_FASE3_FASE2: 'supervision.movimientos.cancelFase3AndFase2',
 }
