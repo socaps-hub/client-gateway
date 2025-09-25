@@ -12,6 +12,7 @@ import { Movimiento } from './entities/movimiento.entity';
 import { UpdateMovimientoArgs } from './dto/inputs/update-movimiento.input';
 import { CreateFase2Input } from './dto/inputs/create-fase2.input';
 import { ValidEstadosArgs } from 'src/supervision/fase-i-levantamiento/solicitudes/dto/args/prestamos-by-estado.arg';
+import { CreateFase3Input } from './dto/inputs/create-fase3.input';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -47,6 +48,18 @@ export class MovimientosResolver {
   ) {
     return await firstValueFrom(
       this.movimientosService.createOrUpdateFase2( input, user )
+    )
+      .then( success => success)
+      .catch( (err) => err )
+  }
+
+  @Mutation(() => BooleanResponse)
+  async createOrUpdateFase3(
+    @Args('input') input: CreateFase3Input,
+    @GetUser('graphql') user: Usuario,
+  ) {
+    return await firstValueFrom(
+      this.movimientosService.createOrUpdateFase3( input, user )
     )
       .then( success => success)
       .catch( (err) => err )

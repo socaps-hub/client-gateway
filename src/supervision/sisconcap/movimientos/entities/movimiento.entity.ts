@@ -7,6 +7,8 @@ import { SisconcapEvaluacionResumenFase1 } from './sisconcap-resumen-fase1.entit
 import { Sucursal } from 'src/configuracion/sucursales/entities/sucursal.entity';
 import { SisconcapEvaluacionFase2 } from './sisconcap-evaluacion-fase2.entity';
 import { SisconcapEvaluacionResumenFase2 } from './sisconcap-resumen-fase2.entity';
+import { SisconcapEvaluacionFase3 } from './sisconcap-evaluacion-fase3.entity';
+import { SisconcapEvaluacionResumenFase3 } from './sisconcap-resumen-fase3.entity';
 
 @ObjectType()
 export class Movimiento {
@@ -65,4 +67,10 @@ export class Movimiento {
 
     @Field(() => SisconcapEvaluacionResumenFase2, { nullable: true })
     evaluacionResumenFase2?: SisconcapEvaluacionResumenFase2;
+
+    @Field(() => [SisconcapEvaluacionFase3], { nullable: true })
+    evaluacionFase3?: SisconcapEvaluacionFase3[];
+
+    @Field(() => SisconcapEvaluacionResumenFase3, { nullable: true })
+    evaluacionResumenFase3?: SisconcapEvaluacionResumenFase3;
 }
