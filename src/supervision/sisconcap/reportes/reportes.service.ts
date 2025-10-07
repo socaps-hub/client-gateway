@@ -4,6 +4,7 @@ import { reportesSisconcapPatterns } from 'src/common/constants/reportes/reporte
 import { FiltroFechasInput } from 'src/common/dto/filtro-fechas.input';
 import { NATS_SERVICE } from 'src/config';
 import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
+import { ResumenAnomaliasArgs } from './dto/fase1/arg/resumen-anomalias.args';
 
 @Injectable()
 export class ReportesService {
@@ -14,6 +15,21 @@ export class ReportesService {
 
     getReporteSegmentadoF1(input: FiltroFechasInput, user: Usuario) {
         return this.client.send(reportesSisconcapPatterns.GET_FASE1_REPORTE_SEGMENTADO, { input, user });
+    }
+
+    getResumenAnomaliasSucAndEjecutivos(input: FiltroFechasInput, user: Usuario) {
+        return this.client.send(reportesSisconcapPatterns.GET_FASE1_RESUMEN_ANOMALIAS_SUC_EJECUTIVOS, { input, user });
+    }
+
+    getResumenAnomaliasEjecutivosPorSucursal(
+        resumenAnomaliasArgs: ResumenAnomaliasArgs,
+        user: Usuario,
+    ) {
+        return this.client.send(reportesSisconcapPatterns.GET_FASE1_RESUMEN_ANOMALIAS_EJECUTIVOS_POR_SUC, { resumenAnomaliasArgs, user });
+    }
+
+    getResumenAnomaliasEjecutivosGlobal(input: FiltroFechasInput, user: Usuario) {
+        return this.client.send(reportesSisconcapPatterns.GET_FASE1_RESUMEN_ANOMALIAS_EJECUTIVOS_GLOBAL, { input, user });
     }
 
 }
