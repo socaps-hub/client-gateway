@@ -13,6 +13,7 @@ export class ReportesService {
         @Inject(NATS_SERVICE) private readonly client: ClientProxy
     ) { }
 
+    // * FASE 1
     getReporteSegmentadoF1(input: FiltroFechasInput, user: Usuario) {
         return this.client.send(reportesSisconcapPatterns.GET_FASE1_REPORTE_SEGMENTADO, { input, user });
     }
@@ -30,6 +31,11 @@ export class ReportesService {
 
     getResumenAnomaliasEjecutivosGlobal(input: FiltroFechasInput, user: Usuario) {
         return this.client.send(reportesSisconcapPatterns.GET_FASE1_RESUMEN_ANOMALIAS_EJECUTIVOS_GLOBAL, { input, user });
+    }
+
+    // * FASE 2
+    getResultadosSeguimiento(input: FiltroFechasInput, user: Usuario) {
+        return this.client.send(reportesSisconcapPatterns.GET_FASE2_RESULTADOS_SEGUIMIENTO, { input, user });
     }
 
 }
