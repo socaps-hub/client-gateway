@@ -8,4 +8,8 @@ export const reportesSisconcapPatterns = {
 
     // * Fase 2
     GET_FASE2_RESULTADOS_SEGUIMIENTO: 'reportes-sisconcap.fase2.resultadosSeguimiento',
+    
+    // * FASE 3
+    GET_FASE3_RESULTADOS_FINALES: 'reportes-sisconcap.fase3.resultadosFinales',
+
 }

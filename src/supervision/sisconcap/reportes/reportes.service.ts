@@ -38,4 +38,9 @@ export class ReportesService {
         return this.client.send(reportesSisconcapPatterns.GET_FASE2_RESULTADOS_SEGUIMIENTO, { input, user });
     }
 
+    // * FASE 3
+    getResultadosFinales(input: FiltroFechasInput, user: Usuario) {
+        return this.client.send(reportesSisconcapPatterns.GET_FASE3_RESULTADOS_FINALES, { input, user });
+    }
+
 }
