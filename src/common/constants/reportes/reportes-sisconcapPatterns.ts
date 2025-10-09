@@ -12,4 +12,7 @@ export const reportesSisconcapPatterns = {
     // * FASE 3
     GET_FASE3_RESULTADOS_FINALES: 'reportes-sisconcap.fase3.resultadosFinales',
 
+    // * HISTORICO
+    GET_HISTORICO: 'reportes-sisconcap.historico',
+
 }
