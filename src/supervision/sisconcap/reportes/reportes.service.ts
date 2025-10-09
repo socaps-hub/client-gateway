@@ -5,6 +5,7 @@ import { FiltroFechasInput } from 'src/common/dto/filtro-fechas.input';
 import { NATS_SERVICE } from 'src/config';
 import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 import { ResumenAnomaliasArgs } from './dto/fase1/arg/resumen-anomalias.args';
+import { SisconcapHistoricoFiltroInput } from './dto/historicos/inputs/filtro-historico-reporte.input';
 
 @Injectable()
 export class ReportesService {
@@ -41,6 +42,11 @@ export class ReportesService {
     // * FASE 3
     getResultadosFinales(input: FiltroFechasInput, user: Usuario) {
         return this.client.send(reportesSisconcapPatterns.GET_FASE3_RESULTADOS_FINALES, { input, user });
+    }
+
+    // * HISTORICO
+    getHistorico(input: SisconcapHistoricoFiltroInput, user: Usuario) {
+        return this.client.send(reportesSisconcapPatterns.GET_HISTORICO, { input, user });
     }
 
 }
