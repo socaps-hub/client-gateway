@@ -15,4 +15,7 @@ export const reportesSisconcapPatterns = {
     // * HISTORICO
     GET_HISTORICO: 'reportes-sisconcap.historico',
 
+    // * BALANCE
+    GET_BALANCE: 'reportes-sisconcap.balance',
+
 }
