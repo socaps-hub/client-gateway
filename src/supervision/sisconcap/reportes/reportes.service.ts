@@ -49,4 +49,9 @@ export class ReportesService {
         return this.client.send(reportesSisconcapPatterns.GET_HISTORICO, { input, user });
     }
 
+    // * BALANCE
+    getBalance(user: Usuario) {
+        return this.client.send(reportesSisconcapPatterns.GET_BALANCE, { user });
+    }
+
 }
