@@ -1,8 +1,9 @@
 import { join } from 'path';
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ApolloDriverConfig, ApolloDriver } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
+import { graphqlUploadExpress } from 'graphql-upload-ts';
 
 import { AuthModule } from './auth/auth.module';
 import { NatsModule } from './transports/nats.module';
@@ -23,7 +24,8 @@ import { HealthCheckModule } from './health-check/health-check.module';
       autoSchemaFile: join( process.cwd(), 'src/schema.gql'),
       plugins: [
         ApolloServerPluginLandingPageLocalDefault(),
-      ]
+      ],
+      csrfPrevention: false,
     }),
 
     SupervisionModule,
@@ -37,4 +39,13 @@ import { HealthCheckModule } from './health-check/health-check.module';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule {
+  // configure(consumer: MiddlewareConsumer) {
+  //   consumer.apply(
+  //     graphqlUploadExpress({
+  //       maxFileSize: 10_000_000, // 10 MB
+  //       maxFiles: 1,
+  //     }),
+  //   ).forRoutes('graphql');
+  // }
+}

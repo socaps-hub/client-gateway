@@ -10,6 +10,7 @@ import { FaseIiiDesembolsoModule } from './fase-iii-desembolso/fase-iii-desembol
 import { FaseIvSegGlobalModule } from './fase-iv-seg-global/fase-iv-seg-global.module';
 import { ReportesSisconcreModule } from './reportes-sisconcre/reportes-sisconcre.module';
 import { SisconcapModule } from './sisconcap/sisconcap.module';
+import { AuditoriaSisconcreModule } from './auditoria-sisconcre/auditoria-sisconcre.module';
 
 @Module({
   imports: [
@@ -34,6 +35,8 @@ import { SisconcapModule } from './sisconcap/sisconcap.module';
     ReportesSisconcreModule,
 
     SisconcapModule,
+
+    AuditoriaSisconcreModule,
   ],
   providers: []
 })

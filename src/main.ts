@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger, RequestMethod, ValidationPipe } from '@nestjs/common';
+import { graphqlUploadExpress } from 'graphql-upload-ts';
 import { envs } from './config';
 import { RpcCustomExceptionFilter } from './common';
 
@@ -16,6 +17,9 @@ async function bootstrap() {
     }]
   })
   app.enableCors()
+
+  // ⚙️ Habilita procesamiento multipart para GraphQL Upload
+  app.use(graphqlUploadExpress({ maxFileSize: 10_000_000, maxFiles: 1 }));
 
   app.useGlobalPipes(
     new ValidationPipe({
