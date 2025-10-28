@@ -7,6 +7,7 @@ import { UpdateCooperativaInput } from './dto/inputs/update-cooperativa.input';
 import { ParseUUIDPipe, UseGuards } from '@nestjs/common';
 import { AuthGraphQLGuard } from 'src/auth/guards/auth-graphql.guard';
 import { ValidRolesArgs } from '../usuarios/dto/args/roles.arg';
+import { CooperativaRadiografiaStatus } from './dto/outputs/cooperativa-radiografia-status.output';
 
 @Resolver(() => Cooperativa)
 @UseGuards(AuthGraphQLGuard)
@@ -59,4 +60,10 @@ export class CooperativasResolver {
   ) {
     return this.cooperativasService.desactivate(id);
   }
+
+  @Query(() => [CooperativaRadiografiaStatus], { name: 'cooperativasRadiografiaCreditoStatus' })
+  async getCooperativasRadiografiaCreditoStatus() {
+    return this.cooperativasService.getCooperativasRadiografiaCreditoStatus();
+  }
+
 }

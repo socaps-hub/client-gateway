@@ -40,4 +40,8 @@ export class CooperativasService {
   desactivate(id: string) {
     return this._client.send( cooperativasPatterns.DESACTIVATE, { id } )
   }
+
+  getCooperativasRadiografiaCreditoStatus() {
+    return this._client.send( cooperativasPatterns.GET_RADIO_CREDITO_STATUS, {} )
+  }
 }

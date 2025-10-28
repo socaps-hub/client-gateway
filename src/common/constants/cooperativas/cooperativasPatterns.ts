@@ -7,4 +7,5 @@ export const cooperativasPatterns = {
     UPDATE: 'config.cooperativas.update',
     ACTIVATE: 'config.cooperativas.activate',
     DESACTIVATE: 'config.cooperativas.desactivate',
+    GET_RADIO_CREDITO_STATUS: 'config.cooperativas.getCooperativasRadiografiaCreditoStatus',
 }

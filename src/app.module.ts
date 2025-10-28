@@ -10,6 +10,8 @@ import { NatsModule } from './transports/nats.module';
 import { SupervisionModule } from './supervision/supervision.module';
 import { ConfiguracionModule } from './configuracion/configuracion.module';
 import { HealthCheckModule } from './health-check/health-check.module';
+import { ExcelModule } from './common/excel/excel.module';
+import { AwsModule } from './common/aws/aws.module';
 
 @Module({
   imports: [
@@ -35,6 +37,10 @@ import { HealthCheckModule } from './health-check/health-check.module';
     ConfiguracionModule,
 
     HealthCheckModule,
+
+    ExcelModule,
+
+    AwsModule,
   ],
   controllers: [],
   providers: [],

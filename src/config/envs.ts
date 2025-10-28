@@ -4,11 +4,19 @@ import * as joi from 'joi'
 interface EnvVars {
     PORT: number
     NATS_SERVERS: string[]
+    AWS_S3_BUCKET_NAME: string
+    AWS_S3_REGION: string
+    AWS_ACCESS_KEY_ID: string
+    AWS_SECRET_ACCESS_KEY: string
 }
 
 const envsSchema = joi.object({
     PORT: joi.number().required(),
     NATS_SERVERS: joi.array().items( joi.string() ).required(),
+    AWS_S3_BUCKET_NAME: joi.string().required(),
+    AWS_S3_REGION: joi.string().required(),
+    AWS_ACCESS_KEY_ID: joi.string().required(),
+    AWS_SECRET_ACCESS_KEY: joi.string().required(),
 })
 .unknown(true)
 
@@ -26,4 +34,8 @@ const envVars: EnvVars = value
 export const envs = {
     port: envVars.PORT,
     natServers: envVars.NATS_SERVERS,
+    awsS3BucketName: envVars.AWS_S3_BUCKET_NAME,
+    awsS3Region: envVars.AWS_S3_REGION,
+    awsAccessKeyId: envVars.AWS_ACCESS_KEY_ID,
+    awsSecretAccessKey: envVars.AWS_SECRET_ACCESS_KEY,
 }
