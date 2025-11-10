@@ -3,7 +3,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ApolloDriverConfig, ApolloDriver } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
-import { graphqlUploadExpress } from 'graphql-upload-ts';
+import { GraphQLJSON } from 'graphql-scalars';
 
 import { AuthModule } from './auth/auth.module';
 import { NatsModule } from './transports/nats.module';
@@ -27,6 +27,7 @@ import { AwsModule } from './common/aws/aws.module';
       plugins: [
         ApolloServerPluginLandingPageLocalDefault(),
       ],
+      resolvers: { JSON: GraphQLJSON },
       csrfPrevention: false,
     }),
 

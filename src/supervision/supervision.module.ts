@@ -11,6 +11,7 @@ import { FaseIvSegGlobalModule } from './fase-iv-seg-global/fase-iv-seg-global.m
 import { ReportesSisconcreModule } from './reportes-sisconcre/reportes-sisconcre.module';
 import { SisconcapModule } from './sisconcap/sisconcap.module';
 import { AuditoriaSisconcreModule } from './auditoria-sisconcre/auditoria-sisconcre.module';
+import { AuditoriaModule } from './auditoria/auditoria.module';
 
 @Module({
   imports: [
@@ -37,6 +38,8 @@ import { AuditoriaSisconcreModule } from './auditoria-sisconcre/auditoria-siscon
     SisconcapModule,
 
     AuditoriaSisconcreModule,
+
+    AuditoriaModule,
   ],
   providers: []
 })
