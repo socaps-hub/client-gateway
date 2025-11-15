@@ -14,12 +14,20 @@ import { GetAllMuestrasInput } from './dto/inputs/muestra-seleccion/get-all-mues
 import { ResultadoCreditosSeleccionadosResponse } from './dto/outputs/muestra-credito-seleccion/resultado-creditos-seleccionados.output';
 import { GetCreditosSeleccionadosInput } from './dto/inputs/muestra-credito-seleccion/get-creditos-seleccionados.input';
 import { ParametrosMuestraExtendInput } from './dto/inputs/muestra-params-extend.input';
+import { MuestraCreditoSeleccion } from './entities/muestra-credito-seleccion.entity';
 
 @Resolver()
 @UseGuards( AuthGraphQLGuard )
 export class CreditoResolver {
 
   constructor(private readonly creditoService: CreditoService) {}
+
+  @Query( () => MuestraCreditoSeleccion, { name: 'aCreditoGetCreditoSeleccionadoById' })
+  public getCreditoSeleccionadoById(
+    @Args({ name: 'id', type: () => Int }) id: number,
+  ) {
+    return this.creditoService.getCreditoSeleccionadoById( id )
+  }
 
   // * CALCULO DE UNIVERSO Y MUESTRA
   // ────────────────────────────────────────────────

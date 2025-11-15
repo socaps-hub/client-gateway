@@ -15,6 +15,10 @@ export class CreditoService {
     @Inject(NATS_SERVICE) private readonly client: ClientProxy,
   ) {}
 
+  public async getCreditoSeleccionadoById( id: number ) {
+    return this.client.send( auditoriaCreditoPatterns.GET_CREDITO_SELECCIONADO_BY_ID, { id });
+  }
+
   // ────────────────────────────────────────────────
   // 🔹 1️⃣ Cálculo inicial (valores globales)
   // ────────────────────────────────────────────────

@@ -1,0 +1,63 @@
+import { ObjectType, Field, ID, Int } from '@nestjs/graphql';
+
+import { CalificativoBEnum } from '../../enums/calificativo-b.enum';
+import { Calificativo } from 'src/supervision/fase-i-levantamiento/evaluaciones/enums/evaluacion.enum';
+import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
+import { MuestraCreditoSeleccion } from 'src/supervision/auditoria/credito/entities/muestra-credito-seleccion.entity';
+
+@ObjectType()
+export class EvaluacionResumenF1ACredito {
+  @Field(() => Int)
+  A04Id: number;
+
+  @Field(() => String)
+  A04PSAut: string;
+
+  @Field(() => String)
+  A04Excep: string;
+
+  @Field(() => Int)
+  A04Ha: number;
+
+  @Field(() => Int)
+  A04PRes: number;
+
+  @Field(() => Int)
+  A04MonR: number;
+
+  @Field(() => Calificativo)
+  A04CalA: Calificativo;
+
+  @Field(() => CalificativoBEnum)
+  A04CalB: CalificativoBEnum;
+
+  @Field(() => String)
+  A04Obs: string;
+
+  @Field(() => String)
+  A04Comp: string;
+
+  @Field(() => String)
+  A04FPlzo: string;
+
+  @Field(() => ID)
+  A04Resp: string;
+
+  @Field(() => ID)
+  A04Aud_id: string;
+
+  @Field(() => String)
+  A04FRev: string;
+
+  // ───────────────────────────────
+  // Relaciones
+  // ───────────────────────────────
+  @Field(() => MuestraCreditoSeleccion, { nullable: true })
+  creditoSeleccion?: MuestraCreditoSeleccion;
+
+  @Field(() => Usuario, { nullable: true })
+  auditor?: Usuario;
+
+  @Field(() => Usuario, { nullable: true })
+  responsable?: Usuario;
+}
