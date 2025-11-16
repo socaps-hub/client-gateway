@@ -88,11 +88,13 @@ export class RadiografiaResolver {
       console.log({cooperativaCodigo});
       
       // 🧠 2️⃣ Mandar al microservicio (solo la URL)
-      await lastValueFrom(
-        this.radiografiaService.crearCargaMasivaRadiografiaCredito(key, cooperativaCodigo)
-      );
+      // await lastValueFrom(
+      //   this.radiografiaService.crearCargaMasivaRadiografiaCredito(key, cooperativaCodigo)
+      // );
 
-      return { success: true };
+      this.radiografiaService.crearCargaMasivaRadiografiaCredito(key, cooperativaCodigo);
+
+      return { success: true, message: 'Procesamiento iniciado' };
     } catch (error) {
       console.error('❌ Error al cargar radiografía desde Excel:', error);
       return { success: false, message: error.message };
