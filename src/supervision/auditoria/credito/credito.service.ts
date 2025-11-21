@@ -8,6 +8,7 @@ import { auditoriaCreditoPatterns } from 'src/common/constants/auditoria/credito
 import { CreateMuestraSeleccionInput } from './dto/inputs/muestra-seleccion/create-muestra-seleccion.input';
 import { GetAllMuestrasInput } from './dto/inputs/muestra-seleccion/get-all-muestras.input';
 import { GetCreditosSeleccionadosInput } from './dto/inputs/muestra-credito-seleccion/get-creditos-seleccionados.input';
+import { InventarioRevisionFilterInput } from './dto/inputs/inventario-revision-filter.input';
 
 @Injectable()
 export class CreditoService {
@@ -62,5 +63,18 @@ export class CreditoService {
 
   public async getMuestraDetalleById(muestraId: number) {
     return this.client.send( auditoriaCreditoPatterns.GET_MUESTRA_DETALLE_BY_ID, { muestraId } );
+  }
+
+  // * INVENTARIO DE REVISION
+  public async getByEstado( estado: string, user: Usuario, filterBySucursal: boolean = true ) {
+    return this.client.send( auditoriaCreditoPatterns.GET_CREDITOS_BY_ESTADO, { estado, user, filterBySucursal } );
+  }
+
+  public async getInventarioRevisionFiltrado( input: InventarioRevisionFilterInput, user: Usuario ) {
+    return this.client.send( auditoriaCreditoPatterns.GET_INVENTARIO_REVISION_FILTRADO, { input, user } );
+  }
+
+  public async getInventarioRevisionStats( input: InventarioRevisionFilterInput, user: Usuario ) {
+    return this.client.send( auditoriaCreditoPatterns.GET_INVENTARIO_REVISION_STATS, { input, user } );
   }
 }

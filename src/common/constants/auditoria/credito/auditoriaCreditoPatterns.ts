@@ -6,5 +6,8 @@ export const auditoriaCreditoPatterns = {
     GET_CREDITOS_SELECCIONADOS_BY_MUESTRA: 'supervision.auditoria.credito.getCreditosSeleccionadosByMuestra',
     GET_MUESTRA_DETALLE_BY_ID: 'supervision.auditoria.credito.getMuestraDetalleById',
     GET_CREDITO_SELECCIONADO_BY_ID: 'supervision.auditoria.credito.getCreditoSeleccionadoById',
+    GET_CREDITOS_BY_ESTADO: 'supervision.auditoria.credito.getByEstado',
+    GET_INVENTARIO_REVISION_FILTRADO: 'supervision.auditoria.credito.getInventarioRevisionFiltrado',
+    GET_INVENTARIO_REVISION_STATS: 'supervision.auditoria.credito.getInventarioRevisionStats',
     CREATE_MUESTRA_SELECCION: 'supervision.auditoria.credito.createOrUpdateMuestraSeleccion',
 }

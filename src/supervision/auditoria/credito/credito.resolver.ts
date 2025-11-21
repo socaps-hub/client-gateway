@@ -4,7 +4,6 @@ import { UseGuards } from '@nestjs/common';
 import { CreditoService } from './credito.service';
 import { AuthGraphQLGuard } from 'src/auth/guards/auth-graphql.guard';
 import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
-import { ParametrosMuestraInput } from './dto/inputs/muestra-params.input';
 import { ResultadoMuestraCreditoResponse } from './dto/outputs/resultado-muestra.output';
 import { GetUser } from 'src/auth/decorators/user.decorator';
 import { BooleanResponse } from 'src/common/dto/boolean-response.object';
@@ -15,6 +14,10 @@ import { ResultadoCreditosSeleccionadosResponse } from './dto/outputs/muestra-cr
 import { GetCreditosSeleccionadosInput } from './dto/inputs/muestra-credito-seleccion/get-creditos-seleccionados.input';
 import { ParametrosMuestraExtendInput } from './dto/inputs/muestra-params-extend.input';
 import { MuestraCreditoSeleccion } from './entities/muestra-credito-seleccion.entity';
+import { CreditosByEstadoArgs } from '../dtos/args/creditos-by-estado.arg';
+import { InventarioRevisionResponse } from './dto/outputs/inventario-revision-response.output';
+import { InventarioRevisionFilterInput } from './dto/inputs/inventario-revision-filter.input';
+import { InventarioRevisionStatsOutput } from './dto/outputs/inventario-revision-stats.output';
 
 @Resolver()
 @UseGuards( AuthGraphQLGuard )
@@ -95,6 +98,31 @@ export class CreditoResolver {
     @Args('muestraId', { type: () => Int }) muestraId: number,
   ) {
     return this.creditoService.getMuestraDetalleById(muestraId);
+  }
+
+  // * INVENTARIO DE REVISION
+  @Query(() => [MuestraCreditoSeleccion], { name: 'aCreditoGetByEstado' })
+  async creditosByEstado(
+    @Args() args: CreditosByEstadoArgs,
+    @GetUser('graphql') user: Usuario,
+  ) {
+    return this.creditoService.getByEstado( args.estado, user, args.filterBySucursal );
+  }
+
+  @Query(() => InventarioRevisionResponse, { name: 'aCreditoInventarioRevisionFiltrado' })
+  inventarioRevisionFiltrado(
+    @Args('input') input: InventarioRevisionFilterInput,
+    @GetUser('graphql') user: Usuario,
+  ) {
+    return this.creditoService.getInventarioRevisionFiltrado(input, user);
+  }
+
+  @Query(() => InventarioRevisionStatsOutput, { name: 'aCreditoInventarioRevisionStats' })
+  inventarioRevisionStats(
+    @Args('input') input: InventarioRevisionFilterInput,
+    @GetUser('graphql') user: Usuario,
+  ) {
+    return this.creditoService.getInventarioRevisionStats(input, user);
   }
   
 }
