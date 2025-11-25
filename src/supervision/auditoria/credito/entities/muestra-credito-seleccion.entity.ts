@@ -4,6 +4,8 @@ import { RA01Credito } from 'src/configuracion/credito/radiografia/entities/radi
 import { Sucursal } from 'src/configuracion/sucursales/entities/sucursal.entity';
 import { EvaluacionF1ACredito } from '../../fase1-revision/entities/credito/evaluacion-f1-a-credito.entity.ts';
 import { EvaluacionResumenF1ACredito } from '../../fase1-revision/entities/credito/evaluacion-resumen-f1-a-credito.entity';
+import { EvaluacionF2ACredito } from '../../fase2-seguimiento/entities/credito/evaluacion-f2-a-credito.entity';
+import { EvaluacionResumenF2ACredito } from '../../fase2-seguimiento/entities/credito/evaluacion-resumen-f2-a-credito.entity';
 
 @ObjectType()
 export class MuestraCreditoSeleccion {
@@ -115,4 +117,10 @@ export class MuestraCreditoSeleccion {
 
   @Field(() => EvaluacionResumenF1ACredito, { nullable: true })
   resumenRevisionF1?: EvaluacionResumenF1ACredito
+
+  @Field(() => [EvaluacionF2ACredito], { nullable: true })
+  evaluacionRevisionF2?: EvaluacionF2ACredito[]
+
+  @Field(() => EvaluacionResumenF2ACredito, { nullable: true })
+  resumenRevisionF2?: EvaluacionResumenF2ACredito
 }

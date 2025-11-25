@@ -18,6 +18,7 @@ import { CreditosByEstadoArgs } from '../dtos/args/creditos-by-estado.arg';
 import { InventarioRevisionResponse } from './dto/outputs/inventario-revision-response.output';
 import { InventarioRevisionFilterInput } from './dto/inputs/inventario-revision-filter.input';
 import { InventarioRevisionStatsOutput } from './dto/outputs/inventario-revision-stats.output';
+import { InventarioSeguimientoStatsOutput } from './dto/outputs/inventario-seguimiento-stats.output';
 
 @Resolver()
 @UseGuards( AuthGraphQLGuard )
@@ -114,7 +115,7 @@ export class CreditoResolver {
     @Args('input') input: InventarioRevisionFilterInput,
     @GetUser('graphql') user: Usuario,
   ) {
-    return this.creditoService.getInventarioRevisionFiltrado(input, user);
+    return this.creditoService.getInventarioExpedientesFiltrado(input, user);
   }
 
   @Query(() => InventarioRevisionStatsOutput, { name: 'aCreditoInventarioRevisionStats' })
@@ -123,6 +124,14 @@ export class CreditoResolver {
     @GetUser('graphql') user: Usuario,
   ) {
     return this.creditoService.getInventarioRevisionStats(input, user);
+  }
+
+  @Query(() => InventarioSeguimientoStatsOutput, { name: 'aCreditoInventarioSeguimientoStats' })
+  inventarioSeguimientoStats(
+    @Args('input') input: InventarioRevisionFilterInput,
+    @GetUser('graphql') user: Usuario,
+  ) {
+    return this.creditoService.getInventarioSeguimientoStats(input, user);
   }
   
 }

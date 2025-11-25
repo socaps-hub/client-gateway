@@ -70,11 +70,15 @@ export class CreditoService {
     return this.client.send( auditoriaCreditoPatterns.GET_CREDITOS_BY_ESTADO, { estado, user, filterBySucursal } );
   }
 
-  public async getInventarioRevisionFiltrado( input: InventarioRevisionFilterInput, user: Usuario ) {
+  public async getInventarioExpedientesFiltrado( input: InventarioRevisionFilterInput, user: Usuario ) {
     return this.client.send( auditoriaCreditoPatterns.GET_INVENTARIO_REVISION_FILTRADO, { input, user } );
   }
 
   public async getInventarioRevisionStats( input: InventarioRevisionFilterInput, user: Usuario ) {
     return this.client.send( auditoriaCreditoPatterns.GET_INVENTARIO_REVISION_STATS, { input, user } );
+  }
+
+  public async getInventarioSeguimientoStats( input: InventarioRevisionFilterInput, user: Usuario ) {
+    return this.client.send( auditoriaCreditoPatterns.GET_INVENTARIO_SEGUIMIENTO_STATS, { input, user } );
   }
 }
