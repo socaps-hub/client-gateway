@@ -17,18 +17,10 @@ export class RadiografiaService {
     // }
 
     crearCargaMasivaRadiografiaCredito(key: string, cooperativaCodigo: string) {
-        console.log({key, cooperativaCodigo});
-
         return this.client.emit(
             radiografiasPatterns.UPLOAD_RA_CREDITO,
             { key, cooperativaCodigo }
         );
-        
-        // return this.client.send( radiografiasPatterns.UPLOAD_RA_CREDITO, { key, cooperativaCodigo });
-        // return {
-        //     status: true,
-        //     message: 'El procesamiento ha iniciado',
-        // };
     }
 
 }

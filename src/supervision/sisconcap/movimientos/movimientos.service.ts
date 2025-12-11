@@ -8,6 +8,7 @@ import { UpdateMovimientoArgs } from './dto/inputs/update-movimiento.input';
 import { CreateFase1Input } from './dto/inputs/create-fase1.input';
 import { CreateFase2Input } from './dto/inputs/create-fase2.input';
 import { CreateFase3Input } from './dto/inputs/create-fase3.input';
+import { InventarioSolicitudesFilterInput } from 'src/supervision/fase-i-levantamiento/solicitudes/dto/inventario-solicitudes-filter.input';
 
 @Injectable()
 export class MovimientosService {
@@ -32,6 +33,10 @@ export class MovimientosService {
         return this.client.send( movimientosPatterns.GET_ALL, { user, filterBySucursal } )
     }
 
+    getInventarioMovimientosFiltrado( input: InventarioSolicitudesFilterInput, user: Usuario ) {
+        return this.client.send( movimientosPatterns.GET_INVENTARIO_MOVIMIENTOS_FILTRADO, { input, user } )
+    }
+
     getByFolio( folio: number, user: Usuario ) {
         return this.client.send( movimientosPatterns.GET_BY_FOLIO, { folio, user } )
     }
@@ -52,4 +57,17 @@ export class MovimientosService {
         return this.client.send( movimientosPatterns.CANCEL_FASE3_FASE2, { folio, user } )
     }
 
+    // * STATS
+
+    getInventarioF1Stats( input: InventarioSolicitudesFilterInput, user: Usuario ) {
+        return this.client.send( movimientosPatterns.GET_INVENTARIO_F1_STATS, { input, user } )
+    }
+
+    getInventarioF2Stats( input: InventarioSolicitudesFilterInput, user: Usuario ) {
+        return this.client.send( movimientosPatterns.GET_INVENTARIO_F2_STATS, { input, user } )
+    }
+
+    getInventarioF3Stats( input: InventarioSolicitudesFilterInput, user: Usuario ) {
+        return this.client.send( movimientosPatterns.GET_INVENTARIO_F3_STATS, { input, user } )
+    }
 }

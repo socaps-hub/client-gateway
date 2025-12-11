@@ -13,6 +13,9 @@ import { UpdateMovimientoArgs } from './dto/inputs/update-movimiento.input';
 import { CreateFase2Input } from './dto/inputs/create-fase2.input';
 import { ValidEstadosArgs } from 'src/supervision/fase-i-levantamiento/solicitudes/dto/args/prestamos-by-estado.arg';
 import { CreateFase3Input } from './dto/inputs/create-fase3.input';
+import { InventarioMovimientosResponse } from './dto/output/inventario-movimientos-response.dto';
+import { InventarioSolicitudesFilterInput } from 'src/supervision/fase-i-levantamiento/solicitudes/dto/inventario-solicitudes-filter.input';
+import { SisconcapFase1StatisticsOutput } from './dto/output/fase1-stats-response.output';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -73,6 +76,14 @@ export class MovimientosResolver {
     return this.movimientosService.getAll( user, filterBySucursal )
   }
 
+  @Query(() => InventarioMovimientosResponse)
+  inventarioMovimientosFiltrado(
+    @Args('input') input: InventarioSolicitudesFilterInput,
+    @GetUser('graphql') user: Usuario,
+  ) {
+    return this.movimientosService.getInventarioMovimientosFiltrado(input, user);
+  }
+
   @Query(() => [Movimiento])
   movimientosByEstado(
     @Args() args: ValidEstadosArgs,
@@ -119,6 +130,31 @@ export class MovimientosResolver {
     )
       .then( success => success)
       .catch( (err) => err )
+  }
+
+  // *STATS
+  @Query(() => SisconcapFase1StatisticsOutput)
+  inventarioMovimientosF1Stats(
+    @Args('input') input: InventarioSolicitudesFilterInput,
+    @GetUser('graphql') user: Usuario,
+  ) {
+    return this.movimientosService.getInventarioF1Stats(input, user);
+  }
+
+  @Query(() => SisconcapFase1StatisticsOutput)
+  inventarioMovimientosF2Stats(
+    @Args('input') input: InventarioSolicitudesFilterInput,
+    @GetUser('graphql') user: Usuario,
+  ) {
+    return this.movimientosService.getInventarioF2Stats(input, user);
+  }
+
+  @Query(() => SisconcapFase1StatisticsOutput)
+  inventarioMovimientosF3Stats(
+    @Args('input') input: InventarioSolicitudesFilterInput,
+    @GetUser('graphql') user: Usuario,
+  ) {
+    return this.movimientosService.getInventarioF3Stats(input, user);
   }
 
 }

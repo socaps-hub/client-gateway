@@ -6,6 +6,7 @@ import { CategoriasModule } from './categorias/categorias.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { ProductosModule } from './productos/productos.module';
 import { CreditoModule } from './credito/credito.module';
+import { MigracionModule } from './migracion/migracion.module';
 
 @Module({
     imports: [
@@ -16,6 +17,7 @@ import { CreditoModule } from './credito/credito.module';
         UsuariosModule,
         ProductosModule,
         CreditoModule,
+        MigracionModule,
     ]
 })
 export class ConfiguracionModule {}

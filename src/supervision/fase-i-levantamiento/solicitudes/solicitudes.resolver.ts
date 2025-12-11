@@ -15,6 +15,12 @@ import { plainToInstance } from 'class-transformer';
 import { UpdateAllPrestamoArgs } from './dto/args/update-all-prestamo.arg';
 import { BooleanResponse } from 'src/common/dto/boolean-response.object';
 import { ValidEstadosArgs } from './dto/args/prestamos-by-estado.arg';
+import { InventarioSolicitudesResponse } from './dto/output/inventario-solicitudes-response.output';
+import { InventarioSolicitudesFilterInput } from './dto/inventario-solicitudes-filter.input';
+import { Fase1StatisticsOutput } from './dto/output/fase1-stats-response.output';
+import { Fase2StatisticsOutput } from './dto/output/fase2-stats-response.output';
+import { Fase3StatisticsOutput } from './dto/output/fase3-stats-response.output';
+import { Fase4StatisticsOutput } from './dto/output/fase4-stats-response.output';
 
 @Resolver(() => Prestamo)
 @UseGuards(AuthGraphQLGuard)
@@ -45,6 +51,14 @@ export class SolicitudesResolver {
     )
     return lista.map(mapR01ToPrestamo);
   }
+  @Query(() => InventarioSolicitudesResponse)
+  inventarioSolicitudesFiltrado(
+    @Args('input') input: InventarioSolicitudesFilterInput,
+    @GetUser('graphql') user: Usuario,
+  ) {
+    return this.solicitudesService.getInventarioSolicitudesFiltrado(input, user);
+  }
+  
 
   @Query(() => Prestamo)
   async prestamo(
@@ -100,5 +114,38 @@ export class SolicitudesResolver {
       this.solicitudesService.remove(id, user)
     )
     return mapR01ToPrestamo(prestamo);
+  }
+
+  // *STATS
+  @Query(() => Fase1StatisticsOutput)
+  inventarioSolicitudesStats(
+    @Args('input') input: InventarioSolicitudesFilterInput,
+    @GetUser('graphql') user: Usuario,
+  ) {
+    return this.solicitudesService.getInventarioSolicitudesStats(input, user);
+  }
+
+  @Query(() => Fase2StatisticsOutput)
+  inventarioSeguimientosStats(
+    @Args('input') input: InventarioSolicitudesFilterInput,
+    @GetUser('graphql') user: Usuario,
+  ) {
+    return this.solicitudesService.getInventarioSeguimientosStats(input, user);
+  }
+
+  @Query(() => Fase3StatisticsOutput)
+  inventarioDesembolsosStats(
+    @Args('input') input: InventarioSolicitudesFilterInput,
+    @GetUser('graphql') user: Usuario,
+  ) {
+    return this.solicitudesService.getInventarioDesembolsosStats(input, user);
+  }
+
+  @Query(() => Fase4StatisticsOutput)
+  inventarioSeguimientoGlobalStats(
+    @Args('input') input: InventarioSolicitudesFilterInput,
+    @GetUser('graphql') user: Usuario,
+  ) {
+    return this.solicitudesService.getInventarioSeguimientoGlobalStats(input, user);
   }
 }

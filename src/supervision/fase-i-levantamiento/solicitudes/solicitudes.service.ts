@@ -9,6 +9,7 @@ import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 import { CreateEvaluacionFase1Input } from '../evaluaciones/dto/create-evaluacion-fase1.input';
 import { CreateResumenFase1Input } from '../evaluaciones/resumen/dto/create-resumen-fase1.input';
 import { ValidEstados } from './enums/valid-estados.enum';
+import { InventarioSolicitudesFilterInput } from './dto/inventario-solicitudes-filter.input';
 
 @Injectable()
 export class SolicitudesService {
@@ -23,6 +24,10 @@ export class SolicitudesService {
 
   findAll(user: Usuario, filterBySucursal: boolean = true) {
     return this.client.send(solicitudesPatterns.GET_ALL, { user, filterBySucursal });
+  }
+
+  getInventarioSolicitudesFiltrado(input: InventarioSolicitudesFilterInput, user: Usuario) {
+    return this.client.send(solicitudesPatterns.GET_INVENTARIO_SOLICITUDES, { input, user });
   }
 
   findById(id: string, user: Usuario) {
@@ -51,5 +56,21 @@ export class SolicitudesService {
 
   remove(id: string, user: Usuario) {
     return this.client.send(solicitudesPatterns.REMOVE, { id, user });
+  }
+
+  getInventarioSolicitudesStats(input: InventarioSolicitudesFilterInput, user: Usuario) {
+    return this.client.send(solicitudesPatterns.GET_INVENTARIO_SOLICITUDES_STATS, { input, user });
+  }
+
+  getInventarioSeguimientosStats(input: InventarioSolicitudesFilterInput, user: Usuario) {
+    return this.client.send(solicitudesPatterns.GET_INVENTARIO_SEGUIMIENTOS_STATS, { input, user });
+  }
+
+  getInventarioDesembolsosStats(input: InventarioSolicitudesFilterInput, user: Usuario) {
+    return this.client.send(solicitudesPatterns.GET_INVENTARIO_DESEMBOLSOS_STATS, { input, user });
+  }
+
+  getInventarioSeguimientoGlobalStats(input: InventarioSolicitudesFilterInput, user: Usuario) {
+    return this.client.send(solicitudesPatterns.GET_INVENTARIO_SEGUIMIENTO_GLOBAL_STATS, { input, user });
   }
 }

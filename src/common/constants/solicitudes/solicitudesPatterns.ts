@@ -1,9 +1,14 @@
 export const solicitudesPatterns = {
   CREATE: 'supervision.solicitudes.create',
   GET_ALL: 'supervision.solicitudes.getAll',
+  GET_INVENTARIO_SOLICITUDES: 'supervision.solicitudes.getInventarioSolicitudesFiltrado',
   GET_BY_ID: 'supervision.solicitudes.getById',
   GET_BY_ESTADO: 'supervision.solicitudes.getByEstado',
   UPDATE: 'supervision.solicitudes.update',
   UPDATE_ALL: 'supervision.solicitudes.updateAll',
   REMOVE: 'supervision.solicitudes.remove',
+  GET_INVENTARIO_SOLICITUDES_STATS: 'supervision.solicitudes.getInventarioSolicitudesStats',
+  GET_INVENTARIO_SEGUIMIENTOS_STATS: 'supervision.solicitudes.getInventarioSeguimientosStats',
+  GET_INVENTARIO_DESEMBOLSOS_STATS: 'supervision.solicitudes.getInventarioDesembolsosStats',
+  GET_INVENTARIO_SEGUIMIENTO_GLOBAL_STATS: 'supervision.solicitudes.getInventarioSeguimientoGlobalStats',
 };
