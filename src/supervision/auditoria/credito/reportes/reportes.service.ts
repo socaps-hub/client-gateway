@@ -16,4 +16,8 @@ export class ReportesService {
         return this.client.send(auditoriaCreditoReportesPatterns.GET_REPORTE_F1_BY_MUESTRA, { muestraId, user });
     }
 
+    getReporteFase1ByClasificacion(muestraId: number, user: Usuario) {
+        return this.client.send(auditoriaCreditoReportesPatterns.GET_REPORTE_F1_BY_CLASIFICACION, { muestraId, user });
+    }
+
 }

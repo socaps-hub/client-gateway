@@ -21,4 +21,12 @@ export class ReportesResolver {
     return this.reportesService.getReporteFase1ByMuestra(muestraId, user);
   }
 
+  @Query(() => ReporteFase1ResponseDTO, { name: 'aCreditoReporteF1ByClasificacion' })
+  async reporteF1ByClasificacion(
+    @Args({ name: 'muestraId', type: () => Int }, ParseIntPipe) muestraId: number,
+    @GetUser('graphql') user: Usuario
+  ) {
+    return this.reportesService.getReporteFase1ByClasificacion(muestraId, user);
+  }
+
 }
