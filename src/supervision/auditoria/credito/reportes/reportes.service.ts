@@ -20,4 +20,12 @@ export class ReportesService {
         return this.client.send(auditoriaCreditoReportesPatterns.GET_REPORTE_F1_BY_CLASIFICACION, { muestraId, user });
     }
 
+    getDetalleHallazgosFase1ByMuestra(muestraId: number, user: Usuario) {
+        return this.client.send(auditoriaCreditoReportesPatterns.GET_DETALLE_HALLAZGOS_F1_BY_MUESTRA, { muestraId, user });
+    }
+
+    getDetalleHallazgosFase1ByMuestraPorCategoria(muestraId: number, user: Usuario) {
+        return this.client.send(auditoriaCreditoReportesPatterns.GET_DETALLE_HALLAZGOS_F1_BY_MUESTRA_CATEGORIA, { muestraId, user });
+    }
+
 }

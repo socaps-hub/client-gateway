@@ -5,6 +5,8 @@ import { ParseIntPipe, UseGuards } from '@nestjs/common';
 import { ReporteFase1ResponseDTO } from './dto/output/fase1/acredito-reporte-fase1-response.output';
 import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 import { GetUser } from 'src/auth/decorators/user.decorator';
+import { ReporteHallazgosF1Response } from './dto/output/fase1/acredito-reporte-detalle-hallazgos-reponse.output';
+import { ReporteHallazgosF1PorCategoriaResponse } from './dto/output/fase1/acredito-detalle-hallazgos-categoria-response.output';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -27,6 +29,22 @@ export class ReportesResolver {
     @GetUser('graphql') user: Usuario
   ) {
     return this.reportesService.getReporteFase1ByClasificacion(muestraId, user);
+  }
+
+  @Query(() => ReporteHallazgosF1Response, { name: 'aCreditoDetalleHallazgosFase1ByMuestra' })
+  async detalleHallazgosFase1ByMuestra(
+    @Args({ name: 'muestraId', type: () => Int }, ParseIntPipe) muestraId: number,
+    @GetUser('graphql') user: Usuario
+  ) {
+    return this.reportesService.getDetalleHallazgosFase1ByMuestra(muestraId, user);
+  }
+
+  @Query(() => ReporteHallazgosF1PorCategoriaResponse, { name: 'aCreditoDetalleHallazgosFase1ByMuestraPorCategoria' })
+  async detalleHallazgosFase1ByMuestraPorCategoria(
+    @Args({ name: 'muestraId', type: () => Int }, ParseIntPipe) muestraId: number,
+    @GetUser('graphql') user: Usuario
+  ) {
+    return this.reportesService.getDetalleHallazgosFase1ByMuestraPorCategoria(muestraId, user);
   }
 
 }
