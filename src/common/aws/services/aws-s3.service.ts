@@ -45,4 +45,26 @@ export class AwsS3Service {
     return { key, url };
   }
 
+  async uploadBuffer(params: {
+    buffer: Buffer;
+    key: string;
+    contentType: string;
+  }) {
+    const { buffer, key, contentType } = params;
+
+    await this.s3.send(
+      new PutObjectCommand({
+        Bucket: this.bucket,
+        Key: key,
+        Body: buffer,
+        ContentType: contentType,
+        ContentLength: buffer.length,
+      }),
+    );
+
+    const url = `https://${this.bucket}.s3.${envs.awsS3Region}.amazonaws.com/${key}`;
+
+    return { key, url };
+  }
+
 }

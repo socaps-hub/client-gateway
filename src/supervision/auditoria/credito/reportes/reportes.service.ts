@@ -28,4 +28,8 @@ export class ReportesService {
         return this.client.send(auditoriaCreditoReportesPatterns.GET_DETALLE_HALLAZGOS_F1_BY_MUESTRA_CATEGORIA, { muestraId, user });
     }
 
+    buildCedulaF1(muestraId: number, user: Usuario) {
+        return this.client.send(auditoriaCreditoReportesPatterns.BUILD_CEDULA_F1, { muestraId, user });
+    }
+
 }

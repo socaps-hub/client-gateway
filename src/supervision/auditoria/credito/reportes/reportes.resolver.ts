@@ -1,4 +1,4 @@
-import { Args, Int, Query, Resolver } from '@nestjs/graphql';
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ReportesService } from './reportes.service';
 import { AuthGraphQLGuard } from 'src/auth/guards/auth-graphql.guard';
 import { ParseIntPipe, UseGuards } from '@nestjs/common';
@@ -7,6 +7,7 @@ import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 import { GetUser } from 'src/auth/decorators/user.decorator';
 import { ReporteHallazgosF1Response } from './dto/output/fase1/acredito-reporte-detalle-hallazgos-reponse.output';
 import { ReporteHallazgosF1PorCategoriaResponse } from './dto/output/fase1/acredito-detalle-hallazgos-categoria-response.output';
+import { BuildCedulaExcelResponse } from './dto/output/build-cedula-excel-response.output';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -45,6 +46,14 @@ export class ReportesResolver {
     @GetUser('graphql') user: Usuario
   ) {
     return this.reportesService.getDetalleHallazgosFase1ByMuestraPorCategoria(muestraId, user);
+  }
+
+  @Mutation(() => BuildCedulaExcelResponse, { name: 'aCreditoBuildCedulaExcelF1' })
+  async buildCedulaF1(
+    @Args('muestraId', { type: () => Int }) muestraId: number,
+    @GetUser('graphql') user: Usuario
+  ) {
+    return this.reportesService.buildCedulaF1(muestraId, user);
   }
 
 }
