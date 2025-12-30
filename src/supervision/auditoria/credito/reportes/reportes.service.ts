@@ -32,4 +32,14 @@ export class ReportesService {
         return this.client.send(auditoriaCreditoReportesPatterns.BUILD_CEDULA_F1, { muestraId, user });
     }
 
+    // * FASE 2
+    getReporteSeguimientoAnomaliasByMuestra(muestraId: number, user: Usuario) {
+        return this.client.send(auditoriaCreditoReportesPatterns.GET_RESULTADOS_SEGUIMIENTO_ANOMALIAS_BY_MUESTRA, { muestraId, user });
+    }
+
+    buildCedulaF2(muestraId: number, user: Usuario) {
+        return this.client.send(auditoriaCreditoReportesPatterns.BUILD_CEDULA_F2, { muestraId, user });
+    }
+
+
 }

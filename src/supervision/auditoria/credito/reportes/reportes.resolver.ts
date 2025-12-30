@@ -8,6 +8,7 @@ import { GetUser } from 'src/auth/decorators/user.decorator';
 import { ReporteHallazgosF1Response } from './dto/output/fase1/acredito-reporte-detalle-hallazgos-reponse.output';
 import { ReporteHallazgosF1PorCategoriaResponse } from './dto/output/fase1/acredito-detalle-hallazgos-categoria-response.output';
 import { BuildCedulaExcelResponse } from './dto/output/build-cedula-excel-response.output';
+import { ReporteSeguimientoAnomaliasResponseDTO } from './dto/output/fase2/reporte-seguimiento-anomalias-response.output';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -54,6 +55,23 @@ export class ReportesResolver {
     @GetUser('graphql') user: Usuario
   ) {
     return this.reportesService.buildCedulaF1(muestraId, user);
+  }
+
+  // * FASE 2
+  @Query(() => ReporteSeguimientoAnomaliasResponseDTO, { name: 'aCreditoReporteSeguimientoAnomaliasByMuestra' })
+  async reporteSeguimientoAnomaliasByMuestra(
+    @Args({ name: 'muestraId', type: () => Int }, ParseIntPipe) muestraId: number,
+    @GetUser('graphql') user: Usuario
+  ) {
+    return this.reportesService.getReporteSeguimientoAnomaliasByMuestra(muestraId, user);
+  }
+
+  @Mutation(() => BuildCedulaExcelResponse, { name: 'aCreditoBuildCedulaExcelF2' })
+  async buildCedulaF2(
+    @Args('muestraId', { type: () => Int }) muestraId: number,
+    @GetUser('graphql') user: Usuario
+  ) {
+    return this.reportesService.buildCedulaF2(muestraId, user);
   }
 
 }
