@@ -1,5 +1,7 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { RA01Credito } from 'src/configuracion/credito/radiografia/entities/radiografia-credito.entity';
+import { RadioAreaEnum } from '../enums/control-carga-radio-area.enum';
+import { Cooperativa } from 'src/configuracion/cooperativas/entities/cooperativa.entity';
 
 @ObjectType()
 export class C01ControlCarga {
@@ -21,7 +23,13 @@ export class C01ControlCarga {
     @Field(() => Int)
     C01PeriodoAnio: number;
 
+    @Field(() => RadioAreaEnum)
+    C01Area: RadioAreaEnum;
+
     // Relación inversa con RA01Credito
     @Field(() => [RA01Credito], { nullable: true })
     creditos?: RA01Credito[];
+
+    @Field(() => Cooperativa, { nullable: true })
+    cooperativa?: Cooperativa;
 }

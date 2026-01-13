@@ -4,6 +4,7 @@ import { NATS_SERVICE } from 'src/config/services';
 import { CreateRadiografiaCargaArgs } from './dto/args/create-radiografia-carga.arg';
 import { radiografiasPatterns } from 'src/common/constants/radiografias/radiografiasPatterns';
 import { FileUpload } from 'graphql-upload-ts';
+import { RadioAreaEnum } from './enums/control-carga-radio-area.enum';
 
 @Injectable()
 export class RadiografiaService {
@@ -16,10 +17,21 @@ export class RadiografiaService {
     //     return this.client.send( radiografiasPatterns.UPLOAD_RA_CREDITO, { file, cooperativaId } );
     // }
 
+    getAllControlCargaRadiografias() {
+        return this.client.send( radiografiasPatterns.GET_ALL_CONTROL_CARGA_RADIOS, {} );
+    }
+
     crearCargaMasivaRadiografiaCredito(key: string, cooperativaCodigo: string) {
         return this.client.emit(
             radiografiasPatterns.UPLOAD_RA_CREDITO,
             { key, cooperativaCodigo }
+        );
+    }
+
+    crearCargaMasivaRadiografia(key: string, cooperativaCodigo: string, area: RadioAreaEnum) {
+        return this.client.emit(
+            radiografiasPatterns.UPLOAD_RADIOGRAFIA,
+            { key, cooperativaCodigo, area }
         );
     }
 
