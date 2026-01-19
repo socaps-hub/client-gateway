@@ -44,9 +44,9 @@ export class CreditoResolver {
   })
   public getMuestraInicial(
     @Args('input') input: ParametrosMuestraExtendInput,
-    @GetUser('graphql') usuario: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
-    return this.creditoService.getMuestraInicial(input, usuario);
+    return this.creditoService.getMuestraInicial(input, user);
   }
 
   // ────────────────────────────────────────────────
@@ -59,9 +59,9 @@ export class CreditoResolver {
   })
   public getCreditosFiltrados(
     @Args('input') input: ParametrosMuestraExtendInput,
-    @GetUser('graphql') usuario: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
-    return this.creditoService.getCreditosFiltrados(input, usuario);
+    return this.creditoService.getCreditosFiltrados(input, user);
   }
 
   // * GUARDADO DE MUESTRA (SELECCION)
@@ -73,7 +73,7 @@ export class CreditoResolver {
     @Args({ name: 'folios', type: () => [Int] }) folios: number[],
     @Args({ name: 'isUpdate', type: () => Boolean, nullable: true, defaultValue: false }) isUpdate: boolean,
     @Args({ name: 'muestraId', type: () => Int, nullable: true }) muestraId: number,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.creditoService.createOrUpdateMuestraSeleccionConFolios( user, input, folios, isUpdate, muestraId );
   }
@@ -81,7 +81,7 @@ export class CreditoResolver {
   @Query(() => ResultadoMuestrasResponse, { name: 'aCreditoGetAllMuestras' })
   async getAllMuestras(
     @Args('input', { type: () => GetAllMuestrasInput }) input: GetAllMuestrasInput,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.creditoService.getAllMuestrasSeleccion(user, input);
   }
@@ -89,7 +89,7 @@ export class CreditoResolver {
   @Query(() => ResultadoCreditosSeleccionadosResponse, { name: 'aCreditoGetCreditosSeleccionadosByMuestra' })
   async getCreditosSeleccionadosByMuestra(
     @Args('input', { type: () => GetCreditosSeleccionadosInput }) input: GetCreditosSeleccionadosInput,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.creditoService.getCreditosSeleccionadosByMuestra(user, input);
   }
@@ -105,7 +105,7 @@ export class CreditoResolver {
   @Query(() => [MuestraCreditoSeleccion], { name: 'aCreditoGetByEstado' })
   async creditosByEstado(
     @Args() args: CreditosByEstadoArgs,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.creditoService.getByEstado( args.estado, user, args.filterBySucursal );
   }
@@ -113,7 +113,7 @@ export class CreditoResolver {
   @Query(() => InventarioRevisionResponse, { name: 'aCreditoInventarioRevisionFiltrado' })
   inventarioRevisionFiltrado(
     @Args('input') input: InventarioRevisionFilterInput,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.creditoService.getInventarioExpedientesFiltrado(input, user);
   }
@@ -121,7 +121,7 @@ export class CreditoResolver {
   @Query(() => InventarioRevisionStatsOutput, { name: 'aCreditoInventarioRevisionStats' })
   inventarioRevisionStats(
     @Args('input') input: InventarioRevisionFilterInput,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.creditoService.getInventarioRevisionStats(input, user);
   }
@@ -129,7 +129,7 @@ export class CreditoResolver {
   @Query(() => InventarioSeguimientoStatsOutput, { name: 'aCreditoInventarioSeguimientoStats' })
   inventarioSeguimientoStats(
     @Args('input') input: InventarioRevisionFilterInput,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.creditoService.getInventarioSeguimientoStats(input, user);
   }

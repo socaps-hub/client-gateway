@@ -18,7 +18,7 @@ export class Fase1RevisionResolver {
   })
   async aCreditoCreateOrUpdateFase1(
     @Args('input') input: CreateFase1RevisionInput,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.fase1RevisionService.createOrUpdateFase1( input, user );
   }

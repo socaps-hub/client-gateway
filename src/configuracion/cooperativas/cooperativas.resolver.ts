@@ -16,6 +16,9 @@ import { UpdateCooperativaSubModuloInput } from './dto/inputs/update-cooperativa
 import { AuthGraphQLGuard } from 'src/auth/guards/auth-graphql.guard';
 import { ValidRolesArgs } from '../usuarios/dto/args/roles.arg';
 import { CooperativaRadiografiaStatus } from './dto/outputs/cooperativa-radiografia-status.output';
+import { GetUser } from 'src/auth/decorators/user.decorator';
+import { ValidRoles } from 'src/auth/enums/valid-roles.enum';
+import { Usuario } from '../usuarios/entities/usuario.entity';
 
 @Resolver(() => Cooperativa)
 @UseGuards(AuthGraphQLGuard)
@@ -31,14 +34,15 @@ export class CooperativasResolver {
 
   @Mutation(() => Cooperativa)
   createCooperativa(
-    @Args('createCooperativaInput') createCooperativaInput: CreateCooperativaInput
+    @Args('createCooperativaInput') createCooperativaInput: CreateCooperativaInput,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.cooperativasService.create(createCooperativaInput);
   }
 
   @Query(() => [Cooperativa], { name: 'cooperativas' })
   findAll(
-    @Args() validRoles: ValidRolesArgs
+    @Args() validRoles: ValidRolesArgs,    
   ) {
     return this.cooperativasService.findAll(validRoles.role);
   }
@@ -57,7 +61,8 @@ export class CooperativasResolver {
 
   @Mutation(() => Cooperativa)
   updateCooperativa(
-    @Args('updateCooperativaInput') updateCooperativaInput: UpdateCooperativaInput
+    @Args('updateCooperativaInput') updateCooperativaInput: UpdateCooperativaInput,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.cooperativasService.update(
       updateCooperativaInput.id,
@@ -67,14 +72,16 @@ export class CooperativasResolver {
 
   @Mutation(() => Cooperativa)
   activateCooperativa(
-    @Args('name', { type: () => String }) name: string
+    @Args('name', { type: () => String }) name: string,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.cooperativasService.activate(name);
   }
 
   @Mutation(() => Cooperativa)
   desactivateCooperativa(
-    @Args('id', { type: () => ID }, ParseUUIDPipe) id: string
+    @Args('id', { type: () => ID }, ParseUUIDPipe) id: string,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.cooperativasService.desactivate(id);
   }
@@ -92,21 +99,23 @@ export class CooperativasResolver {
 
   @Mutation(() => CooperativaModulo, { name: 'LassignModuloToCooperativa' })
   assignModuloToCooperativa(
-    @Args('input') input: AssignCooperativaModuloInput
+    @Args('input') input: AssignCooperativaModuloInput,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.cooperativasService.assignModuloToCooperativa(input);
   }
 
   @Mutation(() => CooperativaModulo, { name: 'LupdateCooperativaModulo' })
   updateCooperativaModulo(
-    @Args('input') input: UpdateCooperativaModuloInput
+    @Args('input') input: UpdateCooperativaModuloInput,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.cooperativasService.updateCooperativaModulo(input);
   }
 
   @Query(() => [CooperativaModulo], { name: 'LgetModulosByCooperativa' })
   getModulosByCooperativa(
-    @Args('coopId', { type: () => ID }, ParseUUIDPipe) coopId: string
+    @Args('coopId', { type: () => ID }, ParseUUIDPipe) coopId: string,
   ) {
     return this.cooperativasService.getModulosByCooperativa(coopId);
   }
@@ -117,14 +126,16 @@ export class CooperativasResolver {
 
   @Mutation(() => CooperativaSubModulo, { name: 'LassignSubModuloToCooperativa' })
   assignSubModuloToCooperativa(
-    @Args('input') input: AssignCooperativaSubModuloInput
+    @Args('input') input: AssignCooperativaSubModuloInput,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.cooperativasService.assignSubModuloToCooperativa(input);
   }
 
   @Mutation(() => CooperativaSubModulo, { name: 'LupdateCooperativaSubModulo' })
   updateCooperativaSubModulo(
-    @Args('input') input: UpdateCooperativaSubModuloInput
+    @Args('input') input: UpdateCooperativaSubModuloInput,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.cooperativasService.updateCooperativaSubModulo(input);
   }

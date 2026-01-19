@@ -15,6 +15,9 @@ import { ExcelUtils } from 'src/common/excel/utils/excel.utils';
 import { AwsS3Service } from 'src/common/aws/services/aws-s3.service';
 import { ControlCargaRadiografiasResponse } from './outputs/control-carga-radiografias-response.output';
 import { RadioAreaEnum } from './enums/control-carga-radio-area.enum';
+import { GetUser } from 'src/auth/decorators/user.decorator';
+import { ValidRoles } from 'src/auth/enums/valid-roles.enum';
+import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -27,7 +30,9 @@ export class RadiografiaResolver {
   ) { }
 
   @Query(() => ControlCargaRadiografiasResponse, { name: 'getAllControlCargasRadiografias' })
-  controlCargaRadiografias() {
+  controlCargaRadiografias(
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
+  ) {
     return this.radiografiaService.getAllControlCargaRadiografias()
   }
 
@@ -35,6 +40,7 @@ export class RadiografiaResolver {
   async cargarRadiografiaDesdeExcel(
     @Args({ name: 'file', type: () => GraphQLUpload }) file: FileUpload,
     @Args('cooperativaCodigo') cooperativaCodigo: string,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     try {
       // 🧠 1️⃣ Subir archivo a S3
@@ -53,6 +59,7 @@ export class RadiografiaResolver {
     @Args({ name: 'file', type: () => GraphQLUpload }) file: FileUpload,
     @Args('cooperativaCodigo') cooperativaCodigo: string,
     @Args({ name: 'area', type: () => RadioAreaEnum }) area: RadioAreaEnum,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     try {
       // 🧠 1️⃣ Subir archivo a S3

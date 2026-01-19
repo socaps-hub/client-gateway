@@ -26,7 +26,7 @@ export class MovimientosResolver {
   @Mutation(() => BooleanResponse, { name: 'createSisconcapFase1' })
   async createFase1(
     @Args('input') input: CreateFase1Input,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {    
     try {
       await firstValueFrom( this.movimientosService.createFase1( input, user ) )
@@ -47,7 +47,7 @@ export class MovimientosResolver {
   @Mutation(() => BooleanResponse)
   async createOrUpdateFase2(
     @Args('input') input: CreateFase2Input,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return await firstValueFrom(
       this.movimientosService.createOrUpdateFase2( input, user )
@@ -59,7 +59,7 @@ export class MovimientosResolver {
   @Mutation(() => BooleanResponse)
   async createOrUpdateFase3(
     @Args('input') input: CreateFase3Input,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return await firstValueFrom(
       this.movimientosService.createOrUpdateFase3( input, user )
@@ -71,7 +71,7 @@ export class MovimientosResolver {
   @Query(() => [Movimiento])
   movimientos(
     @Args('filterBySucursal', { type: () => Boolean, nullable: true, defaultValue: true }) filterBySucursal: boolean,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.movimientosService.getAll( user, filterBySucursal )
   }
@@ -79,7 +79,7 @@ export class MovimientosResolver {
   @Query(() => InventarioMovimientosResponse)
   inventarioMovimientosFiltrado(
     @Args('input') input: InventarioSolicitudesFilterInput,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.movimientosService.getInventarioMovimientosFiltrado(input, user);
   }
@@ -87,7 +87,7 @@ export class MovimientosResolver {
   @Query(() => [Movimiento])
   movimientosByEstado(
     @Args() args: ValidEstadosArgs,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.movimientosService.findByEstado( args.estado, user, args.filterBySucursal )
   }
@@ -95,7 +95,7 @@ export class MovimientosResolver {
   @Query(() => Movimiento)
   movimiento(
     @Args('folio', ParseIntPipe) folio: number,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.movimientosService.getByFolio( folio, user )
   }
@@ -103,7 +103,7 @@ export class MovimientosResolver {
   @Mutation(() => BooleanResponse)
   async updateMovimientoF1(
     @Args('updateMovimientoArgs') updateMovimientoArgs: UpdateMovimientoArgs,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return await firstValueFrom(
       this.movimientosService.updateFase1( updateMovimientoArgs, user )
@@ -115,7 +115,7 @@ export class MovimientosResolver {
   @Mutation(() => Movimiento)
   removeMovimiento(
     @Args('folio', ParseIntPipe) folio: number,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.movimientosService.remove(folio, user)
   }
@@ -123,7 +123,7 @@ export class MovimientosResolver {
   @Mutation(() => BooleanResponse)
   async cancelFase3AndFase2(
     @Args('folio', ParseIntPipe) folio: number,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ): Promise<BooleanResponse> {
     return await firstValueFrom(
       this.movimientosService.cancelFase3AndFase2( folio, user )
@@ -136,7 +136,7 @@ export class MovimientosResolver {
   @Query(() => SisconcapFase1StatisticsOutput)
   inventarioMovimientosF1Stats(
     @Args('input') input: InventarioSolicitudesFilterInput,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.movimientosService.getInventarioF1Stats(input, user);
   }
@@ -144,7 +144,7 @@ export class MovimientosResolver {
   @Query(() => SisconcapFase1StatisticsOutput)
   inventarioMovimientosF2Stats(
     @Args('input') input: InventarioSolicitudesFilterInput,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.movimientosService.getInventarioF2Stats(input, user);
   }
@@ -152,7 +152,7 @@ export class MovimientosResolver {
   @Query(() => SisconcapFase1StatisticsOutput)
   inventarioMovimientosF3Stats(
     @Args('input') input: InventarioSolicitudesFilterInput,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.movimientosService.getInventarioF3Stats(input, user);
   }

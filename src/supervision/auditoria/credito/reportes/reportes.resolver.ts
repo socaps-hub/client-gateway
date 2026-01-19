@@ -20,7 +20,7 @@ export class ReportesResolver {
   @Query(() => ReporteFase1ResponseDTO, { name: 'aCreditoReporteF1ByMuestra' })
   async reporteF1ByMuestra(
     @Args({ name: 'muestraId', type: () => Int }, ParseIntPipe) muestraId: number,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesService.getReporteFase1ByMuestra(muestraId, user);
   }
@@ -28,7 +28,7 @@ export class ReportesResolver {
   @Query(() => ReporteFase1ResponseDTO, { name: 'aCreditoReporteF1ByClasificacion' })
   async reporteF1ByClasificacion(
     @Args({ name: 'muestraId', type: () => Int }, ParseIntPipe) muestraId: number,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesService.getReporteFase1ByClasificacion(muestraId, user);
   }
@@ -36,7 +36,7 @@ export class ReportesResolver {
   @Query(() => ReporteHallazgosF1Response, { name: 'aCreditoDetalleHallazgosFase1ByMuestra' })
   async detalleHallazgosFase1ByMuestra(
     @Args({ name: 'muestraId', type: () => Int }, ParseIntPipe) muestraId: number,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesService.getDetalleHallazgosFase1ByMuestra(muestraId, user);
   }
@@ -44,7 +44,7 @@ export class ReportesResolver {
   @Query(() => ReporteHallazgosF1PorCategoriaResponse, { name: 'aCreditoDetalleHallazgosFase1ByMuestraPorCategoria' })
   async detalleHallazgosFase1ByMuestraPorCategoria(
     @Args({ name: 'muestraId', type: () => Int }, ParseIntPipe) muestraId: number,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesService.getDetalleHallazgosFase1ByMuestraPorCategoria(muestraId, user);
   }
@@ -52,7 +52,7 @@ export class ReportesResolver {
   @Mutation(() => BuildCedulaExcelResponse, { name: 'aCreditoBuildCedulaExcelF1' })
   async buildCedulaF1(
     @Args('muestraId', { type: () => Int }) muestraId: number,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesService.buildCedulaF1(muestraId, user);
   }
@@ -61,7 +61,7 @@ export class ReportesResolver {
   @Query(() => ReporteSeguimientoAnomaliasResponseDTO, { name: 'aCreditoReporteSeguimientoAnomaliasByMuestra' })
   async reporteSeguimientoAnomaliasByMuestra(
     @Args({ name: 'muestraId', type: () => Int }, ParseIntPipe) muestraId: number,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesService.getReporteSeguimientoAnomaliasByMuestra(muestraId, user);
   }
@@ -69,7 +69,7 @@ export class ReportesResolver {
   @Mutation(() => BuildCedulaExcelResponse, { name: 'aCreditoBuildCedulaExcelF2' })
   async buildCedulaF2(
     @Args('muestraId', { type: () => Int }) muestraId: number,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesService.buildCedulaF2(muestraId, user);
   }

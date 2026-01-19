@@ -23,7 +23,7 @@ export class ReportesResolver {
   @Query(() => ReporteFase1Response, { name: 'sisconcapReporteSegmentadoFase1' })
   async reporteSegmentadoFase1(
     @Args('input') input: FiltroFechasInput,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesService.getReporteSegmentadoF1(input, user);
   }
@@ -31,7 +31,7 @@ export class ReportesResolver {
   @Query(() => ResumenAnomaliasSucAndEjecutivosResponseDto, { name: 'sisconcapResumenAnomaliasSucAndEjecutivosFase1' })
   async resumenAnomaliasSucAndEjecutivos(
     @Args('input') input: FiltroFechasInput,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesService.getResumenAnomaliasSucAndEjecutivos(input, user);
   }
@@ -39,7 +39,7 @@ export class ReportesResolver {
   @Query(() => [ResumenAnomaliasSucAndEjecutivosEjecutivoResponse], { name: 'sisconcapResumenAnomaliasEjecutivosBySucFase1' })
   async resumenAnomaliasEjecutivosPorSucursal(
     @Args() resumenAnomaliasArgs: ResumenAnomaliasArgs,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesService.getResumenAnomaliasEjecutivosPorSucursal(resumenAnomaliasArgs, user);
   }
@@ -47,7 +47,7 @@ export class ReportesResolver {
   @Query(() => ResumenAnomaliasSucAndEjecutivosCategoriaResponse, { name: 'sisconcapResumenAnomaliasEjecutivosGlobalFase1' })
   async resumenAnomaliasEjecutivosGlobal(
     @Args('input') input: FiltroFechasInput,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesService.getResumenAnomaliasEjecutivosGlobal(input, user);
   }
@@ -57,7 +57,7 @@ export class ReportesResolver {
   @Query(() => ResultadosSeguimientoResponse, { name: 'sisconcapResultadosSeguimientoFase2' })
   async resultadosSeguimiento(
     @Args('input') input: FiltroFechasInput,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesService.getResultadosSeguimiento(input, user);
   }
@@ -66,7 +66,7 @@ export class ReportesResolver {
   @Query(() => ResultadosSeguimientoResponse, { name: 'sisconcapResultadosFinalesFase3' })
   async resultadosFinales(
     @Args('input') input: FiltroFechasInput,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesService.getResultadosFinales(input, user);
   }
@@ -75,7 +75,7 @@ export class ReportesResolver {
   @Query(() => SisconcapHistoricoResponseDto, { name: 'sisconcapHistorico' })
   async historico(
     @Args('input') input: SisconcapHistoricoFiltroInput,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesService.getHistorico(input, user);
   }
@@ -83,7 +83,7 @@ export class ReportesResolver {
   // * BALANCE
   @Query(() => BalanceResponse, { name: 'sisconcapBalance' })
   async balance(
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesService.getBalance(user);
   }

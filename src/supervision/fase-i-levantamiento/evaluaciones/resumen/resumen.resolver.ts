@@ -18,14 +18,14 @@ export class ResumenFase1Resolver {
   @Mutation(() => EvaluacionResumenFase1)
   createResumenFase1(
     @Args('createResumenFase1Input') input: CreateResumenFase1Input,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.resumenFase1Service.create(input, user);
   }
 
   @Query(() => [EvaluacionResumenFase1])
   resumenesFase1(
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.resumenFase1Service.findAll(user);
   }
@@ -33,7 +33,7 @@ export class ResumenFase1Resolver {
   @Query(() => EvaluacionResumenFase1)
   resumenFase1ByPrestamo(
     @Args('R06P_num', { type: () => String }) R06P_num: string,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.resumenFase1Service.findOne(R06P_num, user);
   }
@@ -41,7 +41,7 @@ export class ResumenFase1Resolver {
   @Mutation(() => EvaluacionResumenFase1)
   updateResumenFase1(
     @Args('updateResumenFase1Input') input: UpdateResumenFase1Input,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.resumenFase1Service.update(input, user);
   }

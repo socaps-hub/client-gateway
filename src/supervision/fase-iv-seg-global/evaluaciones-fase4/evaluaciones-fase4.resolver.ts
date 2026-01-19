@@ -22,7 +22,7 @@ export class EvaluacionesFase4Resolver {
   @Mutation(() => BooleanResponse)
   async saveEvaluacionesFase4(
     @Args('saveEvaluacionesFase4Args') saveEvaluacionesFase4Args: SaveEvaluacionesFase4Args,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ): Promise<BooleanResponse> {
     return await firstValueFrom(
       this.service.saveEvaluacionesFase4(saveEvaluacionesFase4Args, user)
@@ -34,7 +34,7 @@ export class EvaluacionesFase4Resolver {
   @Mutation(() => BooleanResponse)
   async createEvaluacionesFase4(
     @Args('inputs', { type: () => [CreateEvaluacionFase4Input] }) inputs: CreateEvaluacionFase4Input[],
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return await firstValueFrom(
       this.service.createMany(inputs, user)
@@ -45,7 +45,7 @@ export class EvaluacionesFase4Resolver {
 
   @Mutation(() => BooleanResponse)
   async pasoMasivoAFase4(
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ): Promise<{ success: boolean; message: string }> {
     return await firstValueFrom(
       this.service.pasoMasivoAFase4(user)
@@ -56,7 +56,7 @@ export class EvaluacionesFase4Resolver {
   @Query(() => [EvaluacionFase4], { name: 'evaluacionesFase4' })
   async evaluacionesFase4ByPrestamo(
     @Args('prestamoId', { type: () => ID }) prestamoId: string,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return await firstValueFrom(
       this.service.findAll(prestamoId, user)
@@ -75,7 +75,7 @@ export class EvaluacionesFase4Resolver {
   @Mutation(() => BooleanResponse)
   async deleteEvaluacionFase4ByPrestamo(
     @Args('prestamoId', { type: () => ID }) prestamoId: string,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return await firstValueFrom(
       this.service.deleteByPrestamo(prestamoId, user)

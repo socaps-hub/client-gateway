@@ -20,14 +20,14 @@ export class ResumenFase2Resolver {
   @Mutation(() => EvaluacionResumenFase2)
   createResumenFase2(
     @Args('createEvaluacionResumenFase2Input') input: CreateEvaluacionResumenFase2Input,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.resumenFase2Service.create(input, user)
   }
 
   @Query(() => [EvaluacionResumenFase2])
   resumenesFase2(
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.resumenFase2Service.findAll(user);
   }
@@ -35,7 +35,7 @@ export class ResumenFase2Resolver {
   @Query(() => EvaluacionResumenFase2)
   resumenFase2ByPrestamo(
     @Args('R08P_num', { type: () => String }) R08P_num: string,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.resumenFase2Service.findOne(R08P_num, user);
   }
@@ -43,7 +43,7 @@ export class ResumenFase2Resolver {
   @Mutation(() => EvaluacionResumenFase2)
   updateResumenFase2(
     @Args('updateEvaluacionResumenFase2Input') input: UpdateEvaluacionResumenFase2Input,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.resumenFase2Service.update(input, user);
   }
@@ -51,7 +51,7 @@ export class ResumenFase2Resolver {
   @Mutation(() => BooleanResponse, { name: 'deleteResumenF2ByPrestamo' })
   async deleteByPrestamo(
     @Args('prestamoId', { type: () => String }) prestamoId: string,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return await firstValueFrom(
       this.resumenFase2Service.deleteByPrestamo(prestamoId, user)

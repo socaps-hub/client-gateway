@@ -29,7 +29,7 @@ export class AuthController {
   @UseGuards( AuthGuard )
   @Get('check-status')
   verifyUser( 
-    @GetUser('rest') user: Usuario,
+    @GetUser({type: 'rest'}) user: Usuario,
     @Token() token: string 
   ) {
 

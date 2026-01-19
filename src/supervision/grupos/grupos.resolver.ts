@@ -10,6 +10,7 @@ import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 import { BooleanResponse } from 'src/common/dto/boolean-response.object';
 import { CreateManyGruposFromExcelArgs } from './dto/args/create-many-grupos-from-excel.arg';
 import { GrupoTipo } from './enums/grupo-type-enum';
+import { ValidRoles } from 'src/auth/enums/valid-roles.enum';
 
 @Resolver(() => Grupo)
 @UseGuards( AuthGraphQLGuard )
@@ -18,7 +19,8 @@ export class GruposResolver {
 
   @Mutation(() => Grupo, { name: 'createGrupo' })
   createGrupo(
-    @Args('createGrupoInput') createGrupoInput: CreateGrupoInput
+    @Args('createGrupoInput') createGrupoInput: CreateGrupoInput,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.gruposService.create(createGrupoInput)
   }
@@ -41,21 +43,23 @@ export class GruposResolver {
   @Query(() => Grupo, { name: 'grupoByName' })
   findByName(
     @Args('name', { type: () => String }) name: string,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.gruposService.findByName(name, user);
   }
 
   @Mutation(() => Grupo)
   updateGrupo(
-    @Args('updateGrupoInput') updateGrupoInput: UpdateGrupoInput
+    @Args('updateGrupoInput') updateGrupoInput: UpdateGrupoInput,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.gruposService.update( updateGrupoInput );
   }
 
   @Mutation(() => Grupo)
   removeGrupo(
-    @Args('id', { type: () => ID }, ParseUUIDPipe) id: string
+    @Args('id', { type: () => ID }, ParseUUIDPipe) id: string,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.gruposService.remove(id);
   }
@@ -63,6 +67,7 @@ export class GruposResolver {
   @Mutation(() => BooleanResponse)
   createManyGruposFromExcel(
     @Args('createManyGruposFromExcelArgs') createManyGruposFromExcelArgs: CreateManyGruposFromExcelArgs,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.gruposService.createManyFromExcel(createManyGruposFromExcelArgs.data, createManyGruposFromExcelArgs.coopId);
   }

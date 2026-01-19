@@ -26,7 +26,7 @@ export class AuditoriaSisconcreResolver {
   @Mutation(() => [AuditoriaResponse], { name: 'sisconcreValidarPrestamosFromExcel' })
   async validarPrestamosFromExcel(
     @Args({ name: 'data', type: () => [AuditoriaInput] }) data: AuditoriaInput[],
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.auditoriaSisconcreService.validarPrestamosNoExistentes(data, user);
   }
@@ -39,7 +39,7 @@ export class AuditoriaSisconcreResolver {
   async validarPrestamosFromFile(
     @Args({ name: 'file', type: () => GraphQLUpload }) file: FileUpload,
     @Args('input') input: FiltroFechasInput,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     const { createReadStream, filename, mimetype } = file;
     const fechaInicio = new Date(input.fechaInicio)

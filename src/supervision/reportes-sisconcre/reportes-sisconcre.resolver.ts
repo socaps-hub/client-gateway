@@ -26,7 +26,7 @@ export class ReportesSisconcreResolver {
   @Query(() => ReporteSegmentadoFase1Response)
   async reporteSegmentadoFase1(
     @Args('input') input: FiltroFechasInput,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesSisconcreService.getReporteSegmentadoF1(input, user);
   }
@@ -34,7 +34,7 @@ export class ReportesSisconcreResolver {
   @Query(() => DetalleAnomaliasF1Response)
   async detalleAnomaliasF1(
     @Args('input') input: FiltroFechasInput,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesSisconcreService.getDetalleAnomaliasF1(input, user);
   }
@@ -42,7 +42,7 @@ export class ReportesSisconcreResolver {
   @Query(() => AnomaliasResumenResponseF1)
   async detalleAnomaliasIntegralF1(
     @Args('input') input: FiltroFechasInput,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesSisconcreService.getDetalleAnomaliasInteralF1(input, user);
   }
@@ -50,7 +50,7 @@ export class ReportesSisconcreResolver {
   @Query(() => DetalleAnomaliasEjecutivoF1Response)
   async detalleAnomaliasPorEjecutivoF1(
     @Args('input') input: FiltroFechasInput,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesSisconcreService.getDetalleAnomaliasPorEjecutivoF1(input, user);
   }
@@ -58,7 +58,7 @@ export class ReportesSisconcreResolver {
   @Query(() => DetalleAnomaliasIntegralEjecutivosResponseF1)
   async detalleAnomaliasIntegralPorEjecutivoF1(
     @Args('input') input: FiltroFechasInput,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesSisconcreService.getDetalleAnomaliasIntegralPorEjecutivoF1(input, user);
   }
@@ -67,7 +67,7 @@ export class ReportesSisconcreResolver {
   @Query(() => ReporteFase2Response)
   async resultadoSeguimientoF2(
     @Args('input') input: FiltroFechasInput,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesSisconcreService.getResultadosSeguimientoF2(input, user);
   }
@@ -76,7 +76,7 @@ export class ReportesSisconcreResolver {
   @Query(() => ReporteFase3Response)
   async revisionDesembolsosF3(
     @Args('input') input: FiltroFechasInput,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesSisconcreService.getRevisionDesembolsosF3(input, user);
   }
@@ -84,7 +84,7 @@ export class ReportesSisconcreResolver {
   @Query(() => DetalleAnomaliasF3Response)
   async detalleAnomaliasF3(
     @Args('input') input: FiltroFechasInput,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesSisconcreService.getDetalleAnomaliasF3(input, user);
   }
@@ -93,7 +93,7 @@ export class ReportesSisconcreResolver {
   @Query(() => ReporteFase4Response)
   async reporteGlobalF4(
     @Args('input') input: FiltroFechasInput,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesSisconcreService.getReporteGlobalF4(input, user);
   }
@@ -102,7 +102,7 @@ export class ReportesSisconcreResolver {
   @Query(() => HistoricoResponseDto)
   async historicos(
     @Args('input') input: HistoricoFiltroInput,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.reportesSisconcreService.getHistoricos(input, user);
   }

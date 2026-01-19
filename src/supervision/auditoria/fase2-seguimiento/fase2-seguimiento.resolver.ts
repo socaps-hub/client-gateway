@@ -18,7 +18,7 @@ export class Fase2SeguimientoResolver {
   })
   async aCreditoCreateOrUpdateFase2(
     @Args('input') input: CreateFase2SeguimientoInput,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.fase2SeguimientoService.createOrUpdateFase2( input, user );
   }

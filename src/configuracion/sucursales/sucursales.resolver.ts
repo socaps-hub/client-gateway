@@ -9,6 +9,7 @@ import { Usuario } from '../usuarios/entities/usuario.entity';
 import { UpdateSucursalInput } from './dto/inputs/update-sucursale.input';
 import { BooleanResponse } from 'src/common/dto/boolean-response.object';
 import { CreateManySucursalesFromExcelArgs } from './dto/args/create-many-from-excel.arg';
+import { ValidRoles } from 'src/auth/enums/valid-roles.enum';
 
 @Resolver(() => Sucursal)
 @UseGuards( AuthGraphQLGuard )
@@ -19,14 +20,14 @@ export class SucursalesResolver {
   @Mutation(() => Sucursal)
   createSucursal(
     @Args('createSucursalInput') createSucursalInput: CreateSucursaleInput,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.sucursalesService.create(createSucursalInput, user);
   }
 
   @Query(() => [Sucursal], { name: 'sucursales' })
   findAll(
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.sucursalesService.findAll( user );
   }
@@ -42,14 +43,15 @@ export class SucursalesResolver {
   @Query(() => Sucursal, { name: 'sucursal' })
   findOne(
     @Args('id', { type: () => ID }) id: string,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.sucursalesService.findOne(id, user);
   }
 
   @Mutation(() => Sucursal)
   updateSucursal(
-    @Args('updateSucursalInput') updateSucursalInput: UpdateSucursalInput
+    @Args('updateSucursalInput') updateSucursalInput: UpdateSucursalInput,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.sucursalesService.update( updateSucursalInput );
   }
@@ -57,6 +59,7 @@ export class SucursalesResolver {
   @Mutation(() => BooleanResponse, { name: 'createManySucursalesFromExcel' })
   createManyFromExcel(
     @Args('createManyFromExcelArgs') createManyFromExcelArgs: CreateManySucursalesFromExcelArgs,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.sucursalesService.createManyFromExcel(createManyFromExcelArgs.data, createManyFromExcelArgs.coopId);
   }

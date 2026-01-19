@@ -11,6 +11,7 @@ import { ChangePasswordInput } from './dto/inputs/change-password.input';
 import { firstValueFrom } from 'rxjs';
 import { BooleanResponse } from 'src/common/dto/boolean-response.object';
 import { CreateManyUsuariosFromExcelArgs } from './dto/args/create-many-usuario-from-excel.arg';
+import { ValidRoles } from 'src/auth/enums/valid-roles.enum';
 
 @Resolver(() => Usuario)
 @UseGuards( AuthGraphQLGuard )
@@ -21,6 +22,7 @@ export class UsuariosResolver {
   @Mutation(() => Usuario)
   createUsuario(
     @Args('createUsuarioInput') createUsuarioInput: CreateUsuarioInput,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.admin, ValidRoles.auditorAdmin, ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.usuariosService.create( createUsuarioInput );
   }
@@ -28,7 +30,7 @@ export class UsuariosResolver {
   @Query(() => [Usuario], { name: 'usuarios' })
   findAll(
     @Args() validRoles: ValidRolesArgs,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.usuariosService.findAll( validRoles.role, user );
   }
@@ -42,27 +44,32 @@ export class UsuariosResolver {
 
   @Mutation(() => Usuario)
   updateUsuario(
-    @Args('updateUsuarioInput') updateUsuarioInput: UpdateUsuarioInput
+    @Args('updateUsuarioInput') updateUsuarioInput: UpdateUsuarioInput,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.usuariosService.update(updateUsuarioInput);
   }
 
   @Mutation(() => Usuario)
   desactivateUser(
-    @Args('id', { type: () => ID }, ParseUUIDPipe) id: string) {
+    @Args('id', { type: () => ID }, ParseUUIDPipe) id: string,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser, ValidRoles.admin ]}) user: Usuario,
+  ) {
     return this.usuariosService.desactivate(id);
   }
 
   @Mutation(() => Usuario)
   activateUser(
-    @Args('userNI', { type: () => String }) userNI: string) {
+    @Args('userNI', { type: () => String }) userNI: string,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser, ValidRoles.admin ]}) user: Usuario,
+  ) {
     return this.usuariosService.activate(userNI.toUpperCase());
   }
 
   @Mutation(() => Boolean)
   async changePassword(
     @Args('data') data: ChangePasswordInput,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario
   ): Promise<boolean> {
     return await firstValueFrom(
       this.usuariosService.changePassword(data, user)
@@ -72,6 +79,7 @@ export class UsuariosResolver {
   @Mutation(() => BooleanResponse)
   createManyUsuariosFromExcel(
     @Args('createManyUsuariosFromExcelArgs') createManyUsuariosFromExcelArgs: CreateManyUsuariosFromExcelArgs,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.usuariosService.createManyFromExcel(createManyUsuariosFromExcelArgs.data, createManyUsuariosFromExcelArgs.coopId);
   }

@@ -33,7 +33,7 @@ export class SolicitudesResolver {
   @Mutation(() => Prestamo)
   async createPrestamo(
     @Args('createPrestamoInput') createPrestamoInput: CreatePrestamoInput,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ): Promise<Prestamo> {
     const prestamo = await firstValueFrom(
       this.solicitudesService.create(createPrestamoInput, user)
@@ -44,7 +44,7 @@ export class SolicitudesResolver {
   @Query(() => [Prestamo])
   async prestamos(
     @Args('filterBySucursal', { type: () => Boolean, nullable: true, defaultValue: true }) filterBySucursal: boolean,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ): Promise<Prestamo[]> {
     const lista = await firstValueFrom(
       this.solicitudesService.findAll(user, filterBySucursal)
@@ -54,7 +54,7 @@ export class SolicitudesResolver {
   @Query(() => InventarioSolicitudesResponse)
   inventarioSolicitudesFiltrado(
     @Args('input') input: InventarioSolicitudesFilterInput,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.solicitudesService.getInventarioSolicitudesFiltrado(input, user);
   }
@@ -63,7 +63,7 @@ export class SolicitudesResolver {
   @Query(() => Prestamo)
   async prestamo(
     @Args('id') id: string,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ): Promise<Prestamo> {
     const prestamo = await firstValueFrom(
       this.solicitudesService.findById(id, user)
@@ -74,7 +74,7 @@ export class SolicitudesResolver {
   @Query(() => [Prestamo])
   async prestamosByEstado(
     @Args() args: ValidEstadosArgs,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ): Promise<Prestamo[]> {
     const lista = await firstValueFrom(
       this.solicitudesService.findByEstado(args.estado, user, args.filterBySucursal)
@@ -85,7 +85,7 @@ export class SolicitudesResolver {
   @Mutation(() => Prestamo)
   async updatePrestamo(
     @Args('updatePrestamoInput') updatePrestamoInput: UpdatePrestamoInput,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ): Promise<Prestamo> {
     const prestamo = await firstValueFrom(
       this.solicitudesService.update(updatePrestamoInput, user)
@@ -96,7 +96,7 @@ export class SolicitudesResolver {
   @Mutation(() => BooleanResponse)
   async updateAllPrestamo(
     @Args('updateAllPrestamoArgs') updateAllPrestamoArgs: UpdateAllPrestamoArgs,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return await firstValueFrom(
       this.solicitudesService.updateAll({ ...updateAllPrestamoArgs, user })
@@ -108,7 +108,7 @@ export class SolicitudesResolver {
   @Mutation(() => Prestamo)
   async removePrestamo(
     @Args('R01NUM') id: string,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ): Promise<Prestamo> {
     const prestamo = await firstValueFrom(
       this.solicitudesService.remove(id, user)
@@ -120,7 +120,7 @@ export class SolicitudesResolver {
   @Query(() => Fase1StatisticsOutput)
   inventarioSolicitudesStats(
     @Args('input') input: InventarioSolicitudesFilterInput,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.solicitudesService.getInventarioSolicitudesStats(input, user);
   }
@@ -128,7 +128,7 @@ export class SolicitudesResolver {
   @Query(() => Fase2StatisticsOutput)
   inventarioSeguimientosStats(
     @Args('input') input: InventarioSolicitudesFilterInput,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.solicitudesService.getInventarioSeguimientosStats(input, user);
   }
@@ -136,7 +136,7 @@ export class SolicitudesResolver {
   @Query(() => Fase3StatisticsOutput)
   inventarioDesembolsosStats(
     @Args('input') input: InventarioSolicitudesFilterInput,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.solicitudesService.getInventarioDesembolsosStats(input, user);
   }
@@ -144,7 +144,7 @@ export class SolicitudesResolver {
   @Query(() => Fase4StatisticsOutput)
   inventarioSeguimientoGlobalStats(
     @Args('input') input: InventarioSolicitudesFilterInput,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.solicitudesService.getInventarioSeguimientoGlobalStats(input, user);
   }

@@ -8,6 +8,9 @@ import { UpdateRubroInput } from './dto/update-rubro.input';
 import { AuthGraphQLGuard } from 'src/auth/guards/auth-graphql.guard';
 import { BooleanResponse } from 'src/common/dto/boolean-response.object';
 import { CreateManyRubrosFromExcelArgs } from './dto/args/create-many-rubros-from-excel.arg';
+import { GetUser } from 'src/auth/decorators/user.decorator';
+import { ValidRoles } from 'src/auth/enums/valid-roles.enum';
+import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 
 @Resolver(() => Rubro)
 @UseGuards( AuthGraphQLGuard )
@@ -17,7 +20,8 @@ export class RubrosResolver {
 
   @Mutation(() => Rubro)
   createRubro(
-    @Args('createRubroInput') createRubroInput: CreateRubroInput
+    @Args('createRubroInput') createRubroInput: CreateRubroInput,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.rubrosService.create(createRubroInput);
   }
@@ -38,14 +42,16 @@ export class RubrosResolver {
 
   @Mutation(() => Rubro)
   updateRubro(
-    @Args('updateRubroInput') updateRubroInput: UpdateRubroInput
+    @Args('updateRubroInput') updateRubroInput: UpdateRubroInput,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.rubrosService.update(updateRubroInput.id, updateRubroInput);
   }
 
   @Mutation(() => Rubro)
   removeRubro(
-    @Args('id', { type: () => ID }, ParseUUIDPipe) id: string
+    @Args('id', { type: () => ID }, ParseUUIDPipe) id: string,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.rubrosService.remove(id);
   }
@@ -53,6 +59,7 @@ export class RubrosResolver {
   @Mutation(() => BooleanResponse)
   createManyRubrosFromExcel(
     @Args('createManyRubrosFromExcelArgs') createManyRubrosFromExcelArgs: CreateManyRubrosFromExcelArgs,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.rubrosService.createManyFromExcel(createManyRubrosFromExcelArgs.data, createManyRubrosFromExcelArgs.coopId);
   }

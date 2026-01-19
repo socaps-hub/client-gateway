@@ -16,14 +16,14 @@ export class LimitePrudencialResolver {
   @Mutation(() => LimitePrudencial)
   createLimitePrudencial(
     @Args('createLimitePrudencialInput') createLimitePrudencialInput: CreateLimitePrudencialInput,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.limitePrudencialService.create(createLimitePrudencialInput, user);
   }
 
   @Query(() => LimitePrudencial)
   findLastLimitePrudencial(
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.limitePrudencialService.findLast(user);
   }

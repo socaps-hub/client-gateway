@@ -20,7 +20,7 @@ export class EvaluacionesFase3Resolver {
   @Mutation(() => BooleanResponse)
   async createEvaluacionesFase3(
     @Args({ name: 'inputs', type: () => [CreateEvaluacionFase3Input] }) inputs: CreateEvaluacionFase3Input[],
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return await firstValueFrom(
       this.service.createMany(inputs, user)
@@ -32,7 +32,7 @@ export class EvaluacionesFase3Resolver {
   @Query(() => [EvaluacionFase3], { name: 'evaluacionesFase3' })
   async findAllEvaluacionesFase3(
     @Args('prestamoId', { type: () => ID }) prestamoId: string,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ): Promise<EvaluacionFase3[]> {
     return await firstValueFrom(
       this.service.findAll(prestamoId, user)
@@ -42,7 +42,7 @@ export class EvaluacionesFase3Resolver {
   @Mutation(() => EvaluacionFase3)
   async updateEvaluacionFase3(
     @Args('input') input: UpdateEvaluacionFase3Input,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ): Promise<EvaluacionFase3> {
     return await firstValueFrom(
       this.service.update(input, user)
@@ -52,7 +52,7 @@ export class EvaluacionesFase3Resolver {
   @Mutation(() => BooleanResponse,  { name: 'deleteEvaluacionF3ByPrestamo' })
   async deleteByPrestamo(
     @Args('prestamoId', { type: () => ID }) prestamoId: string,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ): Promise<BooleanResponse> {
     return await firstValueFrom(
       this.service.deleteByPrestamo(prestamoId, user)

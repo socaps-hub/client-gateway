@@ -16,7 +16,7 @@ export class CategoriasResolver {
   @Mutation(() => Categoria)
   createCategoria(
     @Args('createCategoriaInput') createCategoriaInput: CreateCategoriaInput,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario
   ) {
     return this.categoriasService.create(createCategoriaInput, user);
   }

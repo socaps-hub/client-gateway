@@ -21,7 +21,7 @@ export class EvaluacionesResolver {
   @Mutation(() => EvaluacionFase1)
   async createEvaluacionFase1(
     @Args('createEvaluacionFase1Input') input: CreateEvaluacionFase1Input,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ): Promise<EvaluacionFase1> {
     return await firstValueFrom(
       this.evaluacionesService.create(input, user)
@@ -31,7 +31,7 @@ export class EvaluacionesResolver {
   @Mutation(() => BooleanResponse)
   async createEvaluacionesFase1(
     @Args({ name: 'inputs', type: () => [CreateEvaluacionFase1Input] }) inputs: CreateEvaluacionFase1Input[],
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     // return this.evaluacionesService.createManyEvaluaciones(inputs, user)
     //   .then(success => ({ success }))
@@ -46,7 +46,7 @@ export class EvaluacionesResolver {
   @Query(() => [EvaluacionFase1], { name: 'evaluacionesFase1' })
   async findAllEvaluacionesFase1(
     @Args('prestamoId', { type: () => ID }) prestamoId: string,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ): Promise<EvaluacionFase1[]> {
     return await firstValueFrom(
       this.evaluacionesService.findAll( prestamoId, user )
@@ -56,7 +56,7 @@ export class EvaluacionesResolver {
   @Mutation(() => EvaluacionFase1)
   async updateEvaluacionFase1(
     @Args('updateEvaluacionFase1Input') input: UpdateEvaluacionFase1Input,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ): Promise<EvaluacionFase1> {
     return await firstValueFrom(
       this.evaluacionesService.update( input, user )

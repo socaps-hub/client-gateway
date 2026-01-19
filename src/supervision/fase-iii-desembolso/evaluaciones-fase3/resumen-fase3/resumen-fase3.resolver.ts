@@ -20,14 +20,14 @@ export class ResumenFase3Resolver {
   @Mutation(() => EvaluacionResumenFase3)
   createResumenFase3(
     @Args('createEvaluacionResumenFase3Input') input: CreateEvaluacionResumenFase3Input,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.resumenFase3Service.create(input, user);
   }
 
   @Query(() => [EvaluacionResumenFase3])
   resumenesFase3(
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.resumenFase3Service.findAll(user);
   }
@@ -35,7 +35,7 @@ export class ResumenFase3Resolver {
   @Query(() => EvaluacionResumenFase3)
   resumenFase3ByPrestamo(
     @Args('R10P_num', { type: () => String }) R10P_num: string,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.resumenFase3Service.findOne(R10P_num, user);
   }
@@ -43,7 +43,7 @@ export class ResumenFase3Resolver {
   @Mutation(() => EvaluacionResumenFase3)
   updateResumenFase3(
     @Args('updateEvaluacionResumenFase3Input') input: UpdateEvaluacionResumenFase3Input,
-    @GetUser('graphql') user: Usuario
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return this.resumenFase3Service.update(input, user);
   }
@@ -51,7 +51,7 @@ export class ResumenFase3Resolver {
   @Mutation(() => BooleanResponse, { name: 'deleteResumenF3ByPrestamo' })
   async deleteByPrestamo(
     @Args('prestamoId', { type: () => String }) prestamoId: string,
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
   ) {
     return await firstValueFrom(
       this.resumenFase3Service.deleteByPrestamo(prestamoId, user)

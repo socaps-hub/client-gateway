@@ -12,6 +12,7 @@ import { BooleanResponse } from 'src/common/dto/boolean-response.object';
 import { CreateProductoImportDto } from './dto/inputs/create-producto-import.dto';
 import { firstValueFrom } from 'rxjs';
 import { CreateManyFromExcelArgs } from './dto/args/create-many-from-excel.arg';
+import { ValidRoles } from 'src/auth/enums/valid-roles.enum';
 
 @Resolver(() => Producto)
 @UseGuards( AuthGraphQLGuard )
@@ -22,13 +23,14 @@ export class ProductosResolver {
   @Mutation(() => Producto)
   createProducto(
     @Args('createProductoInput') createProductoInput: CreateProductoInput,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser, ValidRoles.admin ]}) user: Usuario,
   ) {
     return this.productosService.create(createProductoInput);
   }
 
   @Query(() => [Producto], { name: 'productos' })
   findAll(
-    @GetUser('graphql') user: Usuario,
+    @GetUser({type: 'graphql'}) user: Usuario,
     @Args('categoriaId', { type: () => String, nullable: true }) categoriaId?: string,
   ) {
     return this.productosService.getProductos(user, categoriaId);
@@ -37,6 +39,7 @@ export class ProductosResolver {
   @Mutation(() => Producto)
   updateProducto(
     @Args('updateProductoInput') updateProductoInput: UpdateProductoInput,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser, ValidRoles.admin ]}) user: Usuario,
   ) {
     return this.productosService.update(updateProductoInput.id, updateProductoInput);
   }
@@ -45,13 +48,15 @@ export class ProductosResolver {
   activateProducto(
     @Args('name', { type: () => String }) name: string,
     @Args('coopId', { type: () => String }) coopId: string,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser, ValidRoles.admin ]}) user: Usuario,
   ) {
     return this.productosService.activate(name, coopId);
   }
 
   @Mutation(() => Producto)
   desactivateProducto(
-    @Args('id', { type: () => ID }, ParseUUIDPipe) id: string
+    @Args('id', { type: () => ID }, ParseUUIDPipe) id: string,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser, ValidRoles.admin ]}) user: Usuario,
   ) {
     return this.productosService.desactivate(id);
   }
@@ -59,6 +64,7 @@ export class ProductosResolver {
   @Mutation(() => BooleanResponse)
   async createManyFromExcel(
     @Args('createManyFromExcelArgs') createManyFromExcelArgs: CreateManyFromExcelArgs,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return await firstValueFrom(
       this.productosService.createManyFromExcel(createManyFromExcelArgs.data, createManyFromExcelArgs.coopId)

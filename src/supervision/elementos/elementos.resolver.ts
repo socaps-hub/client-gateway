@@ -8,6 +8,9 @@ import { UpdateElementoInput } from './dto/update-elemento.input';
 import { Elemento } from './entities/elemento.entity';
 import { BooleanResponse } from 'src/common/dto/boolean-response.object';
 import { CreateManyElementosFromExcelArgs } from './dto/args/create-many-elementos-from-excel.arg';
+import { GetUser } from 'src/auth/decorators/user.decorator';
+import { ValidRoles } from 'src/auth/enums/valid-roles.enum';
+import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 
 @Resolver(() => Elemento)
 @UseGuards(AuthGraphQLGuard)
@@ -20,6 +23,7 @@ export class ElementosResolver {
   @Mutation(() => Elemento)
   createElemento(
     @Args('createElementoInput') createElementoInput: CreateElementoInput,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.elementosService.create(createElementoInput);
   }
@@ -40,14 +44,16 @@ export class ElementosResolver {
 
   @Mutation(() => Elemento)
   updateElemento(
-    @Args('updateElementoInput') updateElementoInput: UpdateElementoInput
+    @Args('updateElementoInput') updateElementoInput: UpdateElementoInput,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.elementosService.update(updateElementoInput);
   }
 
   @Mutation(() => Elemento)
   removeElemento(
-    @Args('id', { type: () => ID }, ParseUUIDPipe) id: string
+    @Args('id', { type: () => ID }, ParseUUIDPipe) id: string,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.elementosService.remove(id);
   }
@@ -55,6 +61,7 @@ export class ElementosResolver {
   @Mutation(() => BooleanResponse)
   createManyElementosFromExcel(
     @Args('createManyElementosFromExcelArgs') createManyElementosFromExcelArgs: CreateManyElementosFromExcelArgs,
+    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return this.elementosService.createManyFromExcel(createManyElementosFromExcelArgs.data, createManyElementosFromExcelArgs.rubroId);
   }
