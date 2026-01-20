@@ -4,7 +4,6 @@ import { LimitePrudencialModule } from './limite-prudencial/limite-prudencial.mo
 import { GruposModule } from './grupos/grupos.module';
 import { RubrosModule } from './rubros/rubros.module';
 import { ElementosModule } from './elementos/elementos.module';
-import { FaseIiiDesembolsoModule } from './fase-iii-desembolso/fase-iii-desembolso.module';
 import { FaseIvSegGlobalModule } from './fase-iv-seg-global/fase-iv-seg-global.module';
 import { ReportesSisconcreModule } from './reportes-sisconcre/reportes-sisconcre.module';
 import { SisconcapModule } from './sisconcap/sisconcap.module';
@@ -23,8 +22,6 @@ import { SisconcreModule } from './sisconcre/sisconcre.module';
     RubrosModule,
 
     ElementosModule,
-
-    FaseIiiDesembolsoModule,
 
     FaseIvSegGlobalModule,
 

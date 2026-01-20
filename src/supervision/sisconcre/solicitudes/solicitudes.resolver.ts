@@ -18,6 +18,7 @@ import { Fase2StatisticsOutput } from './dto/output/fase2-stats-response.output'
 import { Fase3StatisticsOutput } from './dto/output/fase3-stats-response.output';
 import { Fase4StatisticsOutput } from './dto/output/fase4-stats-response.output';
 import { SisConCreCreateFase2Input } from './dto/inputs/fase2-seguimiento/create-fase2input';
+import { SisConCreCreateFase3Input } from './dto/inputs/fase3-desembolso/create-fase3.input';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -75,6 +76,27 @@ export class SolicitudesResolver {
       return {
         success: false,
         message: error?.message || 'No se pudo crear la Fase 2',
+      };
+    }
+
+  }
+
+  @Mutation(() => BooleanResponse, { name: 'createOrUpdateSisconcreFase3' })
+  async createOrUpdateFase3(
+    @Args('input') input: SisConCreCreateFase3Input,
+    @GetUser({ type: 'graphql' }) user: Usuario,
+  ) {
+    try {
+      await firstValueFrom(this._solicitudesService.createOrUpdateFase3(input, user))
+
+      return {
+        success: true,
+        message: 'Fase 3 creada exitosamente',
+      };
+    } catch (error) {
+      return {
+        success: false,
+        message: error?.message || 'No se pudo crear la Fase 3',
       };
     }
 
