@@ -1,6 +1,6 @@
 import { ObjectType, Field, ID, Int } from '@nestjs/graphql';
 import { Calificativo, Resolucion } from '../../enums/evaluacion.enum';
-import { Prestamo } from 'src/supervision/fase-i-levantamiento/solicitudes/entities/solicitud.entity';
+import { Prestamo } from 'src/supervision/sisconcre/solicitudes/entities/solicitud.entity';
 import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 
 @ObjectType()

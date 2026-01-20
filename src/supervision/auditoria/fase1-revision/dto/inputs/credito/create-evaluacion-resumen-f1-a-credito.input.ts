@@ -1,7 +1,7 @@
 import { InputType, Field, Int } from '@nestjs/graphql';
 import { IsNumber, IsString } from 'class-validator';
-import { Calificativo } from 'src/supervision/fase-i-levantamiento/evaluaciones/enums/evaluacion.enum';
 import { CalificativoBEnum } from '../../../enums/calificativo-b.enum';
+import { Calificativo } from 'src/supervision/sisconcre/solicitudes/enums/evaluacion.enum';
 
 @InputType()
 export class CreateEvaluacionResumenF1ACreditoInput {

@@ -1,7 +1,7 @@
 import { ObjectType, Field, Int } from "@nestjs/graphql";
 import { Usuario } from "src/configuracion/usuarios/entities/usuario.entity";
-import { Calificativo } from "src/supervision/fase-i-levantamiento/evaluaciones/enums/evaluacion.enum";
 import { Movimiento } from "./movimiento.entity";
+import { Calificativo } from "src/supervision/sisconcre/solicitudes/enums/evaluacion.enum";
 
 @ObjectType()
 export class SisconcapEvaluacionResumenFase3 {

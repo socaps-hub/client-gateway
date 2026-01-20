@@ -1,5 +1,5 @@
 // import { R01Prestamo } from '@prisma/client';
-import { Prestamo } from '../entities/solicitud.entity';
+import { Prestamo } from '../../../sisconcre/solicitudes/entities/solicitud.entity';
 
 
 export function mapR01ToPrestamo(data: any): Prestamo {

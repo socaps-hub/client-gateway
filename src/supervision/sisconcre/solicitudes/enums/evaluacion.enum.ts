@@ -11,7 +11,7 @@ export enum Calificativo {
   CORRECTO = 'CORRECTO',
   ACEPTABLE = 'ACEPTABLE',
   DEFICIENTE = 'DEFICIENTE',
-  PENDIENTE = 'PENDIENTE',
+  PENDIENTE = 'PENDIENTE'
 }
 
 export enum Resolucion {

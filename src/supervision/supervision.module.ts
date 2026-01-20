@@ -4,7 +4,6 @@ import { LimitePrudencialModule } from './limite-prudencial/limite-prudencial.mo
 import { GruposModule } from './grupos/grupos.module';
 import { RubrosModule } from './rubros/rubros.module';
 import { ElementosModule } from './elementos/elementos.module';
-import { FaseILevantamientoModule } from './fase-i-levantamiento/fase-i-levantamiento.module';
 import { FaseIiSeguimientoModule } from './fase-ii-seguimiento/fase-ii-seguimiento.module';
 import { FaseIiiDesembolsoModule } from './fase-iii-desembolso/fase-iii-desembolso.module';
 import { FaseIvSegGlobalModule } from './fase-iv-seg-global/fase-iv-seg-global.module';
@@ -12,6 +11,7 @@ import { ReportesSisconcreModule } from './reportes-sisconcre/reportes-sisconcre
 import { SisconcapModule } from './sisconcap/sisconcap.module';
 import { AuditoriaSisconcreModule } from './auditoria-sisconcre/auditoria-sisconcre.module';
 import { AuditoriaModule } from './auditoria/auditoria.module';
+import { SisconcreModule } from './sisconcre/sisconcre.module';
 
 @Module({
   imports: [
@@ -24,8 +24,6 @@ import { AuditoriaModule } from './auditoria/auditoria.module';
     RubrosModule,
 
     ElementosModule,
-
-    FaseILevantamientoModule,
 
     FaseIiSeguimientoModule,
 
@@ -40,6 +38,8 @@ import { AuditoriaModule } from './auditoria/auditoria.module';
     AuditoriaSisconcreModule,
 
     AuditoriaModule,
+
+    SisconcreModule,
   ],
   providers: []
 })

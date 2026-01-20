@@ -1,8 +1,8 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { ResFaseI } from '../enums/evaluacion.enum';
-import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
+import { ResFaseI } from '../../enums/evaluacion.enum';
 import { Elemento } from 'src/supervision/elementos/entities/elemento.entity';
-import { Prestamo } from '../../solicitudes/entities/solicitud.entity';
+import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
+import { Prestamo } from 'src/supervision/sisconcre/solicitudes/entities/solicitud.entity';
 // import { ResFaseI } from '@prisma/client';
 
 @ObjectType()

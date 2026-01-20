@@ -1,13 +1,13 @@
 import { IsString, IsUUID } from 'class-validator';
 import { InputType, Field, ID } from '@nestjs/graphql';
-import { ResFaseI } from '../enums/evaluacion.enum';
+import { ResFaseI } from 'src/supervision/sisconcre/solicitudes/enums/evaluacion.enum';
 
 @InputType()
 export class CreateEvaluacionFase1Input {
 
-  @Field(() => ID)
-  @IsString()
-  R05P_num: string;
+  // @Field(() => ID)
+  // @IsString()
+  // R05P_num: string;
 
   @Field(() => ID)
   @IsUUID()

@@ -1,6 +1,6 @@
 import { IsNumber, IsString, IsUUID } from 'class-validator';
 import { InputType, Field, Int, ID } from '@nestjs/graphql';
-import { ResFaseI } from 'src/supervision/fase-i-levantamiento/evaluaciones/enums/evaluacion.enum';
+import { ResFaseI } from 'src/supervision/sisconcre/solicitudes/enums/evaluacion.enum';
 
 @InputType()
 export class CreateEvaluacionF1ACreditoInput {

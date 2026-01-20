@@ -11,11 +11,11 @@ import { GetUser } from 'src/auth/decorators/user.decorator';
 import { Movimiento } from './entities/movimiento.entity';
 import { UpdateMovimientoArgs } from './dto/inputs/update-movimiento.input';
 import { CreateFase2Input } from './dto/inputs/create-fase2.input';
-import { ValidEstadosArgs } from 'src/supervision/fase-i-levantamiento/solicitudes/dto/args/prestamos-by-estado.arg';
 import { CreateFase3Input } from './dto/inputs/create-fase3.input';
 import { InventarioMovimientosResponse } from './dto/output/inventario-movimientos-response.dto';
-import { InventarioSolicitudesFilterInput } from 'src/supervision/fase-i-levantamiento/solicitudes/dto/inventario-solicitudes-filter.input';
 import { SisconcapFase1StatisticsOutput } from './dto/output/fase1-stats-response.output';
+import { ValidEstadosArgs } from 'src/supervision/sisconcre/solicitudes/dto/args/prestamos-by-estado.arg';
+import { InventarioSolicitudesFilterInput } from 'src/supervision/sisconcre/solicitudes/dto/inputs/solicitudes/inventario-solicitudes-filter.input';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)

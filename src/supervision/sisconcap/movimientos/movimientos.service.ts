@@ -3,12 +3,12 @@ import { ClientProxy } from '@nestjs/microservices';
 import { NATS_SERVICE } from 'src/config';
 import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 import { movimientosPatterns } from 'src/common/constants/movimientos/movimientosPatterns';
-import { ValidEstados } from 'src/supervision/fase-i-levantamiento/solicitudes/enums/valid-estados.enum';
 import { UpdateMovimientoArgs } from './dto/inputs/update-movimiento.input';
 import { CreateFase1Input } from './dto/inputs/create-fase1.input';
 import { CreateFase2Input } from './dto/inputs/create-fase2.input';
 import { CreateFase3Input } from './dto/inputs/create-fase3.input';
-import { InventarioSolicitudesFilterInput } from 'src/supervision/fase-i-levantamiento/solicitudes/dto/inventario-solicitudes-filter.input';
+import { InventarioSolicitudesFilterInput } from 'src/supervision/sisconcre/solicitudes/dto/inputs/solicitudes/inventario-solicitudes-filter.input';
+import { ValidEstados } from 'src/supervision/sisconcre/solicitudes/enums/valid-estados.enum';
 
 @Injectable()
 export class MovimientosService {
