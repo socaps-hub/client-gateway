@@ -17,6 +17,7 @@ import { Fase1StatisticsOutput } from './dto/output/fase1-stats-response.output'
 import { Fase2StatisticsOutput } from './dto/output/fase2-stats-response.output';
 import { Fase3StatisticsOutput } from './dto/output/fase3-stats-response.output';
 import { Fase4StatisticsOutput } from './dto/output/fase4-stats-response.output';
+import { SisConCreCreateFase2Input } from './dto/inputs/fase2-seguimiento/create-fase2input';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -56,6 +57,27 @@ export class SolicitudesResolver {
     )
       .then(success => success)
       .catch((err) => err)
+  }
+
+  @Mutation(() => BooleanResponse, { name: 'createOrUpdateSisconcreFase2' })
+  async createOrUpdateFase2(
+    @Args('input') input: SisConCreCreateFase2Input,
+    @GetUser({ type: 'graphql' }) user: Usuario,
+  ) {
+    try {
+      await firstValueFrom(this._solicitudesService.createOrUpdateFase2(input, user))
+
+      return {
+        success: true,
+        message: 'Fase 2 creada exitosamente',
+      };
+    } catch (error) {
+      return {
+        success: false,
+        message: error?.message || 'No se pudo crear la Fase 2',
+      };
+    }
+
   }
 
   @Query(() => InventarioSolicitudesResponse)

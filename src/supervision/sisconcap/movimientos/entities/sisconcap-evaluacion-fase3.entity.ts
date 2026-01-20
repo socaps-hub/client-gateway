@@ -1,6 +1,6 @@
 import { ObjectType, Field, ID, Int } from "@nestjs/graphql";
-import { ResFaseII } from "src/supervision/fase-ii-seguimiento/evaluaciones-fase2/enums/evaluacion-fase2.enum";
 import { Movimiento } from "./movimiento.entity";
+import { ResFaseII } from "src/supervision/sisconcre/solicitudes/enums/evaluacion-fase2.enum";
 @ObjectType()
 export class SisconcapEvaluacionFase3 {
     @Field(() => ID)

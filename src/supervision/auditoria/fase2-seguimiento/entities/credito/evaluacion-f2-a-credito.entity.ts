@@ -1,6 +1,6 @@
 import { ObjectType, Field, ID, Int } from '@nestjs/graphql';
 import { MuestraCreditoSeleccion } from 'src/supervision/auditoria/credito/entities/muestra-credito-seleccion.entity';
-import { ResFaseII } from 'src/supervision/fase-ii-seguimiento/evaluaciones-fase2/enums/evaluacion-fase2.enum';
+import { ResFaseII } from 'src/supervision/sisconcre/solicitudes/enums/evaluacion-fase2.enum';
 
 @ObjectType()
 export class EvaluacionF2ACredito {

@@ -1,7 +1,6 @@
-import { IsString } from 'class-validator';
 import { InputType, Field } from '@nestjs/graphql';
-
-import { ResFaseII } from '../../enums/evaluacion-fase2.enum';
+import { IsString } from 'class-validator';
+import { ResFaseII } from 'src/supervision/sisconcre/solicitudes/enums/evaluacion-fase2.enum';
 
 @InputType()
 export class CreateEvaluacionFase2Input {

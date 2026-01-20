@@ -1,8 +1,9 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { ResFaseII } from '../enums/evaluacion-fase2.enum';
+
+import { ResFaseII } from '../../enums/evaluacion-fase2.enum';
 import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 import { Elemento } from 'src/supervision/elementos/entities/elemento.entity';
-import { Prestamo } from 'src/supervision/sisconcre/solicitudes/entities/solicitud.entity';
+import { Prestamo } from '../solicitud.entity';
 
 @ObjectType()
 export class EvaluacionFase2 {

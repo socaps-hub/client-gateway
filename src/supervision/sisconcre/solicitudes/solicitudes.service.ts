@@ -9,6 +9,7 @@ import { InventarioSolicitudesFilterInput } from './dto/inputs/solicitudes/inven
 import { UpdatePrestamoInput } from './dto/inputs/solicitudes/update-solicitud.input';
 import { ValidEstados } from './enums/valid-estados.enum';
 import { UpdateAllPrestamoArgs } from './dto/args/update-all-prestamo.arg';
+import { SisConCreCreateFase2Input } from './dto/inputs/fase2-seguimiento/create-fase2input';
 
 @Injectable()
 export class SolicitudesService {
@@ -23,6 +24,10 @@ export class SolicitudesService {
 
     updateAll( input: UpdateAllPrestamoArgs, user: Usuario ) {
         return this.client.send(solicitudesPatterns.UPDATE_ALL, { input, user });
+    }
+
+    createOrUpdateFase2(input: SisConCreCreateFase2Input, user: Usuario) {
+        return this.client.send(solicitudesPatterns.CREATE_OR_UPDATE_F2, { input, user })
     }
 
     getInventarioSolicitudesFiltrado(input: InventarioSolicitudesFilterInput, user: Usuario) {
