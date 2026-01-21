@@ -19,6 +19,7 @@ import { Fase3StatisticsOutput } from './dto/output/fase3-stats-response.output'
 import { Fase4StatisticsOutput } from './dto/output/fase4-stats-response.output';
 import { SisConCreCreateFase2Input } from './dto/inputs/fase2-seguimiento/create-fase2input';
 import { SisConCreCreateFase3Input } from './dto/inputs/fase3-desembolso/create-fase3.input';
+import { SisConCreCreateFase4Input } from './dto/inputs/fase4-seguimiento-global/create-or-update-fase4.input';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -100,6 +101,36 @@ export class SolicitudesResolver {
       };
     }
 
+  }
+
+  @Mutation(() => BooleanResponse, { name: 'createOrUpdateSisconcreFase4' })
+  async createOrUpdateFase4(
+    @Args('input') input: SisConCreCreateFase4Input,
+    @GetUser({ type: 'graphql' }) user: Usuario,
+  ) {
+    try {
+      await firstValueFrom(this._solicitudesService.createOrUpdateFase4(input, user))
+
+      return {
+        success: true,
+        message: 'Fase 4 creada exitosamente',
+      };
+    } catch (error) {
+      return {
+        success: false,
+        message: error?.message || 'No se pudo crear la Fase 4',
+      };
+    }
+
+  }
+
+  @Mutation(() => BooleanResponse)
+  async pasoMasivoAFase4(
+    @GetUser({type: 'graphql'}) user: Usuario,
+  ): Promise<{ success: boolean; message: string }> {
+    return await firstValueFrom(
+      this._solicitudesService.pasoMasivoAFase4(user)
+    );
   }
 
   @Query(() => InventarioSolicitudesResponse)

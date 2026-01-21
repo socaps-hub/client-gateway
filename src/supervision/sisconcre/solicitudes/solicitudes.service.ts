@@ -11,6 +11,7 @@ import { ValidEstados } from './enums/valid-estados.enum';
 import { UpdateAllPrestamoArgs } from './dto/args/update-all-prestamo.arg';
 import { SisConCreCreateFase2Input } from './dto/inputs/fase2-seguimiento/create-fase2input';
 import { SisConCreCreateFase3Input } from './dto/inputs/fase3-desembolso/create-fase3.input';
+import { SisConCreCreateFase4Input } from './dto/inputs/fase4-seguimiento-global/create-or-update-fase4.input';
 
 @Injectable()
 export class SolicitudesService {
@@ -33,6 +34,14 @@ export class SolicitudesService {
 
     createOrUpdateFase3(input: SisConCreCreateFase3Input, user: Usuario) {
         return this.client.send(solicitudesPatterns.CREATE_OR_UPDATE_F3, { input, user })
+    }
+
+    createOrUpdateFase4(input: SisConCreCreateFase4Input, user: Usuario) {
+        return this.client.send(solicitudesPatterns.CREATE_OR_UPDATE_F4, { input, user })
+    }
+
+    pasoMasivoAFase4(user: Usuario){
+    return this.client.send(solicitudesPatterns.PASO_MASIVO_F4, user )    
     }
 
     getInventarioSolicitudesFiltrado(input: InventarioSolicitudesFilterInput, user: Usuario) {

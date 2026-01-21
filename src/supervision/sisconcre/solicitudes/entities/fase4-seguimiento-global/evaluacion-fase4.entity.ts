@@ -1,9 +1,9 @@
-import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { Elemento } from 'src/supervision/elementos/entities/elemento.entity';
-import { Prestamo } from 'src/supervision/sisconcre/solicitudes/entities/solicitud.entity';
-import { ResFaseI } from 'src/supervision/sisconcre/solicitudes/enums/evaluacion.enum';
-import { ResFaseII } from 'src/supervision/sisconcre/solicitudes/enums/evaluacion-fase2.enum';
-import { ResFaseIII } from 'src/supervision/sisconcre/solicitudes/enums/evaluacion-fase3.enum';
+import { ResFaseII } from '../../enums/evaluacion-fase2.enum';
+import { ResFaseIII } from '../../enums/evaluacion-fase3.enum';
+import { ResFaseI } from '../../enums/evaluacion.enum';
+import { Prestamo } from '../solicitud.entity';
 
 @ObjectType()
 export class EvaluacionFase4 {

@@ -2,6 +2,8 @@ export const solicitudesPatterns = {
   CREATE_F1: 'supervision.solicitudes.createFase1',
   CREATE_OR_UPDATE_F2: 'supervision.solicitudes.createOrUpdateFase2',
   CREATE_OR_UPDATE_F3: 'supervision.solicitudes.createOrUpdateFase3',
+  CREATE_OR_UPDATE_F4: 'supervision.solicitudes.createOrUpdateFase4',
+  PASO_MASIVO_F4: 'supervision.solicitudes.pasoMasivoAFase4',
   CREATE: 'supervision.solicitudes.create',
   GET_ALL: 'supervision.solicitudes.getAll',
   GET_INVENTARIO_SOLICITUDES: 'supervision.solicitudes.getInventarioSolicitudesFiltrado',
