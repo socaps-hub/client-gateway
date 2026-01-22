@@ -1,17 +1,17 @@
 import { Args, Field, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { SolicitudesService } from './solicitudes.service';
 import { UseGuards } from '@nestjs/common';
+import { firstValueFrom } from 'rxjs';
+
+import { SolicitudesService } from './solicitudes.service';
 import { AuthGraphQLGuard } from 'src/auth/guards/auth-graphql.guard';
 import { BooleanResponse } from 'src/common/dto/boolean-response.object';
 import { SisConCreCreateFase1Input } from './dto/inputs/fase1-levantamiento/create-fase1.input';
 import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 import { GetUser } from 'src/auth/decorators/user.decorator';
-import { firstValueFrom } from 'rxjs';
 import { InventarioSolicitudesResponse } from './dto/output/inventario-solicitudes-response.output';
 import { InventarioSolicitudesFilterInput } from './dto/inputs/solicitudes/inventario-solicitudes-filter.input';
 import { Prestamo } from './entities/solicitud.entity';
 import { mapR01ToPrestamo } from './mappers/prestamo.mapper';
-import { ValidEstadosArgs } from './dto/args/prestamos-by-estado.arg';
 import { UpdateAllPrestamoArgs } from './dto/args/update-all-prestamo.arg';
 import { Fase1StatisticsOutput } from './dto/output/fase1-stats-response.output';
 import { Fase2StatisticsOutput } from './dto/output/fase2-stats-response.output';
@@ -33,17 +33,17 @@ export class SolicitudesResolver {
     @Args('input') input: SisConCreCreateFase1Input,
     @GetUser({ type: 'graphql' }) user: Usuario,
   ) {
-    try {
-      await firstValueFrom(this._solicitudesService.createFase1(input, user))
+    const resp = await firstValueFrom(this._solicitudesService.createFase1(input, user))
 
+    if (resp && resp.success) {
       return {
         success: true,
-        message: 'Fase 1 creada exitosamente',
+        message: 'Solicitud creada exitosamente.',
       };
-    } catch (error) {
+    } else {
       return {
         success: false,
-        message: error?.message || 'No se pudo crear la Fase 1',
+        message: resp?.message || 'No se pudo crear la solicitud.',
       };
     }
 
@@ -54,11 +54,21 @@ export class SolicitudesResolver {
     @Args('updateAllPrestamoArgs') updateAllPrestamoArgs: UpdateAllPrestamoArgs,
     @GetUser({ type: 'graphql' }) user: Usuario,
   ) {
-    return await firstValueFrom(
+    const resp = await firstValueFrom(
       this._solicitudesService.updateAll(updateAllPrestamoArgs, user)
     )
-      .then(success => success)
-      .catch((err) => err)
+    
+    if (resp && resp.success) {
+      return {
+        success: true,
+        message: 'Solicitud actualizada exitosamente.',
+      };
+    } else {
+      return {
+        success: false,
+        message: resp?.message || 'No se pudo actualizar la solicitud.',
+      };
+    }
   }
 
   @Mutation(() => BooleanResponse, { name: 'createOrUpdateSisconcreFase2' })
@@ -66,20 +76,19 @@ export class SolicitudesResolver {
     @Args('input') input: SisConCreCreateFase2Input,
     @GetUser({ type: 'graphql' }) user: Usuario,
   ) {
-    try {
-      await firstValueFrom(this._solicitudesService.createOrUpdateFase2(input, user))
+    const resp = await firstValueFrom(this._solicitudesService.createOrUpdateFase2(input, user))
 
+    if (resp && resp.success) {
       return {
         success: true,
-        message: 'Fase 2 creada exitosamente',
+        message: 'Seguimiento realizado exitosamente.',
       };
-    } catch (error) {
+    } else {
       return {
         success: false,
-        message: error?.message || 'No se pudo crear la Fase 2',
+        message: resp?.message || 'No se pudo dar seguimiento.',
       };
     }
-
   }
 
   @Mutation(() => BooleanResponse, { name: 'createOrUpdateSisconcreFase3' })
@@ -87,20 +96,19 @@ export class SolicitudesResolver {
     @Args('input') input: SisConCreCreateFase3Input,
     @GetUser({ type: 'graphql' }) user: Usuario,
   ) {
-    try {
-      await firstValueFrom(this._solicitudesService.createOrUpdateFase3(input, user))
+    const resp = await firstValueFrom(this._solicitudesService.createOrUpdateFase3(input, user))
 
+    if (resp && resp.success) {
       return {
         success: true,
-        message: 'Fase 3 creada exitosamente',
+        message: 'Desembolso realizado exitosamente.',
       };
-    } catch (error) {
+    } else {
       return {
         success: false,
-        message: error?.message || 'No se pudo crear la Fase 3',
+        message: resp?.message || 'No se pudo realizar el desembolso.',
       };
     }
-
   }
 
   @Mutation(() => BooleanResponse, { name: 'createOrUpdateSisconcreFase4' })
@@ -108,20 +116,19 @@ export class SolicitudesResolver {
     @Args('input') input: SisConCreCreateFase4Input,
     @GetUser({ type: 'graphql' }) user: Usuario,
   ) {
-    try {
-      await firstValueFrom(this._solicitudesService.createOrUpdateFase4(input, user))
+    const resp = await firstValueFrom(this._solicitudesService.createOrUpdateFase4(input, user))
 
+    if (resp && resp.success) {
       return {
         success: true,
-        message: 'Fase 4 creada exitosamente',
+        message: 'Seguimiento Global realizado exitosamente.',
       };
-    } catch (error) {
+    } else {
       return {
         success: false,
-        message: error?.message || 'No se pudo crear la Fase 4',
+        message: resp?.message || 'No se pudo realizar el seguimiento global.',
       };
     }
-
   }
 
   @Mutation(() => BooleanResponse)
