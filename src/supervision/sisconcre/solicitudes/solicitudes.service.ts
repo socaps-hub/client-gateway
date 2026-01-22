@@ -41,7 +41,7 @@ export class SolicitudesService {
     }
 
     pasoMasivoAFase4(user: Usuario){
-    return this.client.send(solicitudesPatterns.PASO_MASIVO_F4, user )    
+        return this.client.send(solicitudesPatterns.PASO_MASIVO_F4, { user })    
     }
 
     getInventarioSolicitudesFiltrado(input: InventarioSolicitudesFilterInput, user: Usuario) {

@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Field, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { SolicitudesService } from './solicitudes.service';
 import { UseGuards } from '@nestjs/common';
 import { AuthGraphQLGuard } from 'src/auth/guards/auth-graphql.guard';
@@ -126,7 +126,7 @@ export class SolicitudesResolver {
 
   @Mutation(() => BooleanResponse)
   async pasoMasivoAFase4(
-    @GetUser({type: 'graphql'}) user: Usuario,
+    @GetUser({ type: 'graphql' }) user: Usuario,
   ): Promise<{ success: boolean; message: string }> {
     return await firstValueFrom(
       this._solicitudesService.pasoMasivoAFase4(user)
@@ -151,17 +151,29 @@ export class SolicitudesResolver {
       this._solicitudesService.findById(id, user)
     )
     return mapR01ToPrestamo(prestamo);
-  }  
+  }
 
-  @Mutation(() => Prestamo)
+  @Mutation(() => BooleanResponse)
   async removePrestamo(
     @Args('R01NUM') id: string,
     @GetUser({ type: 'graphql' }) user: Usuario,
-  ): Promise<Prestamo> {
-    const prestamo = await firstValueFrom(
-      this._solicitudesService.remove(id, user)
-    )
-    return mapR01ToPrestamo(prestamo);
+  ): Promise<BooleanResponse> {
+    try {
+      await firstValueFrom(
+        this._solicitudesService.remove(id, user)
+      )
+
+      return {
+        success: true,
+        message: `Solicitud ${id} eliminada exitosamente`,
+      };
+    } catch (error) {
+      return {
+        success: false,
+        message: error?.message || 'No se pudo eliminar la solicitud',
+      };
+    }
+
   }
 
   // *STATS
