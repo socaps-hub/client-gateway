@@ -7,18 +7,32 @@ import { CreateLimitePrudencialInput } from './dto/inputs/create-limite-prudenci
 import { AuthGraphQLGuard } from 'src/auth/guards/auth-graphql.guard';
 import { GetUser } from 'src/auth/decorators/user.decorator';
 import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
+import { firstValueFrom } from 'rxjs';
+import { BooleanResponse } from 'src/common/dto/boolean-response.object';
 
 @Resolver(() => LimitePrudencial)
 @UseGuards( AuthGraphQLGuard )
 export class LimitePrudencialResolver {
   constructor(private readonly limitePrudencialService: LimitePrudencialService) {}
 
-  @Mutation(() => LimitePrudencial)
-  createLimitePrudencial(
+  @Mutation(() => BooleanResponse)
+  async createLimitePrudencial(
     @Args('createLimitePrudencialInput') createLimitePrudencialInput: CreateLimitePrudencialInput,
     @GetUser({type: 'graphql'}) user: Usuario,
   ) {
-    return this.limitePrudencialService.create(createLimitePrudencialInput, user);
+    const resp = await firstValueFrom( this.limitePrudencialService.create(createLimitePrudencialInput, user) )
+
+    if (resp && resp.success) {
+      return {
+        success: true,
+        message: 'Límite prudencial creado exitosamente.',
+      };
+    } else {
+      return {
+        success: false,
+        message: resp?.message || 'No se pudo crear el límite prudencial.',
+      };
+    }
   }
 
   @Query(() => LimitePrudencial)
