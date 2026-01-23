@@ -28,20 +28,19 @@ export class MovimientosResolver {
     @Args('input') input: CreateFase1Input,
     @GetUser({type: 'graphql'}) user: Usuario,
   ) {    
-    try {
-      await firstValueFrom( this.movimientosService.createFase1( input, user ) )
-
+    const resp = await firstValueFrom( this.movimientosService.createFase1( input, user ) )
+      
+    if (resp && resp.success) {
       return {
         success: true,
-        message: 'Fase 1 creada exitosamente',
+        message: 'Movimiento registrado exitosamente.'
       };
-    } catch (error) {
+    } else {
       return {
         success: false,
-        message: error?.message || 'No se pudo crear la Fase 1',
+        message: resp?.message || 'No se pudo registrar el movimiento.',
       };
     }
-
   }
 
   @Mutation(() => BooleanResponse)
@@ -49,11 +48,21 @@ export class MovimientosResolver {
     @Args('input') input: CreateFase2Input,
     @GetUser({type: 'graphql'}) user: Usuario,
   ) {
-    return await firstValueFrom(
+    const resp = await firstValueFrom(
       this.movimientosService.createOrUpdateFase2( input, user )
     )
-      .then( success => success)
-      .catch( (err) => err )
+    
+    if (resp && resp.success) {
+      return {
+        success: true,
+        message: 'Seguimiento realizado exitosamente.'
+      };
+    } else {
+      return {
+        success: false,
+        message: resp?.message || 'No se pudo realizar el Seguimiento.',
+      };
+    }
   }
 
   @Mutation(() => BooleanResponse)
@@ -61,11 +70,21 @@ export class MovimientosResolver {
     @Args('input') input: CreateFase3Input,
     @GetUser({type: 'graphql'}) user: Usuario,
   ) {
-    return await firstValueFrom(
+    const resp = await firstValueFrom(
       this.movimientosService.createOrUpdateFase3( input, user )
     )
-      .then( success => success)
-      .catch( (err) => err )
+    
+    if (resp && resp.success) {
+      return {
+        success: true,
+        message: 'Seguimiento Global realizado exitosamente.'
+      };
+    } else {
+      return {
+        success: false,
+        message: resp?.message || 'No se pudo realizar el Seguimiento Global.',
+      };
+    }
   }
 
   @Query(() => [Movimiento])
@@ -105,19 +124,36 @@ export class MovimientosResolver {
     @Args('updateMovimientoArgs') updateMovimientoArgs: UpdateMovimientoArgs,
     @GetUser({type: 'graphql'}) user: Usuario,
   ) {
-    return await firstValueFrom(
+    const resp = await firstValueFrom(
       this.movimientosService.updateFase1( updateMovimientoArgs, user )
     )
-      .then( success => success)
-      .catch( (err) => err )
+
+    if (resp && resp.success) {
+      return {
+        success: true,
+        message: 'Movimiento actualizado exitosamente.'
+      };
+    } else {
+      return {
+        success: false,
+        message: resp?.message || 'No se pudo actualizar el movimiento.',
+      };
+    }
   }
 
-  @Mutation(() => Movimiento)
-  removeMovimiento(
+  @Mutation(() => BooleanResponse)
+  async removeMovimiento(
     @Args('folio', ParseIntPipe) folio: number,
     @GetUser({type: 'graphql'}) user: Usuario,
   ) {
-    return this.movimientosService.remove(folio, user)
+    const resp = await firstValueFrom(
+      this.movimientosService.remove(folio, user)
+    )
+    if (resp && resp.success) {
+      return { success: true, message: `Movimiento ${folio} eliminado exitosamente.` };
+    } else {
+      return { success: false, message: resp?.message || 'No se pudo eliminar el movimiento.', };
+    }
   }
 
   @Mutation(() => BooleanResponse)
@@ -125,11 +161,21 @@ export class MovimientosResolver {
     @Args('folio', ParseIntPipe) folio: number,
     @GetUser({type: 'graphql'}) user: Usuario,
   ): Promise<BooleanResponse> {
-    return await firstValueFrom(
+    const resp = await firstValueFrom(
       this.movimientosService.cancelFase3AndFase2( folio, user )
     )
-      .then( success => success)
-      .catch( (err) => err )
+      
+    if (resp && resp.success) {
+      return {
+        success: true,
+        message: 'Fase 3 cancelada exitosamente.'
+      };
+    } else {
+      return {
+        success: false,
+        message: resp?.message || 'No se pudo realizar la cancelación de Fase 3.',
+      };
+    }
   }
 
   // *STATS
