@@ -23,7 +23,7 @@ export class RubrosResolver {
     @Args('createRubroInput') createRubroInput: CreateRubroInput,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.rubrosService.create(createRubroInput);
+    return this.rubrosService.create(createRubroInput, user);
   }
 
   @Query(() => [Rubro], { name: 'rubros' })
@@ -45,7 +45,7 @@ export class RubrosResolver {
     @Args('updateRubroInput') updateRubroInput: UpdateRubroInput,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.rubrosService.update(updateRubroInput.id, updateRubroInput);
+    return this.rubrosService.update(updateRubroInput.id, updateRubroInput, user);
   }
 
   @Mutation(() => Rubro)
@@ -53,7 +53,7 @@ export class RubrosResolver {
     @Args('id', { type: () => ID }, ParseUUIDPipe) id: string,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.rubrosService.remove(id);
+    return this.rubrosService.remove(id, user);
   }
 
   @Mutation(() => BooleanResponse)
@@ -61,6 +61,6 @@ export class RubrosResolver {
     @Args('createManyRubrosFromExcelArgs') createManyRubrosFromExcelArgs: CreateManyRubrosFromExcelArgs,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.rubrosService.createManyFromExcel(createManyRubrosFromExcelArgs.data, createManyRubrosFromExcelArgs.coopId);
+    return this.rubrosService.createManyFromExcel(createManyRubrosFromExcelArgs.data, createManyRubrosFromExcelArgs.coopId, user);
   }
 }

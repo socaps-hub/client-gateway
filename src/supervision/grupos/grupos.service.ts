@@ -15,8 +15,8 @@ export class GruposService {
     @Inject(NATS_SERVICE) private readonly client: ClientProxy
   ) {}
 
-  create(createGrupoInput: CreateGrupoInput) {
-    return this.client.send( gruposPatterns.CREATE, { createGrupoInput });
+  create(createGrupoInput: CreateGrupoInput, user: Usuario) {
+    return this.client.send( gruposPatterns.CREATE, { createGrupoInput, user });
   }
 
   findAll(coopId: string, type: GrupoTipo) {
@@ -31,16 +31,16 @@ export class GruposService {
     return this.client.send( gruposPatterns.GET_BY_NAME, { name, user });
   }
   
-  update( updateGrupoInput: UpdateGrupoInput ) {
+  update( updateGrupoInput: UpdateGrupoInput, user: Usuario ) {
     return this.client.send( gruposPatterns.UPDATE, { updateGrupoInput });    
   }
 
-  remove( id: string ) {
-    return this.client.send( gruposPatterns.REMOVE, { id });    
+  remove( id: string, user: Usuario ) {
+    return this.client.send( gruposPatterns.REMOVE, { id, user });    
   }
 
-  createManyFromExcel( data: CreateManyGruposFromExcelDto[], coopId: string ) {
-    return this.client.send( gruposPatterns.CREATE_MANY_FROM_EXCEL, { data, coopId });    
+  createManyFromExcel( data: CreateManyGruposFromExcelDto[], coopId: string, user: Usuario ) {
+    return this.client.send( gruposPatterns.CREATE_MANY_FROM_EXCEL, { data, coopId, user });    
   }
 
 }

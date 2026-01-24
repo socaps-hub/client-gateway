@@ -6,6 +6,7 @@ import { firstValueFrom } from 'rxjs';
 import { NATS_SERVICE } from 'src/config';
 import { elementosPatterns } from 'src/common/constants/elementos/elementosPatterns';
 import { CreateManyElementoFromExcelDto } from './dto/create-many-elementos-from-excel.dto';
+import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 
 @Injectable()
 export class ElementosService {
@@ -14,8 +15,8 @@ export class ElementosService {
         @Inject(NATS_SERVICE) private readonly client: ClientProxy
     ) { }
 
-    async create( createElementoInput: CreateElementoInput ) {        
-        return this.client.send(elementosPatterns.CREATE, { createElementoInput })
+    async create( createElementoInput: CreateElementoInput, user: Usuario ) {        
+        return this.client.send(elementosPatterns.CREATE, { createElementoInput, user })
     }
 
     async findAll(rubroId: string) {        
@@ -26,15 +27,15 @@ export class ElementosService {
         return this.client.send(elementosPatterns.GET_BY_ID, { id })
     }
 
-    async update(updateElementoInput: UpdateElementoInput) {        
-        return this.client.send(elementosPatterns.UPDATE, { updateElementoInput })
+    async update(updateElementoInput: UpdateElementoInput, user: Usuario) {        
+        return this.client.send(elementosPatterns.UPDATE, { updateElementoInput, user })
     }
 
-    async remove(id: string) {        
-        return this.client.send(elementosPatterns.REMOVE, { id })
+    async remove(id: string, user: Usuario) {        
+        return this.client.send(elementosPatterns.REMOVE, { id, user })
     }
 
-    createManyFromExcel( data: CreateManyElementoFromExcelDto[],  rubroId: string ) {        
-        return this.client.send(elementosPatterns.CREATE_MANY_FROM_EXCEL, { data, rubroId })
+    createManyFromExcel( data: CreateManyElementoFromExcelDto[],  rubroId: string, user: Usuario ) {        
+        return this.client.send(elementosPatterns.CREATE_MANY_FROM_EXCEL, { data, rubroId, user })
     }
 }

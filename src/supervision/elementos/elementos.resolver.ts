@@ -25,7 +25,7 @@ export class ElementosResolver {
     @Args('createElementoInput') createElementoInput: CreateElementoInput,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.elementosService.create(createElementoInput);
+    return this.elementosService.create(createElementoInput, user);
   }
 
   @Query(() => [Elemento], { name: 'elementosPorRubro' })
@@ -47,7 +47,7 @@ export class ElementosResolver {
     @Args('updateElementoInput') updateElementoInput: UpdateElementoInput,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.elementosService.update(updateElementoInput);
+    return this.elementosService.update(updateElementoInput, user);
   }
 
   @Mutation(() => Elemento)
@@ -55,7 +55,7 @@ export class ElementosResolver {
     @Args('id', { type: () => ID }, ParseUUIDPipe) id: string,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.elementosService.remove(id);
+    return this.elementosService.remove(id, user);
   }
 
   @Mutation(() => BooleanResponse)
@@ -63,6 +63,6 @@ export class ElementosResolver {
     @Args('createManyElementosFromExcelArgs') createManyElementosFromExcelArgs: CreateManyElementosFromExcelArgs,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.elementosService.createManyFromExcel(createManyElementosFromExcelArgs.data, createManyElementosFromExcelArgs.rubroId);
+    return this.elementosService.createManyFromExcel(createManyElementosFromExcelArgs.data, createManyElementosFromExcelArgs.rubroId, user);
   }
 }

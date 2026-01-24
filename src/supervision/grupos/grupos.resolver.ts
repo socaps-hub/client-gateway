@@ -22,7 +22,7 @@ export class GruposResolver {
     @Args('createGrupoInput') createGrupoInput: CreateGrupoInput,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.gruposService.create(createGrupoInput)
+    return this.gruposService.create(createGrupoInput, user)
   }
 
   @Query(() => [Grupo], { name: 'grupos' })
@@ -53,7 +53,7 @@ export class GruposResolver {
     @Args('updateGrupoInput') updateGrupoInput: UpdateGrupoInput,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.gruposService.update( updateGrupoInput );
+    return this.gruposService.update( updateGrupoInput, user );
   }
 
   @Mutation(() => Grupo)
@@ -61,7 +61,7 @@ export class GruposResolver {
     @Args('id', { type: () => ID }, ParseUUIDPipe) id: string,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.gruposService.remove(id);
+    return this.gruposService.remove(id, user);
   }
 
   @Mutation(() => BooleanResponse)
@@ -69,6 +69,6 @@ export class GruposResolver {
     @Args('createManyGruposFromExcelArgs') createManyGruposFromExcelArgs: CreateManyGruposFromExcelArgs,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.gruposService.createManyFromExcel(createManyGruposFromExcelArgs.data, createManyGruposFromExcelArgs.coopId);
+    return this.gruposService.createManyFromExcel(createManyGruposFromExcelArgs.data, createManyGruposFromExcelArgs.coopId, user);
   }
 }
