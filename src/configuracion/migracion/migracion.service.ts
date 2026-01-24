@@ -3,6 +3,7 @@ import { ClientProxy } from '@nestjs/microservices';
 import { migracionPatterns } from 'src/common/constants/migracion/migracionPatterns';
 import { NATS_SERVICE } from 'src/config/services';
 import { MigracionRequestInput } from './dto/input/migracion-request.input';
+import { Usuario } from '../usuarios/entities/usuario.entity';
 
 @Injectable()
 export class MigracionService {
@@ -19,10 +20,10 @@ export class MigracionService {
         return this.client.send( migracionPatterns.GET_CONTROL_MIGRATION_BY_ID, { id } )
     }
 
-    public ejecutarMigracion(input: MigracionRequestInput) {
+    public ejecutarMigracion(input: MigracionRequestInput, user: Usuario) {
         this.client.emit(
             migracionPatterns.MIGRAR_SISTEMA,
-            { input }
+            { input, user }
         );
     }
 

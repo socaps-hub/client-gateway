@@ -47,7 +47,7 @@ export class MigracionResolver {
     try {
       // 🧠 1️⃣ Subir archivo a S3
       const { key } = await this.awsS3Service.uploadExcel(file, 'migraciones');
-      this.migracionService.ejecutarMigracion({ cooperativaId, fase, sistema, key });
+      this.migracionService.ejecutarMigracion({ cooperativaId, fase, sistema, key }, user);
 
       return { success: true, message: 'Migración iniciada correctamente' };
     } catch (error) {
