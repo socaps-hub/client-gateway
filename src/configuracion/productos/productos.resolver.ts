@@ -25,7 +25,7 @@ export class ProductosResolver {
     @Args('createProductoInput') createProductoInput: CreateProductoInput,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser, ValidRoles.admin ]}) user: Usuario,
   ) {
-    return this.productosService.create(createProductoInput);
+    return this.productosService.create(createProductoInput, user);
   }
 
   @Query(() => [Producto], { name: 'productos' })
@@ -41,7 +41,7 @@ export class ProductosResolver {
     @Args('updateProductoInput') updateProductoInput: UpdateProductoInput,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser, ValidRoles.admin ]}) user: Usuario,
   ) {
-    return this.productosService.update(updateProductoInput.id, updateProductoInput);
+    return this.productosService.update(updateProductoInput.id, updateProductoInput, user);
   }
 
   @Mutation(() => Producto)
@@ -50,7 +50,7 @@ export class ProductosResolver {
     @Args('coopId', { type: () => String }) coopId: string,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser, ValidRoles.admin ]}) user: Usuario,
   ) {
-    return this.productosService.activate(name, coopId);
+    return this.productosService.activate(name, coopId, user);
   }
 
   @Mutation(() => Producto)
@@ -58,7 +58,7 @@ export class ProductosResolver {
     @Args('id', { type: () => ID }, ParseUUIDPipe) id: string,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser, ValidRoles.admin ]}) user: Usuario,
   ) {
-    return this.productosService.desactivate(id);
+    return this.productosService.desactivate(id, user);
   }
 
   @Mutation(() => BooleanResponse)
@@ -67,7 +67,7 @@ export class ProductosResolver {
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
     return await firstValueFrom(
-      this.productosService.createManyFromExcel(createManyFromExcelArgs.data, createManyFromExcelArgs.coopId)
+      this.productosService.createManyFromExcel(createManyFromExcelArgs.data, createManyFromExcelArgs.coopId, user)
     );
   }
 

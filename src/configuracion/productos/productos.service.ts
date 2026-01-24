@@ -18,23 +18,23 @@ export class ProductosService {
         return this._client.send( productsPatterns.GET_ALL , { usuario: user, categoriaId } )
     }
 
-    create( createProductoInput: CreateProductoInput ) {
-        return this._client.send(productsPatterns.CREATE, { createProductoInput })
+    create( createProductoInput: CreateProductoInput, user: Usuario ) {
+        return this._client.send(productsPatterns.CREATE, { createProductoInput, user })
     }
 
-    update( id: string, updateProductoInput: UpdateProductoInput ) {
-        return this._client.send(productsPatterns.UPDATE_PRODUCT, { id, updateProductoInput })
+    update( id: string, updateProductoInput: UpdateProductoInput, user: Usuario ) {
+        return this._client.send(productsPatterns.UPDATE_PRODUCT, { id, updateProductoInput, user })
     }
 
-    activate( name: string, coopId: string ) {
-        return this._client.send(productsPatterns.ACTIVATE_PRODUCT, { name, coopId })
+    activate( name: string, coopId: string, user: Usuario ) {
+        return this._client.send(productsPatterns.ACTIVATE_PRODUCT, { name, coopId, user })
     }
 
-    desactivate( id: string ) {
-        return this._client.send(productsPatterns.DESACTIVATE_PRODUCT, { id })    }
+    desactivate( id: string, user: Usuario ) {
+        return this._client.send(productsPatterns.DESACTIVATE_PRODUCT, { id, user })    }
     
-    createManyFromExcel( data: CreateProductoImportDto[], coopId: string ) {
-        return this._client.send(productsPatterns.CREATE_MANY_FROM_EXCEL, { data, coopId })
+    createManyFromExcel( data: CreateProductoImportDto[], coopId: string, user: Usuario ) {
+        return this._client.send(productsPatterns.CREATE_MANY_FROM_EXCEL, { data, coopId, user })
     }
     
 }
