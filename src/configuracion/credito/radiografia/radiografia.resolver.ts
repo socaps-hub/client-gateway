@@ -64,7 +64,7 @@ export class RadiografiaResolver {
     try {
       // 🧠 1️⃣ Subir archivo a S3
       const { key } = await this.awsS3Service.uploadExcel(file, 'radiografias');
-      this.radiografiaService.crearCargaMasivaRadiografia(key, cooperativaCodigo, area);
+      this.radiografiaService.crearCargaMasivaRadiografia(key, cooperativaCodigo, area, user);
 
       return { success: true, message: 'Procesamiento iniciado' };
     } catch (error) {

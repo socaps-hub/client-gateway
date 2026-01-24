@@ -5,6 +5,7 @@ import { CreateRadiografiaCargaArgs } from './dto/args/create-radiografia-carga.
 import { radiografiasPatterns } from 'src/common/constants/radiografias/radiografiasPatterns';
 import { FileUpload } from 'graphql-upload-ts';
 import { RadioAreaEnum } from './enums/control-carga-radio-area.enum';
+import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 
 @Injectable()
 export class RadiografiaService {
@@ -28,10 +29,10 @@ export class RadiografiaService {
         );
     }
 
-    crearCargaMasivaRadiografia(key: string, cooperativaCodigo: string, area: RadioAreaEnum) {
+    crearCargaMasivaRadiografia(key: string, cooperativaCodigo: string, area: RadioAreaEnum, user: Usuario) {
         return this.client.emit(
             radiografiasPatterns.UPLOAD_RADIOGRAFIA,
-            { key, cooperativaCodigo, area }
+            { key, cooperativaCodigo, area, user }
         );
     }
 
