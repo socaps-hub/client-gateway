@@ -19,6 +19,8 @@ import { CooperativaRadiografiaStatus } from './dto/outputs/cooperativa-radiogra
 import { GetUser } from 'src/auth/decorators/user.decorator';
 import { ValidRoles } from 'src/auth/enums/valid-roles.enum';
 import { Usuario } from '../usuarios/entities/usuario.entity';
+import { BooleanResponse } from 'src/common/dto/boolean-response.object';
+import { firstValueFrom } from 'rxjs';
 
 @Resolver(() => Cooperativa)
 @UseGuards(AuthGraphQLGuard)
@@ -33,11 +35,11 @@ export class CooperativasResolver {
   // ===============================
 
   @Mutation(() => Cooperativa)
-  createCooperativa(
+  async createCooperativa(
     @Args('createCooperativaInput') createCooperativaInput: CreateCooperativaInput,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.cooperativasService.create(createCooperativaInput);
+    return this.cooperativasService.create(createCooperativaInput, user)
   }
 
   @Query(() => [Cooperativa], { name: 'cooperativas' })
@@ -66,7 +68,8 @@ export class CooperativasResolver {
   ) {
     return this.cooperativasService.update(
       updateCooperativaInput.id,
-      updateCooperativaInput
+      updateCooperativaInput,
+      user,
     );
   }
 
@@ -75,7 +78,7 @@ export class CooperativasResolver {
     @Args('name', { type: () => String }) name: string,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.cooperativasService.activate(name);
+    return this.cooperativasService.activate(name, user);
   }
 
   @Mutation(() => Cooperativa)
@@ -83,7 +86,7 @@ export class CooperativasResolver {
     @Args('id', { type: () => ID }, ParseUUIDPipe) id: string,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.cooperativasService.desactivate(id);
+    return this.cooperativasService.desactivate(id, user);
   }
 
   @Query(() => [CooperativaRadiografiaStatus], {
@@ -102,7 +105,7 @@ export class CooperativasResolver {
     @Args('input') input: AssignCooperativaModuloInput,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.cooperativasService.assignModuloToCooperativa(input);
+    return this.cooperativasService.assignModuloToCooperativa(input, user);
   }
 
   @Mutation(() => CooperativaModulo, { name: 'LupdateCooperativaModulo' })
@@ -110,7 +113,7 @@ export class CooperativasResolver {
     @Args('input') input: UpdateCooperativaModuloInput,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.cooperativasService.updateCooperativaModulo(input);
+    return this.cooperativasService.updateCooperativaModulo(input, user);
   }
 
   @Query(() => [CooperativaModulo], { name: 'LgetModulosByCooperativa' })
@@ -129,7 +132,7 @@ export class CooperativasResolver {
     @Args('input') input: AssignCooperativaSubModuloInput,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.cooperativasService.assignSubModuloToCooperativa(input);
+    return this.cooperativasService.assignSubModuloToCooperativa(input, user);
   }
 
   @Mutation(() => CooperativaSubModulo, { name: 'LupdateCooperativaSubModulo' })
@@ -137,6 +140,6 @@ export class CooperativasResolver {
     @Args('input') input: UpdateCooperativaSubModuloInput,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.cooperativasService.updateCooperativaSubModulo(input);
+    return this.cooperativasService.updateCooperativaSubModulo(input, user);
   }
 }

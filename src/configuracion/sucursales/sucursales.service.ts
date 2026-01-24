@@ -32,12 +32,12 @@ export class SucursalesService {
     return this._client.send( sucursalesPatterns.GET_BY_ID, { id, user } );
   }
 
-  update(updateSucursalInput: UpdateSucursalInput) {
-    return this._client.send( sucursalesPatterns.UPDATE, { updateSucursalInput } );
+  update(updateSucursalInput: UpdateSucursalInput, user: Usuario) {
+    return this._client.send( sucursalesPatterns.UPDATE, { updateSucursalInput, user } );
   }
 
-  createManyFromExcel(data: CreateSucursalImportDto[], coopId: string) {
-    return this._client.send( sucursalesPatterns.CREATE_MANY_FROM_EXCEL, { data, coopId } );
+  createManyFromExcel(data: CreateSucursalImportDto[], coopId: string, user: Usuario) {
+    return this._client.send( sucursalesPatterns.CREATE_MANY_FROM_EXCEL, { data, coopId, user } );
   }
 
   // remove(id: number) {

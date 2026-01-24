@@ -24,7 +24,7 @@ export class UsuariosResolver {
     @Args('createUsuarioInput') createUsuarioInput: CreateUsuarioInput,
     @GetUser({type: 'graphql', roles: [ ValidRoles.admin, ValidRoles.auditorAdmin, ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.usuariosService.create( createUsuarioInput );
+    return this.usuariosService.create( createUsuarioInput, user );
   }
 
   @Query(() => [Usuario], { name: 'usuarios' })
@@ -47,7 +47,7 @@ export class UsuariosResolver {
     @Args('updateUsuarioInput') updateUsuarioInput: UpdateUsuarioInput,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.usuariosService.update(updateUsuarioInput);
+    return this.usuariosService.update(updateUsuarioInput, user);
   }
 
   @Mutation(() => Usuario)
@@ -55,7 +55,7 @@ export class UsuariosResolver {
     @Args('id', { type: () => ID }, ParseUUIDPipe) id: string,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser, ValidRoles.admin ]}) user: Usuario,
   ) {
-    return this.usuariosService.desactivate(id);
+    return this.usuariosService.desactivate(id, user);
   }
 
   @Mutation(() => Usuario)
@@ -63,17 +63,15 @@ export class UsuariosResolver {
     @Args('userNI', { type: () => String }) userNI: string,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser, ValidRoles.admin ]}) user: Usuario,
   ) {
-    return this.usuariosService.activate(userNI.toUpperCase());
+    return this.usuariosService.activate(userNI.toUpperCase(), user);
   }
 
-  @Mutation(() => Boolean)
+  @Mutation(() => Usuario)
   async changePassword(
     @Args('data') data: ChangePasswordInput,
     @GetUser({type: 'graphql'}) user: Usuario
-  ): Promise<boolean> {
-    return await firstValueFrom(
-      this.usuariosService.changePassword(data, user)
-    )
+  ) {
+    return this.usuariosService.changePassword(data, user)
   }
 
   @Mutation(() => BooleanResponse)
@@ -81,6 +79,6 @@ export class UsuariosResolver {
     @Args('createManyUsuariosFromExcelArgs') createManyUsuariosFromExcelArgs: CreateManyUsuariosFromExcelArgs,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.usuariosService.createManyFromExcel(createManyUsuariosFromExcelArgs.data, createManyUsuariosFromExcelArgs.coopId);
+    return this.usuariosService.createManyFromExcel(createManyUsuariosFromExcelArgs.data, createManyUsuariosFromExcelArgs.coopId, user);
   }
 }

@@ -53,7 +53,7 @@ export class SucursalesResolver {
     @Args('updateSucursalInput') updateSucursalInput: UpdateSucursalInput,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.sucursalesService.update( updateSucursalInput );
+    return this.sucursalesService.update( updateSucursalInput, user );
   }
 
   @Mutation(() => BooleanResponse, { name: 'createManySucursalesFromExcel' })
@@ -61,7 +61,7 @@ export class SucursalesResolver {
     @Args('createManyFromExcelArgs') createManyFromExcelArgs: CreateManySucursalesFromExcelArgs,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this.sucursalesService.createManyFromExcel(createManyFromExcelArgs.data, createManyFromExcelArgs.coopId);
+    return this.sucursalesService.createManyFromExcel(createManyFromExcelArgs.data, createManyFromExcelArgs.coopId, user);
   }
 
   // @Mutation(() => Sucursale)

@@ -13,6 +13,7 @@ import { AssignCooperativaModuloInput } from './dto/inputs/assign-cooperativa-mo
 import { UpdateCooperativaModuloInput } from './dto/inputs/update-cooperativa-modulo.input';
 import { AssignCooperativaSubModuloInput } from './dto/inputs/assign-cooperativa-submodulo.input';
 import { UpdateCooperativaSubModuloInput } from './dto/inputs/update-cooperativa-submodulo.input';
+import { Usuario } from '../usuarios/entities/usuario.entity';
 
 @Injectable()
 export class CooperativasService {
@@ -25,10 +26,10 @@ export class CooperativasService {
   // COOPERATIVAS
   // ===============================
 
-  create(createCooperativaInput: CreateCooperativaInput) {
+  create(createCooperativaInput: CreateCooperativaInput, user: Usuario) {
     return this._client.send(
       cooperativasPatterns.CREATE,
-      createCooperativaInput
+      { createCooperativaInput, user }
     );
   }
 
@@ -53,24 +54,24 @@ export class CooperativasService {
     );
   }
 
-  update(id: string, updateCooperativaInput: UpdateCooperativaInput) {
+  update(id: string, updateCooperativaInput: UpdateCooperativaInput, user: Usuario) {
     return this._client.send(
       cooperativasPatterns.UPDATE,
-      { id, updateCooperativaInput }
+      { id, updateCooperativaInput, user }
     );
   }
 
-  activate(name: string) {
+  activate(name: string, user: Usuario) {
     return this._client.send(
       cooperativasPatterns.ACTIVATE,
-      { name }
+      { name, user }
     );
   }
 
-  desactivate(id: string) {
+  desactivate(id: string, user: Usuario) {
     return this._client.send(
       cooperativasPatterns.DESACTIVATE,
-      { id }
+      { id, user }
     );
   }
 
@@ -85,17 +86,17 @@ export class CooperativasService {
   // LICENCIAMIENTO – MÓDULOS (C02)
   // ===============================
 
-  assignModuloToCooperativa(input: AssignCooperativaModuloInput) {
+  assignModuloToCooperativa(input: AssignCooperativaModuloInput, user: Usuario) {
     return this._client.send(
       cooperativasPatterns.ASSIGN_MODULO,
-      input
+      { input, user }
     );
   }
 
-  updateCooperativaModulo(input: UpdateCooperativaModuloInput) {
+  updateCooperativaModulo(input: UpdateCooperativaModuloInput, user: Usuario) {
     return this._client.send(
       cooperativasPatterns.UPDATE_MODULO,
-      input
+      { input, user }
     );
   }
 
@@ -110,17 +111,17 @@ export class CooperativasService {
   // LICENCIAMIENTO – SUBMÓDULOS (C03)
   // ===============================
 
-  assignSubModuloToCooperativa(input: AssignCooperativaSubModuloInput) {
+  assignSubModuloToCooperativa(input: AssignCooperativaSubModuloInput, user: Usuario) {
     return this._client.send(
       cooperativasPatterns.ASSIGN_SUBMODULO,
-      input
+      { input, user }
     );
   }
 
-  updateCooperativaSubModulo(input: UpdateCooperativaSubModuloInput) {
+  updateCooperativaSubModulo(input: UpdateCooperativaSubModuloInput, user: Usuario) {
     return this._client.send(
       cooperativasPatterns.UPDATE_SUBMODULO,
-      input
+      { input, user }
     );
   }
 }

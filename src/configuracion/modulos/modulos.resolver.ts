@@ -38,7 +38,7 @@ export class ModulosResolver {
     @Args('input') input: CreateModuloInput,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this._modulosService.createModulo(input);
+    return this._modulosService.createModulo(input, user);
   }
 
   @Mutation(() => M02ModuloEntity, { name: 'MupdateModulo' })
@@ -46,7 +46,7 @@ export class ModulosResolver {
     @Args('input') input: UpdateModuloInput,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this._modulosService.updateModulo(input);
+    return this._modulosService.updateModulo(input, user);
   }
 
   @Mutation(() => M02ModuloEntity, { name: 'MdesactivateModulo' })
@@ -54,7 +54,7 @@ export class ModulosResolver {
     @Args('id', { type: () => Int }) id: number,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this._modulosService.desactivateModulo(id);
+    return this._modulosService.desactivateModulo(id, user);
   }
 
   @Mutation(() => M02ModuloEntity, { name: 'MactivateModulo' })
@@ -62,7 +62,7 @@ export class ModulosResolver {
     @Args('id', { type: () => Int }) id: number,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this._modulosService.activateModulo(id);
+    return this._modulosService.activateModulo(id, user);
   }
 
   // ============================
@@ -81,7 +81,7 @@ export class ModulosResolver {
     @Args('input') input: CreateSubModuloInput,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this._modulosService.createSubModulo(input);
+    return this._modulosService.createSubModulo(input, user);
   }
 
   @Mutation(() => M03SubModuloEntity, { name: 'MupdateSubModulo' })
@@ -89,7 +89,7 @@ export class ModulosResolver {
     @Args('input') input: UpdateSubModuloInput,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this._modulosService.updateSubModulo(input);
+    return this._modulosService.updateSubModulo(input, user);
   }
 
   @Mutation(() => M03SubModuloEntity, { name: 'MdesactivateSubModulo' })
@@ -97,7 +97,7 @@ export class ModulosResolver {
     @Args('id', { type: () => Int }) id: number,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this._modulosService.desactivateSubModulo(id);
+    return this._modulosService.desactivateSubModulo(id, user);
   }
 
   @Mutation(() => M03SubModuloEntity, { name: 'MactivateSubModulo' })
@@ -105,7 +105,7 @@ export class ModulosResolver {
     @Args('id', { type: () => Int }) id: number,
     @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
   ) {
-    return this._modulosService.activateSubModulo(id);
+    return this._modulosService.activateSubModulo(id, user);
   }
 
 }

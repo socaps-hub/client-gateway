@@ -8,6 +8,7 @@ import { UpdateModuloInput } from './dto/update-modulo.input';
 import { CreateSubModuloInput } from './dto/create-submodulo.input';
 import { UpdateSubModuloInput } from './dto/update-submodulo.input';
 import { modulosPatterns } from 'src/common/constants/modulos/modulos.patterns';
+import { Usuario } from '../usuarios/entities/usuario.entity';
 
 @Injectable()
 export class ModulosService {
@@ -36,34 +37,34 @@ export class ModulosService {
     
   }
 
-  async createModulo(input: CreateModuloInput) {
+  async createModulo(input: CreateModuloInput, user: Usuario) {
     return this.client.send(
         modulosPatterns.CREATE,
-        { input },
+        { input, user },
     )
     
   }
 
-  async updateModulo(input: UpdateModuloInput) {
+  async updateModulo(input: UpdateModuloInput, user: Usuario) {
     return this.client.send(
         modulosPatterns.UPDATE,
-        { input },
+        { input, user },
     )
     
   }
 
-  async desactivateModulo(id: number) {
+  async desactivateModulo(id: number, user: Usuario) {
     return this.client.send(
         modulosPatterns.DESACTIVATE,
-        { id },
+        { id, user },
     )
     
   }
 
-  async activateModulo(id: number) {
+  async activateModulo(id: number, user: Usuario) {
     return this.client.send(
         modulosPatterns.ACTIVATE,
-        { id },
+        { id, user },
     )
     
   }
@@ -72,10 +73,10 @@ export class ModulosService {
   // SUBMÓDULOS
   // ============================
 
-  async createSubModulo(input: CreateSubModuloInput) {
+  async createSubModulo(input: CreateSubModuloInput, user: Usuario) {
     return this.client.send(
         modulosPatterns.CREATE_SUBMODULO,
-        { input },
+        { input, user },
     )
     
   }
@@ -88,25 +89,25 @@ export class ModulosService {
     
   }
 
-  async updateSubModulo(input: UpdateSubModuloInput) {
+  async updateSubModulo(input: UpdateSubModuloInput, user: Usuario) {
     return this.client.send(
         modulosPatterns.UPDATE_SUBMODULO,
-        { input },
+        { input, user },
     )
     
   }
 
-  async desactivateSubModulo(id: number) {
+  async desactivateSubModulo(id: number, user: Usuario) {
     return this.client.send(
         modulosPatterns.DESACTIVATE_SUBMODULO,
-        { id },
+        { id, user },
     )    
   }
 
-  async activateSubModulo(id: number) {
+  async activateSubModulo(id: number, user: Usuario) {
     return this.client.send(
         modulosPatterns.ACTIVATE_SUBMODULO,
-        { id },
+        { id, user },
     )    
   }
 }

@@ -17,8 +17,8 @@ export class UsuariosService {
     @Inject(NATS_SERVICE) private readonly client: ClientProxy
   ) {}
 
-  create(createUsuarioInput: CreateUsuarioInput) {
-    return this.client.send( usuariosPatterns.CREATE, { createUsuarioInput } );
+  create(createUsuarioInput: CreateUsuarioInput, user: Usuario) {
+    return this.client.send( usuariosPatterns.CREATE, { createUsuarioInput, user } );
   }
 
   findAll(role: ValidRoles, user: Usuario) {
@@ -33,23 +33,23 @@ export class UsuariosService {
     return this.client.send( usuariosPatterns.GET_BY_ID, { id } );
   }
 
-  update(updateUsuarioInput: UpdateUsuarioInput) {
-    return this.client.send( usuariosPatterns.UPDATE, updateUsuarioInput);
+  update(updateUsuarioInput: UpdateUsuarioInput, user: Usuario) {
+    return this.client.send( usuariosPatterns.UPDATE, { updateUsuarioInput, user });
   }
 
-  desactivate(id: string) {
-    return this.client.send( usuariosPatterns.DESACTIVATE, { id } );
+  desactivate(id: string, user: Usuario) {
+    return this.client.send( usuariosPatterns.DESACTIVATE, { id, user } );
   }
 
-  activate(userNI: string) {
-    return this.client.send( usuariosPatterns.ACTIVATE, { userNI } );
+  activate(userNI: string, user: Usuario) {
+    return this.client.send( usuariosPatterns.ACTIVATE, { userNI, user } );
   }
 
-  changePassword( input: ChangePasswordInput, user: Usuario ): Observable<boolean> {
+  changePassword( input: ChangePasswordInput, user: Usuario ) {
     return this.client.send( usuariosPatterns.CHANGE_PASSWORD, { input, user } );
   }
 
-  createManyFromExcel( data: CreateUsuarioImportDto[], coopId: string ): Observable<boolean> {
-    return this.client.send( usuariosPatterns.CREATE_MANY_FROM_EXCEL, { data, coopId } );
+  createManyFromExcel( data: CreateUsuarioImportDto[], coopId: string, user: Usuario ): Observable<boolean> {
+    return this.client.send( usuariosPatterns.CREATE_MANY_FROM_EXCEL, { data, coopId, user } );
   }
 }
