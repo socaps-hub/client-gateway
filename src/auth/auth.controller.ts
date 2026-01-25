@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Inject, Post, UseGuards } from '@nestjs/common';
+import { Request } from 'express';
+import { Body, Controller, Get, Inject, Post, Req, UseGuards } from '@nestjs/common';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { NATS_SERVICE } from 'src/config';
 import { LoginUserDto } from './dto/login-user.dto';
@@ -17,13 +18,24 @@ export class AuthController {
 
   @Post('login')
   login(
-    @Body() loginDto: LoginUserDto
+    @Body() loginUserDto: LoginUserDto,
+    @Req() req: Request,
   ) {
-    return this._client.send('auth.login_user', loginDto).pipe(
-      catchError( err => {
-        throw new RpcException(err)
+    return this._client.send('auth.login_user', 
+      { 
+        loginUserDto,
+        meta: {
+          ip: req.ip,
+          userAgent: req.headers['user-agent'],
+          requestId: req.headers['x-request-id'],
+          correlationId: req.headers['x-correlation-id'],
+        },
       })
-    )
+      .pipe(
+        catchError( err => {
+          throw new RpcException(err)
+        })
+      )
   }
 
   @UseGuards( AuthGuard )

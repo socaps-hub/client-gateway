@@ -1,5 +1,6 @@
-import { ParseUUIDPipe, UseGuards } from '@nestjs/common';
-import { Resolver, Query, Mutation, Args, Int, ID } from '@nestjs/graphql';
+import { Request } from 'express';
+import { ParseUUIDPipe, Req, UseGuards } from '@nestjs/common';
+import { Resolver, Query, Mutation, Args, Int, ID, Context } from '@nestjs/graphql';
 import { UsuariosService } from './usuarios.service';
 import { AuthGraphQLGuard } from 'src/auth/guards/auth-graphql.guard';
 import { GetUser } from 'src/auth/decorators/user.decorator';
@@ -12,6 +13,7 @@ import { firstValueFrom } from 'rxjs';
 import { BooleanResponse } from 'src/common/dto/boolean-response.object';
 import { CreateManyUsuariosFromExcelArgs } from './dto/args/create-many-usuario-from-excel.arg';
 import { ValidRoles } from 'src/auth/enums/valid-roles.enum';
+import { RpcMetaContext } from 'src/common/interfaces/rpc-meta-context.interface';
 
 @Resolver(() => Usuario)
 @UseGuards( AuthGraphQLGuard )
@@ -69,9 +71,25 @@ export class UsuariosResolver {
   @Mutation(() => Usuario)
   async changePassword(
     @Args('data') data: ChangePasswordInput,
-    @GetUser({type: 'graphql'}) user: Usuario
+    @GetUser({ type: 'graphql' }) user: Usuario,
+    @Context() ctx: { req: Request },
   ) {
-    return this.usuariosService.changePassword(data, user)
+    const req = ctx.req;
+
+    const meta = {
+      ip:
+        (req.headers['x-forwarded-for'] as string)?.split(',')[0]
+        ?? req.socket?.remoteAddress,
+      userAgent: req.headers['user-agent'],
+      requestId: req.headers['x-request-id']?.toString(),
+      correlationId: req.headers['x-correlation-id']?.toString(),
+    };
+
+    return this.usuariosService.changePassword(
+      data,
+      user,
+      meta,
+    );
   }
 
   @Mutation(() => BooleanResponse)

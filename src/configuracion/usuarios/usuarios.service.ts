@@ -9,6 +9,7 @@ import { Usuario } from './entities/usuario.entity';
 import { ChangePasswordInput } from './dto/inputs/change-password.input';
 import { Observable } from 'rxjs';
 import { CreateUsuarioImportDto } from './dto/inputs/create-usuario-import.dto';
+import { RpcMetaContext } from 'src/common/interfaces/rpc-meta-context.interface';
 
 @Injectable()
 export class UsuariosService {
@@ -45,8 +46,8 @@ export class UsuariosService {
     return this.client.send( usuariosPatterns.ACTIVATE, { userNI, user } );
   }
 
-  changePassword( input: ChangePasswordInput, user: Usuario ) {
-    return this.client.send( usuariosPatterns.CHANGE_PASSWORD, { input, user } );
+  changePassword( input: ChangePasswordInput, user: Usuario, meta: any ) {
+    return this.client.send( usuariosPatterns.CHANGE_PASSWORD, { input, user, meta } );
   }
 
   createManyFromExcel( data: CreateUsuarioImportDto[], coopId: string, user: Usuario ): Observable<boolean> {
