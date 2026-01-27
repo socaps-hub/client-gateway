@@ -160,6 +160,17 @@ export class SolicitudesResolver {
     return mapR01ToPrestamo(prestamo);
   }
 
+  @Query(() => Prestamo)
+  async prestamoF4Evaluations(
+    @Args('id') id: string,
+    @GetUser({ type: 'graphql' }) user: Usuario,
+  ): Promise<Prestamo> {
+    const prestamo = await firstValueFrom(
+      this._solicitudesService.findF4EvaluationsById(id, user)
+    )
+    return mapR01ToPrestamo(prestamo);
+  }
+
   @Mutation(() => BooleanResponse)
   async removePrestamo(
     @Args('R01NUM') id: string,

@@ -8,6 +8,7 @@ export const solicitudesPatterns = {
   GET_ALL: 'supervision.solicitudes.getAll',
   GET_INVENTARIO_SOLICITUDES: 'supervision.solicitudes.getInventarioSolicitudesFiltrado',
   GET_BY_ID: 'supervision.solicitudes.getById',
+  GET_F4_EVALUATIONS_BY_ID: 'supervision.solicitudes.getF4EvaluationsById',
   GET_BY_ESTADO: 'supervision.solicitudes.getByEstado',
   UPDATE: 'supervision.solicitudes.update',
   UPDATE_ALL: 'supervision.solicitudes.updateAll',
