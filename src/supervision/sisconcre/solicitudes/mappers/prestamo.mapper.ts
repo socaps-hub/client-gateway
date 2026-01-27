@@ -6,6 +6,7 @@ export function mapR01ToPrestamo(data: any): Prestamo {
   // console.log(data);
   
   const prestamo =  {
+    R01Id: data.R01Id,
     R01NUM: data.R01NUM,
     R01Suc_id: data.R01Suc_id,
     R01Nso: data.R01Nso,

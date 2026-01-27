@@ -5,9 +5,9 @@ import { Calificativo, Resolucion } from 'src/supervision/sisconcre/solicitudes/
 @InputType()
 export class CreateResumenFase1Input {
 
-  @Field(() => String)
-  @IsString()
-  R06P_num: string;
+  // @Field(() => String)
+  // @IsString()
+  // R06P_num: string;
 
   @Field(() => Int)
   @IsNumber()

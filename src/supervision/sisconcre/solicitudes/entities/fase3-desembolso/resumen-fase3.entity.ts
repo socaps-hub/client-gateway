@@ -3,11 +3,15 @@ import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 import { Calificativo } from '../../enums/evaluacion.enum';
 import { Prestamo } from '../solicitud.entity';
 
+
 @ObjectType()
 export class EvaluacionResumenFase3 {
 
   @Field(() => ID)
-  R10P_num: string;
+  R10Id: string;
+
+  @Field(() => ID)
+  R10P_id: string;
 
   @Field(() => Int)
   R10Ha: number; // Hallazgos

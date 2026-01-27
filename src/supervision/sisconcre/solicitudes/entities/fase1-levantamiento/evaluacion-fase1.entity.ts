@@ -1,9 +1,9 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
+
 import { ResFaseI } from '../../enums/evaluacion.enum';
-import { Elemento } from 'src/supervision/elementos/entities/elemento.entity';
+import { Prestamo } from '../solicitud.entity';
 import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
-import { Prestamo } from 'src/supervision/sisconcre/solicitudes/entities/solicitud.entity';
-// import { ResFaseI } from '@prisma/client';
+import { Elemento } from 'src/supervision/elementos/entities/elemento.entity';
 
 @ObjectType()
 export class EvaluacionFase1 {
@@ -11,7 +11,7 @@ export class EvaluacionFase1 {
   R05Id: string;
 
   @Field(() => String)
-  R05P_num: string;
+  R05P_id: string;
 
   @Field(() => String)
   R05E_id: string;

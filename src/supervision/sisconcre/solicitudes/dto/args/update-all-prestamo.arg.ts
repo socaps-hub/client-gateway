@@ -1,6 +1,6 @@
 import { Field, ID, InputType } from "@nestjs/graphql";
 import { Type } from "class-transformer";
-import { ValidateNested, IsArray, IsString } from "class-validator";
+import { ValidateNested, IsArray, IsString, IsUUID } from "class-validator";
 
 import { UpdatePrestamoInput } from "../inputs/solicitudes/update-solicitud.input";
 import { CreateEvaluacionFase1Input } from "../inputs/fase1-levantamiento/evaluacion/create-evaluacion-fase1.input";
@@ -11,6 +11,7 @@ export class UpdateAllPrestamoArgs {
 
   @Field(() => ID)
   @IsString()
+  @IsUUID()
   currentId: string
   
   @Field(() => UpdatePrestamoInput)

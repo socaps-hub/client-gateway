@@ -5,9 +5,9 @@ import { ResFaseII } from 'src/supervision/sisconcre/solicitudes/enums/evaluacio
 @InputType()
 export class CreateEvaluacionFase2Input {
 
-  @Field()
-  @IsString()
-  R07P_num: string;
+  // @Field()
+  // @IsString()
+  // R07P_num: string;
   
   @Field()
   @IsString()

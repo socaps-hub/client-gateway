@@ -1,12 +1,15 @@
 import { ObjectType, Field, ID, Int } from '@nestjs/graphql';
-import { Calificativo, Resolucion } from '../../enums/evaluacion.enum';
-import { Prestamo } from 'src/supervision/sisconcre/solicitudes/entities/solicitud.entity';
+import { Prestamo } from '../solicitud.entity';
 import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
+import { Calificativo, Resolucion } from '../../enums/evaluacion.enum';
 
 @ObjectType()
 export class EvaluacionResumenFase1 {
   @Field(() => ID)
-  R06P_num: string;
+  R06Id: string;
+
+  @Field(() => String)
+  R06P_id: string;
 
   @Field(() => Int)
   R06Ha: number;

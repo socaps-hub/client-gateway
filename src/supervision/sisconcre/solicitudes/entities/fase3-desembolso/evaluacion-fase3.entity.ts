@@ -1,4 +1,5 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
+
 import { ResFaseIII } from '../../enums/evaluacion-fase3.enum';
 import { Elemento } from 'src/supervision/elementos/entities/elemento.entity';
 import { Prestamo } from '../solicitud.entity';
@@ -9,16 +10,16 @@ export class EvaluacionFase3 {
   @Field(() => ID)
   R09Id: string;
 
-  @Field()
-  R09P_num: string;
+  @Field(() => String)
+  R09P_id: string;
 
-  @Field()
+  @Field(() => String)
   R09E_id: string;
 
   @Field(() => ResFaseIII)
   R09Res: ResFaseIII;
 
-  @Field()
+  @Field(() => String)
   R09Ev_en: string;
 
   // Relaciones

@@ -1,11 +1,6 @@
 import { ObjectType, Field, ID, Float } from '@nestjs/graphql';
 import { GraphQLISODateTime } from '@nestjs/graphql';
 
-import { Categoria } from 'src/configuracion/categorias/entities/categoria.entity';
-import { Cooperativa } from 'src/configuracion/cooperativas/entities/cooperativa.entity';
-import { Producto } from 'src/configuracion/productos/entities/producto.entity';
-import { Sucursal } from 'src/configuracion/sucursales/entities/sucursal.entity';
-import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 import { EvaluacionFase1 } from './fase1-levantamiento/evaluacion-fase1.entity';
 import { EvaluacionResumenFase1 } from './fase1-levantamiento/resumen-fase1.entity';
 import { EvaluacionFase2 } from './fase2-seguimiento/evaluacion-fase2.entity';
@@ -14,11 +9,19 @@ import { EvaluacionFase3 } from './fase3-desembolso/evaluacion-fase3.entity';
 import { EvaluacionResumenFase3 } from './fase3-desembolso/resumen-fase3.entity';
 import { EvaluacionFase4 } from './fase4-seguimiento-global/evaluacion-fase4.entity';
 import { EvaluacionResumenFase4 } from './fase4-seguimiento-global/resumen-fase4.entity';
+import { Categoria } from 'src/configuracion/categorias/entities/categoria.entity';
+import { Cooperativa } from 'src/configuracion/cooperativas/entities/cooperativa.entity';
+import { Producto } from 'src/configuracion/productos/entities/producto.entity';
+import { Sucursal } from 'src/configuracion/sucursales/entities/sucursal.entity';
+import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 
 @ObjectType()
 export class Prestamo {
 
   @Field(() => ID)
+  R01Id: string;
+
+  @Field(() => String)
   R01NUM: string;
   
   @Field(() => ID)
