@@ -50,8 +50,8 @@ export class ReportesService {
     }
 
     // * BALANCE
-    getBalance(user: Usuario) {
-        return this.client.send(reportesSisconcapPatterns.GET_BALANCE, { user });
+    getBalance(input: FiltroFechasInput, user: Usuario) {
+        return this.client.send(reportesSisconcapPatterns.GET_BALANCE, { input, user });
     }
 
 }

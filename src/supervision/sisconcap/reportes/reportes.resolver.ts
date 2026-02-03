@@ -83,9 +83,10 @@ export class ReportesResolver {
   // * BALANCE
   @Query(() => BalanceResponse, { name: 'sisconcapBalance' })
   async balance(
+    @Args('input') input: FiltroFechasInput,
     @GetUser({type: 'graphql'}) user: Usuario,
   ) {
-    return this.reportesService.getBalance(user);
+    return this.reportesService.getBalance(input, user);
   }
 
 }
