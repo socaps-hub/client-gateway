@@ -12,6 +12,7 @@ import { ConfiguracionModule } from './configuracion/configuracion.module';
 import { HealthCheckModule } from './health-check/health-check.module';
 import { ExcelModule } from './common/excel/excel.module';
 import { AwsModule } from './common/aws/aws.module';
+import { ActivityLogModule } from './activity-log/activity-log.module';
 
 @Module({
   imports: [
@@ -42,6 +43,8 @@ import { AwsModule } from './common/aws/aws.module';
     ExcelModule,
 
     AwsModule,
+
+    ActivityLogModule,
   ],
   controllers: [],
   providers: [],
