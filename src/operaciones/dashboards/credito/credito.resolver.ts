@@ -7,6 +7,8 @@ import { CreditoColocacionTotalOutput } from './dto/outputs/credito-colocacion-t
 import { CreditoColocacionTotalInput } from './dto/inputs/credito-colocacion-total.input';
 import { CreditoMedicionAnualOutput } from './dto/outputs/credito-medicion-anual.output';
 import { CreditoMedicionAnualInput } from './dto/inputs/credito-medicion-anual.input';
+import { CreditoMedicionMensualOutput } from './dto/outputs/credito-medicion-mensual.output';
+import { CreditoMedicionMensualInput } from './dto/inputs/credito-medicion-mensual.input';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -30,5 +32,15 @@ export class CreditoResolver {
     input: CreditoMedicionAnualInput,
   ) {
     return this._creditoService.getMedicionAnual(input);
+  }
+
+  @Query(() => CreditoMedicionMensualOutput, {
+    name: 'creditoMedicionMensual',
+  })
+  public getMedicionMensual(
+    @Args('input')
+    input: CreditoMedicionMensualInput,
+  ) {
+    return this._creditoService.getMedicionMensual(input);
   }
 }
