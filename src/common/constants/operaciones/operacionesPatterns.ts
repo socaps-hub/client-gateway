@@ -5,4 +5,5 @@ export const operacionesPatterns = {
   UPLOAD_METAS_COLOCACION: 'operaciones.credito.metas.upload',
   GET_CONTROLES_METAS: 'operaciones.metas.getControles',
   GET_DETALLE_META: 'operaciones.metas.getDetalle',
+  GET_MEDICION_ANUAL: 'operaciones.credito.getMedicionAnual',
 };
