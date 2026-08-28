@@ -8,6 +8,8 @@ import { CreditoMedicionAnualInput } from './dto/inputs/credito-medicion-anual.i
 import { CreditoMedicionAnualOutput } from './dto/outputs/credito-medicion-anual.output';
 import { CreditoMedicionMensualInput } from './dto/inputs/credito-medicion-mensual.input';
 import { CreditoMedicionMensualOutput } from './dto/outputs/credito-medicion-mensual.output';
+import { CreditoMedicionTrimestralInput } from './dto/inputs/credito-medicion-trimestral.input';
+import { CreditoMedicionTrimestralOutput } from './dto/outputs/credito-medicion-trimestral.output';
 
 @Injectable()
 export class CreditoService {
@@ -31,6 +33,15 @@ export class CreditoService {
   ) {
     return this._client.send<CreditoMedicionMensualOutput>(
       operacionesPatterns.GET_MEDICION_MENSUAL,
+      input,
+    );
+  }
+
+  public getMedicionTrimestral(
+    input: CreditoMedicionTrimestralInput,
+  ) {
+    return this._client.send<CreditoMedicionTrimestralOutput>(
+      operacionesPatterns.GET_MEDICION_TRIMESTRAL,
       input,
     );
   }

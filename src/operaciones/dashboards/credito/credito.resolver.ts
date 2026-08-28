@@ -9,6 +9,8 @@ import { CreditoMedicionAnualOutput } from './dto/outputs/credito-medicion-anual
 import { CreditoMedicionAnualInput } from './dto/inputs/credito-medicion-anual.input';
 import { CreditoMedicionMensualOutput } from './dto/outputs/credito-medicion-mensual.output';
 import { CreditoMedicionMensualInput } from './dto/inputs/credito-medicion-mensual.input';
+import { CreditoMedicionTrimestralOutput } from './dto/outputs/credito-medicion-trimestral.output';
+import { CreditoMedicionTrimestralInput } from './dto/inputs/credito-medicion-trimestral.input';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -42,5 +44,15 @@ export class CreditoResolver {
     input: CreditoMedicionMensualInput,
   ) {
     return this._creditoService.getMedicionMensual(input);
+  }
+
+  @Query(() => CreditoMedicionTrimestralOutput, {
+    name: 'creditoMedicionTrimestral',
+  })
+  public getMedicionTrimestral(
+    @Args('input')
+    input: CreditoMedicionTrimestralInput,
+  ) {
+    return this._creditoService.getMedicionTrimestral(input);
   }
 }

@@ -7,4 +7,5 @@ export const operacionesPatterns = {
   GET_DETALLE_META: 'operaciones.metas.getDetalle',
   GET_MEDICION_ANUAL: 'operaciones.credito.getMedicionAnual',
   GET_MEDICION_MENSUAL: 'operaciones.credito.getMedicionMensual',
+  GET_MEDICION_TRIMESTRAL: 'operaciones.credito.getMedicionTrimestral',
 };
