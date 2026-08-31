@@ -15,6 +15,10 @@ import { CreditoFortalezaColocacionOutput } from './dto/outputs/credito-fortalez
 import { CreditoPosicionLogroMetaInput } from './dto/inputs/credito-posicion-logro-meta.input';
 import { Observable } from 'rxjs';
 import { CreditoPosicionLogroMetaOutput } from './dto/outputs/credito-posicion-logro-meta.output';
+import { CreditoCumplimientoMensualColocacionInput } from './dto/inputs/credito-cumplimiento-mensual-colocacion.input';
+import {
+  CreditoCumplimientoMensualColocacionOutput
+} from './dto/outputs/credito-cumplimiento-mensual-colocacion.output';
 
 @Injectable()
 export class CreditoService {
@@ -54,12 +58,19 @@ export class CreditoService {
     );
   }
 
-  public getPosicionLogroMeta(
-    input: CreditoPosicionLogroMetaInput,
-  ) {
+  public getPosicionLogroMeta(input: CreditoPosicionLogroMetaInput) {
     return this._client.send<
       CreditoPosicionLogroMetaOutput,
       CreditoPosicionLogroMetaInput
     >(operacionesPatterns.GET_POSICION_LOGRO_META, input);
+  }
+
+  public getCumplimientoMensualColocacion(
+    input: CreditoCumplimientoMensualColocacionInput,
+  ) {
+    return this._client.send<
+      CreditoCumplimientoMensualColocacionOutput,
+      CreditoCumplimientoMensualColocacionInput
+    >(operacionesPatterns.GET_CUMPLIMIENTO_MENSUAL_COLOCACION, input);
   }
 }

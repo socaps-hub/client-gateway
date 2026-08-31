@@ -16,6 +16,10 @@ import { CreditoFortalezaColocacionInput } from './dto/inputs/credito-fortaleza-
 import { CreditoPosicionLogroMetaOutput } from './dto/outputs/credito-posicion-logro-meta.output';
 import { Observable } from 'rxjs';
 import { CreditoPosicionLogroMetaInput } from './dto/inputs/credito-posicion-logro-meta.input';
+import {
+  CreditoCumplimientoMensualColocacionOutput
+} from './dto/outputs/credito-cumplimiento-mensual-colocacion.output';
+import { CreditoCumplimientoMensualColocacionInput } from './dto/inputs/credito-cumplimiento-mensual-colocacion.input';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -79,5 +83,15 @@ export class CreditoResolver {
     input: CreditoPosicionLogroMetaInput,
   ): Observable<CreditoPosicionLogroMetaOutput> {
     return this._creditoService.getPosicionLogroMeta(input);
+  }
+
+  @Query(() => CreditoCumplimientoMensualColocacionOutput, {
+    name: 'creditoCumplimientoMensualColocacion',
+  })
+  public getCumplimientoMensualColocacion(
+    @Args('input')
+    input: CreditoCumplimientoMensualColocacionInput,
+  ): Observable<CreditoCumplimientoMensualColocacionOutput> {
+    return this._creditoService.getCumplimientoMensualColocacion(input);
   }
 }
