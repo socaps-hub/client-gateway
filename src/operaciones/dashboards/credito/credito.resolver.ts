@@ -11,6 +11,8 @@ import { CreditoMedicionMensualOutput } from './dto/outputs/credito-medicion-men
 import { CreditoMedicionMensualInput } from './dto/inputs/credito-medicion-mensual.input';
 import { CreditoMedicionTrimestralOutput } from './dto/outputs/credito-medicion-trimestral.output';
 import { CreditoMedicionTrimestralInput } from './dto/inputs/credito-medicion-trimestral.input';
+import { CreditoFortalezaColocacionOutput } from './dto/outputs/credito-fortaleza-colocacion.output';
+import { CreditoFortalezaColocacionInput } from './dto/inputs/credito-fortaleza-colocacion.input';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -54,5 +56,22 @@ export class CreditoResolver {
     input: CreditoMedicionTrimestralInput,
   ) {
     return this._creditoService.getMedicionTrimestral(input);
+  }
+
+  @Query(
+    () =>
+      CreditoFortalezaColocacionOutput,
+    {
+      name:
+        'creditoFortalezaColocacion',
+    },
+  )
+  public getFortalezaColocacion(
+    @Args('input')
+    input:
+    CreditoFortalezaColocacionInput,
+  ) {
+    return this._creditoService
+      .getFortalezaColocacion(input);
   }
 }

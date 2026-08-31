@@ -8,4 +8,5 @@ export const operacionesPatterns = {
   GET_MEDICION_ANUAL: 'operaciones.credito.getMedicionAnual',
   GET_MEDICION_MENSUAL: 'operaciones.credito.getMedicionMensual',
   GET_MEDICION_TRIMESTRAL: 'operaciones.credito.getMedicionTrimestral',
+  GET_FORTALEZA_COLOCACION: 'operaciones.credito.getFortalezaColocacion',
 };
