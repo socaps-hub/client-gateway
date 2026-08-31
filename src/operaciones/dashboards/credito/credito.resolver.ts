@@ -13,6 +13,9 @@ import { CreditoMedicionTrimestralOutput } from './dto/outputs/credito-medicion-
 import { CreditoMedicionTrimestralInput } from './dto/inputs/credito-medicion-trimestral.input';
 import { CreditoFortalezaColocacionOutput } from './dto/outputs/credito-fortaleza-colocacion.output';
 import { CreditoFortalezaColocacionInput } from './dto/inputs/credito-fortaleza-colocacion.input';
+import { CreditoPosicionLogroMetaOutput } from './dto/outputs/credito-posicion-logro-meta.output';
+import { Observable } from 'rxjs';
+import { CreditoPosicionLogroMetaInput } from './dto/inputs/credito-posicion-logro-meta.input';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -58,20 +61,23 @@ export class CreditoResolver {
     return this._creditoService.getMedicionTrimestral(input);
   }
 
-  @Query(
-    () =>
-      CreditoFortalezaColocacionOutput,
-    {
-      name:
-        'creditoFortalezaColocacion',
-    },
-  )
+  @Query(() => CreditoFortalezaColocacionOutput, {
+    name: 'creditoFortalezaColocacion',
+  })
   public getFortalezaColocacion(
     @Args('input')
-    input:
-    CreditoFortalezaColocacionInput,
+    input: CreditoFortalezaColocacionInput,
   ) {
-    return this._creditoService
-      .getFortalezaColocacion(input);
+    return this._creditoService.getFortalezaColocacion(input);
+  }
+
+  @Query(() => CreditoPosicionLogroMetaOutput, {
+    name: 'creditoPosicionLogroMeta',
+  })
+  public getPosicionLogroMeta(
+    @Args('input')
+    input: CreditoPosicionLogroMetaInput,
+  ): Observable<CreditoPosicionLogroMetaOutput> {
+    return this._creditoService.getPosicionLogroMeta(input);
   }
 }
