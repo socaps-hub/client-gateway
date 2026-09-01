@@ -12,4 +12,5 @@ export const operacionesPatterns = {
   GET_POSICION_LOGRO_META: 'operaciones.credito.getPosicionLogroMeta',
   GET_CUMPLIMIENTO_MENSUAL_COLOCACION:
     'operaciones.credito.getCumplimientoMensualColocacion',
+  GET_COMPORTAMIENTO_PRODUCTO: 'operaciones.credito.getComportamientoProducto',
 };

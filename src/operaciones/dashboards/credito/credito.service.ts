@@ -19,6 +19,8 @@ import { CreditoCumplimientoMensualColocacionInput } from './dto/inputs/credito-
 import {
   CreditoCumplimientoMensualColocacionOutput
 } from './dto/outputs/credito-cumplimiento-mensual-colocacion.output';
+import { CreditoComportamientoProductoInput } from './dto/inputs/credito-comportamiento-producto.input';
+import { CreditoComportamientoProductoOutput } from './dto/outputs/credito-comportamiento-producto.output';
 
 @Injectable()
 export class CreditoService {
@@ -72,5 +74,14 @@ export class CreditoService {
       CreditoCumplimientoMensualColocacionOutput,
       CreditoCumplimientoMensualColocacionInput
     >(operacionesPatterns.GET_CUMPLIMIENTO_MENSUAL_COLOCACION, input);
+  }
+
+  public getComportamientoProducto(
+    input: CreditoComportamientoProductoInput,
+  ) {
+    return this._client.send<
+      CreditoComportamientoProductoOutput,
+      CreditoComportamientoProductoInput
+    >( operacionesPatterns.GET_COMPORTAMIENTO_PRODUCTO, input );
   }
 }

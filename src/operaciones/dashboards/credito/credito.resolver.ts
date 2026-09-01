@@ -1,5 +1,6 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
+import { Observable } from 'rxjs';
 
 import { CreditoService } from './credito.service';
 import { AuthGraphQLGuard } from '../../../auth/guards/auth-graphql.guard';
@@ -14,12 +15,13 @@ import { CreditoMedicionTrimestralInput } from './dto/inputs/credito-medicion-tr
 import { CreditoFortalezaColocacionOutput } from './dto/outputs/credito-fortaleza-colocacion.output';
 import { CreditoFortalezaColocacionInput } from './dto/inputs/credito-fortaleza-colocacion.input';
 import { CreditoPosicionLogroMetaOutput } from './dto/outputs/credito-posicion-logro-meta.output';
-import { Observable } from 'rxjs';
 import { CreditoPosicionLogroMetaInput } from './dto/inputs/credito-posicion-logro-meta.input';
 import {
   CreditoCumplimientoMensualColocacionOutput
 } from './dto/outputs/credito-cumplimiento-mensual-colocacion.output';
 import { CreditoCumplimientoMensualColocacionInput } from './dto/inputs/credito-cumplimiento-mensual-colocacion.input';
+import { CreditoComportamientoProductoOutput } from './dto/outputs/credito-comportamiento-producto.output';
+import { CreditoComportamientoProductoInput } from './dto/inputs/credito-comportamiento-producto.input';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -93,5 +95,15 @@ export class CreditoResolver {
     input: CreditoCumplimientoMensualColocacionInput,
   ): Observable<CreditoCumplimientoMensualColocacionOutput> {
     return this._creditoService.getCumplimientoMensualColocacion(input);
+  }
+
+  @Query(() => CreditoComportamientoProductoOutput, {
+    name: 'creditoComportamientoProducto',
+  })
+  public getComportamientoProducto(
+    @Args('input')
+    input: CreditoComportamientoProductoInput,
+  ): Observable<CreditoComportamientoProductoOutput> {
+    return this._creditoService.getComportamientoProducto(input);
   }
 }
