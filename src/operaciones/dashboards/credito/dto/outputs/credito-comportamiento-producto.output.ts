@@ -34,6 +34,9 @@ export class CreditoComportamientoProductoOutput {
   oficinaNombre: string;
 
   @Field(() => String)
+  productoCategoria: string;
+
+  @Field(() => String)
   productoNombre: string;
 
   @Field(() => Int)
