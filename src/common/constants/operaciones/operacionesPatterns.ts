@@ -15,4 +15,5 @@ export const operacionesPatterns = {
   GET_COMPORTAMIENTO_PRODUCTO: 'operaciones.credito.getComportamientoProducto',
   GET_COMPORTAMIENTO_CARTERA: 'operaciones.credito.getComportamientoCartera',
   GET_COMPORTAMIENTO_PRODUCTO_CARTERA: 'operaciones.credito.getComportamientoProductoCartera',
+  GET_COMPOSICION_CARTERA: 'operaciones.credito.getComposicionCartera',
 };

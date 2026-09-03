@@ -24,6 +24,8 @@ import { CreditoComportamientoProductoOutput } from './dto/outputs/credito-compo
 import { CreditoComportamientoProductoInput } from './dto/inputs/credito-comportamiento-producto.input';
 import { CreditoComportamientoCarteraOutput } from './dto/outputs/credito-comportamiento-cartera.output';
 import { CreditoComportamientoCarteraInput } from './dto/inputs/credito-comportamiento-cartera.input';
+import { CreditoComposicionCarteraOutput } from './dto/outputs/credito-composicion-cartera.output';
+import { CreditoComposicionCarteraInput } from './dto/inputs/credito-composicion-cartera.input';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -110,7 +112,7 @@ export class CreditoResolver {
   }
 
   //   ====================================
-  //   COMPORTAMIENTO DE LA CARTERA
+  //   CALIDAD DE LA CARTERA
   //   ====================================
   @Query(() => CreditoComportamientoCarteraOutput, {
     name: 'creditoComportamientoCartera',
@@ -119,5 +121,14 @@ export class CreditoResolver {
     @Args('input') input: CreditoComportamientoCarteraInput,
   ): Observable<CreditoComportamientoCarteraOutput> {
     return this._creditoService.getComportamientoCartera(input);
+  }
+
+  @Query(() => CreditoComposicionCarteraOutput, {
+    name: 'creditoComposicionCartera',
+  })
+  public getComposicionCartera(
+    @Args('input') input: CreditoComposicionCarteraInput,
+  ): Observable<CreditoComposicionCarteraOutput> {
+    return this._creditoService.getComposicionCartera(input);
   }
 }

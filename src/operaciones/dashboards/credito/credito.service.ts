@@ -23,6 +23,8 @@ import { CreditoComportamientoProductoInput } from './dto/inputs/credito-comport
 import { CreditoComportamientoProductoOutput } from './dto/outputs/credito-comportamiento-producto.output';
 import { CreditoComportamientoCarteraInput } from './dto/inputs/credito-comportamiento-cartera.input';
 import { CreditoComportamientoCarteraOutput } from './dto/outputs/credito-comportamiento-cartera.output';
+import { CreditoComposicionCarteraInput } from './dto/inputs/credito-composicion-cartera.input';
+import { CreditoComposicionCarteraOutput } from './dto/outputs/credito-composicion-cartera.output';
 
 @Injectable()
 export class CreditoService {
@@ -86,12 +88,18 @@ export class CreditoService {
   }
 
   //   ========================================
-  //   COMPORTAMIENTO DE LA CARTERA
+  //   CALIDAD DE LA CARTERA
   //   ========================================
   public getComportamientoCartera(input: CreditoComportamientoCarteraInput) {
     return this._client.send<
       CreditoComportamientoCarteraOutput,
       CreditoComportamientoCarteraInput
     >(operacionesPatterns.GET_COMPORTAMIENTO_CARTERA, input);
+  }
+
+  public getComposicionCartera(
+    input: CreditoComposicionCarteraInput,
+  ) {
+    return this._client.send<CreditoComposicionCarteraOutput, CreditoComposicionCarteraInput>( operacionesPatterns.GET_COMPOSICION_CARTERA, input );
   }
 }
