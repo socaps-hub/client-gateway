@@ -13,4 +13,6 @@ export const operacionesPatterns = {
   GET_CUMPLIMIENTO_MENSUAL_COLOCACION:
     'operaciones.credito.getCumplimientoMensualColocacion',
   GET_COMPORTAMIENTO_PRODUCTO: 'operaciones.credito.getComportamientoProducto',
+  GET_COMPORTAMIENTO_CARTERA: 'operaciones.credito.getComportamientoCartera',
+  GET_COMPORTAMIENTO_PRODUCTO_CARTERA: 'operaciones.credito.getComportamientoProductoCartera',
 };

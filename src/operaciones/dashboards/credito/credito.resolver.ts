@@ -22,6 +22,8 @@ import {
 import { CreditoCumplimientoMensualColocacionInput } from './dto/inputs/credito-cumplimiento-mensual-colocacion.input';
 import { CreditoComportamientoProductoOutput } from './dto/outputs/credito-comportamiento-producto.output';
 import { CreditoComportamientoProductoInput } from './dto/inputs/credito-comportamiento-producto.input';
+import { CreditoComportamientoCarteraOutput } from './dto/outputs/credito-comportamiento-cartera.output';
+import { CreditoComportamientoCarteraInput } from './dto/inputs/credito-comportamiento-cartera.input';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -105,5 +107,17 @@ export class CreditoResolver {
     input: CreditoComportamientoProductoInput,
   ): Observable<CreditoComportamientoProductoOutput> {
     return this._creditoService.getComportamientoProducto(input);
+  }
+
+  //   ====================================
+  //   COMPORTAMIENTO DE LA CARTERA
+  //   ====================================
+  @Query(() => CreditoComportamientoCarteraOutput, {
+    name: 'creditoComportamientoCartera',
+  })
+  public getComportamientoCartera(
+    @Args('input') input: CreditoComportamientoCarteraInput,
+  ): Observable<CreditoComportamientoCarteraOutput> {
+    return this._creditoService.getComportamientoCartera(input);
   }
 }

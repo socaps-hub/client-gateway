@@ -21,6 +21,8 @@ import {
 } from './dto/outputs/credito-cumplimiento-mensual-colocacion.output';
 import { CreditoComportamientoProductoInput } from './dto/inputs/credito-comportamiento-producto.input';
 import { CreditoComportamientoProductoOutput } from './dto/outputs/credito-comportamiento-producto.output';
+import { CreditoComportamientoCarteraInput } from './dto/inputs/credito-comportamiento-cartera.input';
+import { CreditoComportamientoCarteraOutput } from './dto/outputs/credito-comportamiento-cartera.output';
 
 @Injectable()
 export class CreditoService {
@@ -76,12 +78,20 @@ export class CreditoService {
     >(operacionesPatterns.GET_CUMPLIMIENTO_MENSUAL_COLOCACION, input);
   }
 
-  public getComportamientoProducto(
-    input: CreditoComportamientoProductoInput,
-  ) {
+  public getComportamientoProducto(input: CreditoComportamientoProductoInput) {
     return this._client.send<
       CreditoComportamientoProductoOutput,
       CreditoComportamientoProductoInput
-    >( operacionesPatterns.GET_COMPORTAMIENTO_PRODUCTO, input );
+    >(operacionesPatterns.GET_COMPORTAMIENTO_PRODUCTO, input);
+  }
+
+  //   ========================================
+  //   COMPORTAMIENTO DE LA CARTERA
+  //   ========================================
+  public getComportamientoCartera(input: CreditoComportamientoCarteraInput) {
+    return this._client.send<
+      CreditoComportamientoCarteraOutput,
+      CreditoComportamientoCarteraInput
+    >(operacionesPatterns.GET_COMPORTAMIENTO_CARTERA, input);
   }
 }
