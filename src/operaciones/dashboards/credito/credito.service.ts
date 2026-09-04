@@ -25,6 +25,8 @@ import { CreditoComportamientoCarteraInput } from './dto/inputs/credito-comporta
 import { CreditoComportamientoCarteraOutput } from './dto/outputs/credito-comportamiento-cartera.output';
 import { CreditoComposicionCarteraInput } from './dto/inputs/credito-composicion-cartera.input';
 import { CreditoComposicionCarteraOutput } from './dto/outputs/credito-composicion-cartera.output';
+import { CreditoDiasAtrasoInput } from './dto/inputs/credito-dias-atraso.input';
+import { CreditoDiasAtrasoOutput } from './dto/outputs/credito-dias-atraso.output';
 
 @Injectable()
 export class CreditoService {
@@ -101,5 +103,9 @@ export class CreditoService {
     input: CreditoComposicionCarteraInput,
   ) {
     return this._client.send<CreditoComposicionCarteraOutput, CreditoComposicionCarteraInput>( operacionesPatterns.GET_COMPOSICION_CARTERA, input );
+  }
+
+  public getDiasAtraso( input: CreditoDiasAtrasoInput ) {
+    return this._client.send<CreditoDiasAtrasoOutput, CreditoDiasAtrasoInput>( operacionesPatterns.GET_DIAS_ATRASO, input );
   }
 }

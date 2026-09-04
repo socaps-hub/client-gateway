@@ -26,6 +26,8 @@ import { CreditoComportamientoCarteraOutput } from './dto/outputs/credito-compor
 import { CreditoComportamientoCarteraInput } from './dto/inputs/credito-comportamiento-cartera.input';
 import { CreditoComposicionCarteraOutput } from './dto/outputs/credito-composicion-cartera.output';
 import { CreditoComposicionCarteraInput } from './dto/inputs/credito-composicion-cartera.input';
+import { CreditoDiasAtrasoOutput } from './dto/outputs/credito-dias-atraso.output';
+import { CreditoDiasAtrasoInput } from './dto/inputs/credito-dias-atraso.input';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -130,5 +132,14 @@ export class CreditoResolver {
     @Args('input') input: CreditoComposicionCarteraInput,
   ): Observable<CreditoComposicionCarteraOutput> {
     return this._creditoService.getComposicionCartera(input);
+  }
+
+  @Query(() => CreditoDiasAtrasoOutput, {
+    name: 'creditoDiasAtraso',
+  })
+  public getDiasAtraso(
+    @Args('input') input: CreditoDiasAtrasoInput,
+  ): Observable<CreditoDiasAtrasoOutput> {
+    return this._creditoService.getDiasAtraso(input);
   }
 }
