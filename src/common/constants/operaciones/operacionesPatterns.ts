@@ -14,7 +14,9 @@ export const operacionesPatterns = {
     'operaciones.credito.getCumplimientoMensualColocacion',
   GET_COMPORTAMIENTO_PRODUCTO: 'operaciones.credito.getComportamientoProducto',
   GET_COMPORTAMIENTO_CARTERA: 'operaciones.credito.getComportamientoCartera',
-  GET_COMPORTAMIENTO_PRODUCTO_CARTERA: 'operaciones.credito.getComportamientoProductoCartera',
+  GET_COMPORTAMIENTO_PRODUCTO_CARTERA:
+    'operaciones.credito.getComportamientoProductoCartera',
   GET_COMPOSICION_CARTERA: 'operaciones.credito.getComposicionCartera',
   GET_DIAS_ATRASO: 'operaciones.credito.getDiasAtraso',
+  GET_AMORTIZACIONES_PACTADAS: 'operaciones.credito.getAmortizacionesPactadas',
 };
