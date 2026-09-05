@@ -14,6 +14,9 @@ export class CreditoAmortizacionesPactadasRangoOutput {
   @Field(() => Float)
   monto: number;
 
+  @Field(() => Float)
+  carteraBanda: number;
+
   @Field(() => Int)
   numeroPrestamos: number;
 
