@@ -1,29 +1,5 @@
-import { Field, InputType, Int } from '@nestjs/graphql';
-import { IsInt, IsOptional, IsString, IsUUID, Max, Min } from 'class-validator';
+import { InputType } from '@nestjs/graphql';
+import { CreditoCarteraSegmentoInput } from '../../common/dto/inputs/credito-cartera-segmento.input';
 
 @InputType()
-export class CreditoDiasAtrasoInput {
-  @Field(() => String)
-  @IsUUID()
-  cooperativaId: string;
-
-  @Field(() => Int)
-  @IsInt()
-  @Min(1)
-  @Max(12)
-  periodoMes: number;
-
-  @Field(() => Int)
-  @IsInt()
-  periodoAnio: number;
-
-  @Field(() => String, { nullable: true })
-  @IsOptional()
-  @IsString()
-  oficina?: string;
-
-  @Field(() => String, { nullable: true })
-  @IsOptional()
-  @IsUUID()
-  productoId?: string;
-}
+export class CreditoDiasAtrasoInput extends CreditoCarteraSegmentoInput {}

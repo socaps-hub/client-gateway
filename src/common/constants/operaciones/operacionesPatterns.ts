@@ -19,4 +19,5 @@ export const operacionesPatterns = {
   GET_COMPOSICION_CARTERA: 'operaciones.credito.getComposicionCartera',
   GET_DIAS_ATRASO: 'operaciones.credito.getDiasAtraso',
   GET_AMORTIZACIONES_PACTADAS: 'operaciones.credito.getAmortizacionesPactadas',
+  GET_AMORTIZACIONES_VENCIDAS: 'operaciones.credito.getAmortizacionesVencidas',
 };

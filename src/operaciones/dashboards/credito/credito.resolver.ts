@@ -30,6 +30,8 @@ import { CreditoDiasAtrasoOutput } from './dto/outputs/credito-dias-atraso.outpu
 import { CreditoDiasAtrasoInput } from './dto/inputs/credito-dias-atraso.input';
 import { CreditoAmortizacionesPactadasOutput } from './dto/outputs/credito-amortizaciones-pactadas.output';
 import { CreditoAmortizacionesPactadasInput } from './dto/inputs/credito-amortizaciones-pactadas.input';
+import { CreditoAmortizacionesVencidasOutput } from './dto/outputs/credito-amortizaciones-vencidas.output';
+import { CreditoAmortizacionesVencidasInput } from './dto/inputs/credito-amortizaciones-vencidas.input';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -152,5 +154,14 @@ export class CreditoResolver {
     @Args('input') input: CreditoAmortizacionesPactadasInput,
   ): Observable<CreditoAmortizacionesPactadasOutput> {
     return this._creditoService.getAmortizacionesPactadas(input);
+  }
+
+  @Query(() => CreditoAmortizacionesVencidasOutput, {
+    name: 'creditoAmortizacionesVencidas',
+  })
+  public getAmortizacionesVencidas(
+    @Args('input') input: CreditoAmortizacionesVencidasInput,
+  ): Observable<CreditoAmortizacionesVencidasOutput> {
+    return this._creditoService.getAmortizacionesVencidas(input);
   }
 }

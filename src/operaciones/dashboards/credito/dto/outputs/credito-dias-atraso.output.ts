@@ -1,58 +1,14 @@
-import { Field, Float, Int, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
+import {
+  CreditoCarteraDistribucionOutput,
+  CreditoCarteraDistribucionRangoOutput,
+} from '../../common/dto/outputs/credito-cartera-distribucion.output';
 
 @ObjectType()
-export class CreditoDiasAtrasoRangoOutput {
-  @Field(() => String)
-  rango: string;
-
-  @Field(() => Int)
-  desde: number;
-
-  @Field(() => Int, { nullable: true })
-  hasta: number | null;
-
-  @Field(() => Float)
-  monto: number;
-
-  @Field(() => Float)
-  carteraBanda: number;
-
-  @Field(() => Int)
-  numeroPrestamos: number;
-
-  @Field(() => Float)
-  porcentaje: number;
-}
+export class CreditoDiasAtrasoRangoOutput extends CreditoCarteraDistribucionRangoOutput {}
 
 @ObjectType()
-export class CreditoDiasAtrasoOutput {
-  @Field(() => String, { nullable: true })
-  oficinaNumero: string | null;
-
-  @Field(() => String)
-  oficinaNombre: string;
-
-  @Field(() => String, { nullable: true })
-  productoId: string | null;
-
-  @Field(() => String)
-  productoNombre: string;
-
-  @Field(() => String, { nullable: true })
-  productoCategoria: string | null;
-
-  @Field(() => Int)
-  periodoMes: number;
-
-  @Field(() => Int)
-  periodoAnio: number;
-
-  @Field(() => Float)
-  totalCartera: number;
-
-  @Field(() => Int)
-  numeroPrestamos: number;
-
+export class CreditoDiasAtrasoOutput extends CreditoCarteraDistribucionOutput {
   @Field(() => [CreditoDiasAtrasoRangoOutput])
   rangos: CreditoDiasAtrasoRangoOutput[];
 }

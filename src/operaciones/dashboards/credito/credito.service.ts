@@ -29,6 +29,8 @@ import { CreditoDiasAtrasoInput } from './dto/inputs/credito-dias-atraso.input';
 import { CreditoDiasAtrasoOutput } from './dto/outputs/credito-dias-atraso.output';
 import { CreditoAmortizacionesPactadasInput } from './dto/inputs/credito-amortizaciones-pactadas.input';
 import { CreditoAmortizacionesPactadasOutput } from './dto/outputs/credito-amortizaciones-pactadas.output';
+import { CreditoAmortizacionesVencidasInput } from './dto/inputs/credito-amortizaciones-vencidas.input';
+import { CreditoAmortizacionesVencidasOutput } from './dto/outputs/credito-amortizaciones-vencidas.output';
 
 @Injectable()
 export class CreditoService {
@@ -114,6 +116,13 @@ export class CreditoService {
   public getAmortizacionesPactadas( input: CreditoAmortizacionesPactadasInput ) {
     return this._client.send<CreditoAmortizacionesPactadasOutput, CreditoAmortizacionesPactadasInput>(
       operacionesPatterns.GET_AMORTIZACIONES_PACTADAS,
+      input,
+    );
+  }
+
+  public getAmortizacionesVencidas( input: CreditoAmortizacionesVencidasInput ) {
+    return this._client.send<CreditoAmortizacionesVencidasOutput, CreditoAmortizacionesVencidasInput>(
+      operacionesPatterns.GET_AMORTIZACIONES_VENCIDAS,
       input,
     );
   }
