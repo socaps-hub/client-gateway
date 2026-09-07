@@ -21,4 +21,5 @@ export const operacionesPatterns = {
   GET_AMORTIZACIONES_PACTADAS: 'operaciones.credito.getAmortizacionesPactadas',
   GET_AMORTIZACIONES_VENCIDAS: 'operaciones.credito.getAmortizacionesVencidas',
   GET_TIPO_AUTORIZACION: 'operaciones.credito.getTipoAutorizacion',
+  GET_SITUACION_LEGAL: 'operaciones.credito.getSituacionLegal',
 };

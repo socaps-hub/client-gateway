@@ -1,6 +1,6 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 
 import { CreditoService } from './credito.service';
 import { AuthGraphQLGuard } from '../../../auth/guards/auth-graphql.guard';
@@ -34,6 +34,8 @@ import { CreditoAmortizacionesVencidasOutput } from './dto/outputs/credito-amort
 import { CreditoAmortizacionesVencidasInput } from './dto/inputs/credito-amortizaciones-vencidas.input';
 import { CreditoTipoAutorizacionOutput } from './dto/outputs/credito-tipo-autorizacion.output';
 import { CreditoTipoAutorizacionInput } from './dto/inputs/credito-tipo-autorizacion.input';
+import { CreditoSituacionLegalOutput } from './dto/outputs/credito-situacion-legal.output';
+import { CreditoSituacionLegalInput } from './dto/inputs/credito-situacion-legal.input';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -174,5 +176,14 @@ export class CreditoResolver {
     @Args('input') input: CreditoTipoAutorizacionInput,
   ): Observable<CreditoTipoAutorizacionOutput> {
     return this._creditoService.getTipoAutorizacion(input);
+  }
+
+  @Query(() => CreditoSituacionLegalOutput, {
+    name: 'creditoSituacionLegal',
+  })
+  public async getSituacionLegal(
+    @Args('input') input: CreditoSituacionLegalInput,
+  ): Promise<CreditoSituacionLegalOutput> {
+    return firstValueFrom(this._creditoService.getSituacionLegal(input));
   }
 }
