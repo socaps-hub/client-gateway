@@ -32,6 +32,8 @@ import { CreditoAmortizacionesPactadasOutput } from './dto/outputs/credito-amort
 import { CreditoAmortizacionesPactadasInput } from './dto/inputs/credito-amortizaciones-pactadas.input';
 import { CreditoAmortizacionesVencidasOutput } from './dto/outputs/credito-amortizaciones-vencidas.output';
 import { CreditoAmortizacionesVencidasInput } from './dto/inputs/credito-amortizaciones-vencidas.input';
+import { CreditoTipoAutorizacionOutput } from './dto/outputs/credito-tipo-autorizacion.output';
+import { CreditoTipoAutorizacionInput } from './dto/inputs/credito-tipo-autorizacion.input';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -163,5 +165,14 @@ export class CreditoResolver {
     @Args('input') input: CreditoAmortizacionesVencidasInput,
   ): Observable<CreditoAmortizacionesVencidasOutput> {
     return this._creditoService.getAmortizacionesVencidas(input);
+  }
+
+  @Query(() => CreditoTipoAutorizacionOutput, {
+    name: 'creditoTipoAutorizacion',
+  })
+  public getTipoAutorizacion(
+    @Args('input') input: CreditoTipoAutorizacionInput,
+  ): Observable<CreditoTipoAutorizacionOutput> {
+    return this._creditoService.getTipoAutorizacion(input);
   }
 }
