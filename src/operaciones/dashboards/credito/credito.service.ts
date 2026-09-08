@@ -35,6 +35,8 @@ import { CreditoTipoAutorizacionInput } from './dto/inputs/credito-tipo-autoriza
 import { CreditoTipoAutorizacionOutput } from './dto/outputs/credito-tipo-autorizacion.output';
 import { CreditoSituacionLegalInput } from './dto/inputs/credito-situacion-legal.input';
 import { CreditoSituacionLegalOutput } from './dto/outputs/credito-situacion-legal.output';
+import { CreditoTraspasosCarteraVencidaInput } from './dto/inputs/credito-traspasos-cartera-vencida.input';
+import { CreditoTraspasosCarteraVencidaOutput } from './dto/outputs/credito-traspasos-cartera-vencida.output';
 
 @Injectable()
 export class CreditoService {
@@ -139,8 +141,15 @@ export class CreditoService {
   }
 
   public getSituacionLegal( input: CreditoSituacionLegalInput ) {
-    return this._client.send<CreditoSituacionLegalOutput, CreditoSituacionLegalInput>(
-      operacionesPatterns.GET_SITUACION_LEGAL,
+    return this._client.send<
+      CreditoSituacionLegalOutput,
+      CreditoSituacionLegalInput
+    >(operacionesPatterns.GET_SITUACION_LEGAL, input);
+  }
+
+  public getTraspasosCarteraVencida( input: CreditoTraspasosCarteraVencidaInput ) {
+    return this._client.send<CreditoTraspasosCarteraVencidaOutput, CreditoTraspasosCarteraVencidaInput>(
+      operacionesPatterns.GET_TRASPASOS_CARTERA_VENCIDA,
       input,
     );
   }
