@@ -38,6 +38,12 @@ import { CreditoSituacionLegalOutput } from './dto/outputs/credito-situacion-leg
 import { CreditoSituacionLegalInput } from './dto/inputs/credito-situacion-legal.input';
 import { CreditoTraspasosCarteraVencidaOutput } from './dto/outputs/credito-traspasos-cartera-vencida.output';
 import { CreditoTraspasosCarteraVencidaInput } from './dto/inputs/credito-traspasos-cartera-vencida.input';
+import {
+  CreditoTraspasosCarteraVencidaDetalleOutput
+} from './dto/outputs/credito-traspasos-cartera-vencida-detalle.output';
+import {
+  CreditoTraspasosCarteraVencidaDetalleInput
+} from './dto/inputs/credito-traspasos-cartera-vencida-detalle.input';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -196,5 +202,14 @@ export class CreditoResolver {
     @Args('input') input: CreditoTraspasosCarteraVencidaInput,
   ): Observable<CreditoTraspasosCarteraVencidaOutput> {
     return this._creditoService.getTraspasosCarteraVencida(input);
+  }
+
+  @Query(() => CreditoTraspasosCarteraVencidaDetalleOutput, {
+    name: 'creditoTraspasosCarteraVencidaDetalle',
+  })
+  public getTraspasosCarteraVencidaDetalle(
+    @Args('input') input: CreditoTraspasosCarteraVencidaDetalleInput,
+  ): Observable<CreditoTraspasosCarteraVencidaDetalleOutput> {
+    return this._creditoService.getTraspasosCarteraVencidaDetalle(input);
   }
 }

@@ -23,4 +23,5 @@ export const operacionesPatterns = {
   GET_TIPO_AUTORIZACION: 'operaciones.credito.getTipoAutorizacion',
   GET_SITUACION_LEGAL: 'operaciones.credito.getSituacionLegal',
   GET_TRASPASOS_CARTERA_VENCIDA: 'operaciones.credito.getTraspasosCarteraVencida',
+  GET_TRASPASOS_CARTERA_VENCIDA_DETALLE: 'operaciones.credito.getTraspasosCarteraVencidaDetalle',
 };
