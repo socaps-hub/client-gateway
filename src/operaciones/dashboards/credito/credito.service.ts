@@ -13,7 +13,6 @@ import { CreditoMedicionTrimestralOutput } from './dto/outputs/credito-medicion-
 import { CreditoFortalezaColocacionInput } from './dto/inputs/credito-fortaleza-colocacion.input';
 import { CreditoFortalezaColocacionOutput } from './dto/outputs/credito-fortaleza-colocacion.output';
 import { CreditoPosicionLogroMetaInput } from './dto/inputs/credito-posicion-logro-meta.input';
-import { Observable } from 'rxjs';
 import { CreditoPosicionLogroMetaOutput } from './dto/outputs/credito-posicion-logro-meta.output';
 import { CreditoCumplimientoMensualColocacionInput } from './dto/inputs/credito-cumplimiento-mensual-colocacion.input';
 import {
@@ -43,6 +42,8 @@ import {
 import {
   CreditoTraspasosCarteraVencidaDetalleOutput
 } from './dto/outputs/credito-traspasos-cartera-vencida-detalle.output';
+import { CreditoRentabilidadInput } from './dto/inputs/credito-rentabilidad.input';
+import { CreditoRentabilidadOutput } from './dto/outputs/credito-rentabilidad.output';
 
 @Injectable()
 export class CreditoService {
@@ -161,6 +162,19 @@ export class CreditoService {
   }
 
   public getTraspasosCarteraVencidaDetalle( input: CreditoTraspasosCarteraVencidaDetalleInput ) {
-    return this._client.send<CreditoTraspasosCarteraVencidaDetalleOutput, CreditoTraspasosCarteraVencidaDetalleInput>(operacionesPatterns.GET_TRASPASOS_CARTERA_VENCIDA_DETALLE, input);
+    return this._client.send<
+      CreditoTraspasosCarteraVencidaDetalleOutput,
+      CreditoTraspasosCarteraVencidaDetalleInput
+    >(operacionesPatterns.GET_TRASPASOS_CARTERA_VENCIDA_DETALLE, input);
+  }
+
+  // =================================
+  // RENTABILIDAD
+  // =================================
+  public getRentabilidad( input: CreditoRentabilidadInput ) {
+    return this._client.send<CreditoRentabilidadOutput, CreditoRentabilidadInput>(
+      operacionesPatterns.GET_RENTABILIDAD,
+      input,
+    );
   }
 }

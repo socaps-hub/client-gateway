@@ -44,6 +44,8 @@ import {
 import {
   CreditoTraspasosCarteraVencidaDetalleInput
 } from './dto/inputs/credito-traspasos-cartera-vencida-detalle.input';
+import { CreditoRentabilidadOutput } from './dto/outputs/credito-rentabilidad.output';
+import { CreditoRentabilidadInput } from './dto/inputs/credito-rentabilidad.input';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -211,5 +213,17 @@ export class CreditoResolver {
     @Args('input') input: CreditoTraspasosCarteraVencidaDetalleInput,
   ): Observable<CreditoTraspasosCarteraVencidaDetalleOutput> {
     return this._creditoService.getTraspasosCarteraVencidaDetalle(input);
+  }
+
+  //   ===============================
+  //   RENTABILIDAD
+  //   ===============================
+  @Query(() => CreditoRentabilidadOutput, {
+    name: 'creditoRentabilidad',
+  })
+  public async getRentabilidad(
+    @Args('input') input: CreditoRentabilidadInput,
+  ): Promise<Observable<CreditoRentabilidadOutput>> {
+    return this._creditoService.getRentabilidad(input);
   }
 }

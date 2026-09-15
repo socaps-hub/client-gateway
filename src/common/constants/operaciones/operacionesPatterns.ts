@@ -2,7 +2,9 @@
 export const operacionesPatterns = {
   GET_COLOCACION_TOTAL_CREDITO:
     'operaciones.credito.getColocacionTotalDashboard',
+
   UPLOAD_METAS_COLOCACION: 'operaciones.credito.metas.upload',
+
   GET_CONTROLES_METAS: 'operaciones.metas.getControles',
   GET_DETALLE_META: 'operaciones.metas.getDetalle',
   GET_MEDICION_ANUAL: 'operaciones.credito.getMedicionAnual',
@@ -16,12 +18,23 @@ export const operacionesPatterns = {
   GET_COMPORTAMIENTO_CARTERA: 'operaciones.credito.getComportamientoCartera',
   GET_COMPORTAMIENTO_PRODUCTO_CARTERA:
     'operaciones.credito.getComportamientoProductoCartera',
+
   GET_COMPOSICION_CARTERA: 'operaciones.credito.getComposicionCartera',
   GET_DIAS_ATRASO: 'operaciones.credito.getDiasAtraso',
   GET_AMORTIZACIONES_PACTADAS: 'operaciones.credito.getAmortizacionesPactadas',
   GET_AMORTIZACIONES_VENCIDAS: 'operaciones.credito.getAmortizacionesVencidas',
   GET_TIPO_AUTORIZACION: 'operaciones.credito.getTipoAutorizacion',
   GET_SITUACION_LEGAL: 'operaciones.credito.getSituacionLegal',
-  GET_TRASPASOS_CARTERA_VENCIDA: 'operaciones.credito.getTraspasosCarteraVencida',
-  GET_TRASPASOS_CARTERA_VENCIDA_DETALLE: 'operaciones.credito.getTraspasosCarteraVencidaDetalle',
+  GET_TRASPASOS_CARTERA_VENCIDA:
+    'operaciones.credito.getTraspasosCarteraVencida',
+  GET_TRASPASOS_CARTERA_VENCIDA_DETALLE:
+    'operaciones.credito.getTraspasosCarteraVencidaDetalle',
+
+  GET_RENTABILIDAD: 'operaciones.credito.getRentabilidad',
+
+  CREATE_USUARIO_ALIAS: 'operaciones.usuarios-alias.createAlias',
+  GET_USUARIOS_ALIAS: 'operaciones.usuarios-alias.getAliases',
+  UPDATE_USUARIO_ALIAS: 'operaciones.usuarios-alias.updateAlias',
+  DELETE_USUARIO_ALIAS: 'operaciones.usuarios-alias.deleteAlias',
+  GET_USUARIOS_LOGICOS_CANDIDATOS: 'operaciones.usuarios-alias.getUsuariosLogicosCandidatos',
 };
