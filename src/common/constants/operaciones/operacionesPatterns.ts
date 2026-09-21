@@ -32,9 +32,32 @@ export const operacionesPatterns = {
 
   GET_RENTABILIDAD: 'operaciones.credito.getRentabilidad',
 
+  GET_PRODUCTIVIDAD_EJECUTIVOS_FILTROS:
+    'operaciones.credito.getProductividadEjecutivosFiltros',
+  GET_PRODUCTIVIDAD_OFICINA: 'operaciones.credito.getProductividadOficina',
+  GET_PRODUCTIVIDAD_EJECUTIVO: 'operaciones.credito.getProductividadEjecutivo',
+  GET_PRODUCTIVIDAD_GRAFICAS_EJECUTIVO:
+    'operaciones.credito.getProductividadGraficasEjecutivo',
+  GET_PRODUCTIVIDAD_TIPO_AUTORIZACION:
+    'operaciones.credito.getProductividadTipoAutorizacion',
+  GET_PRODUCTIVIDAD_TIPO_PAGO: 'operaciones.credito.getProductividadTipoPago',
+  GET_PRODUCTIVIDAD_TIPO_SOCIO: 'operaciones.credito.getProductividadTipoSocio',
+  GET_PRODUCTIVIDAD_CLASIFICACION:
+    'operaciones.credito.getProductividadClasificacion',
+  GET_PRODUCTIVIDAD_SITUACION: 'operaciones.credito.getProductividadSituacion',
+  GET_PRODUCTIVIDAD_COMPORTAMIENTO:
+    'operaciones.credito.getProductividadComportamiento',
+  GET_PRODUCTIVIDAD_RANKING_RESUMEN:
+    'operaciones.credito.getProductividadRankingResumen',
+  GET_PRODUCTIVIDAD_RANKING_MENSUAL:
+    'operaciones.credito.getProductividadRankingMensual',
+  GET_PRODUCTIVIDAD_RANKING_ACUMULADO:
+    'operaciones.credito.getProductividadRankingAcumulado',
+
   CREATE_USUARIO_ALIAS: 'operaciones.usuarios-alias.createAlias',
   GET_USUARIOS_ALIAS: 'operaciones.usuarios-alias.getAliases',
   UPDATE_USUARIO_ALIAS: 'operaciones.usuarios-alias.updateAlias',
   DELETE_USUARIO_ALIAS: 'operaciones.usuarios-alias.deleteAlias',
-  GET_USUARIOS_LOGICOS_CANDIDATOS: 'operaciones.usuarios-alias.getUsuariosLogicosCandidatos',
+  GET_USUARIOS_LOGICOS_CANDIDATOS:
+    'operaciones.usuarios-alias.getUsuariosLogicosCandidatos',
 };

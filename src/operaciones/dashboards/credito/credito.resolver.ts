@@ -46,6 +46,31 @@ import {
 } from './dto/inputs/credito-traspasos-cartera-vencida-detalle.input';
 import { CreditoRentabilidadOutput } from './dto/outputs/credito-rentabilidad.output';
 import { CreditoRentabilidadInput } from './dto/inputs/credito-rentabilidad.input';
+import { CreditoProductividadEjecutivosFiltrosOutput } from './dto/outputs/credito-productividad-ejecutivo-filtros.output';
+import {
+  CreditoProductividadEjecutivosFiltrosInput
+} from './dto/inputs/credito-productividad-ejecutivos-filtros.input';
+import { CreditoProductividadOficinaOutput } from './dto/outputs/credito-productividad-oficina.output';
+import { CreditoProductividadOficinaInput } from './dto/inputs/credito-productividad-oficina.input';
+import { CreditoProductividadEjecutivoOutput } from './dto/outputs/credito-productividad-ejecutivo.output';
+import { CreditoProductividadEjecutivoInput } from './dto/inputs/credito-productividad-ejecutivo.input';
+import {
+  CreditoProductividadGraficasEjecutivoOutput
+} from './dto/outputs/credito-productividad-graficas-ejecutivo.output';
+import {
+  CreditoProductividadTipoAutorizacionOutput
+} from './dto/outputs/credito-productividad-tipo-autorizacion.output';
+import { CreditoProductividadTipoPagoOutput } from './dto/outputs/credito-productividad-tipo-pago.output';
+import { CreditoProductividadTipoSocioOutput } from './dto/outputs/credito-productividad-tipo-socio.output';
+import { CreditoProductividadClasificacionOutput } from './dto/outputs/credito-productividad-clasificacion.output';
+import { CreditoProductividadSituacionOutput } from './dto/outputs/credito-productividad-situacion.output';
+import { CreditoProductividadComportamientoOutput } from './dto/outputs/credito-productividad-comportamiento.output';
+import { CreditoProductividadRankingResumenOutput } from './dto/inputs/credito-productividad-ranking-resumen.output';
+import { CreditoProductividadRankingMensualOutput } from './dto/inputs/credito-productividad-ranking-mensual.output';
+import { CreditoProductividadRankingPageInput } from './dto/inputs/credito-productividad-ranking-page.input';
+import {
+  CreditoProductividadRankingAcumuladoOutput
+} from './dto/inputs/credito-productividad-ranking-acumulado.output';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -225,5 +250,125 @@ export class CreditoResolver {
     @Args('input') input: CreditoRentabilidadInput,
   ): Promise<Observable<CreditoRentabilidadOutput>> {
     return this._creditoService.getRentabilidad(input);
+  }
+
+  //   ===============================
+  //   PRODUCTIVIDAD - EJECUTIVOS
+  //   ===============================
+  @Query(() => CreditoProductividadEjecutivosFiltrosOutput, {
+    name: 'creditoProductividadEjecutivosFiltros',
+  })
+  public getProductividadEjecutivosFiltros(
+    @Args('input') input: CreditoProductividadEjecutivosFiltrosInput,
+  ) {
+    return this._creditoService.getProductividadEjecutivosFiltros(input);
+  }
+
+  @Query(() => CreditoProductividadOficinaOutput, {
+    name: 'creditoProductividadOficina',
+  })
+  public getProductividadOficina(
+    @Args('input') input: CreditoProductividadOficinaInput,
+  ) {
+    return this._creditoService.getProductividadOficina(input);
+  }
+
+  @Query(() => CreditoProductividadEjecutivoOutput, {
+    name: 'creditoProductividadEjecutivo',
+  })
+  public getProductividadEjecutivo(
+    @Args('input') input: CreditoProductividadEjecutivoInput,
+  ) {
+    return this._creditoService.getProductividadEjecutivo(input);
+  }
+
+  @Query(() => CreditoProductividadGraficasEjecutivoOutput, {
+    name: 'creditoProductividadGraficasEjecutivo',
+  })
+  public getProductividadGraficasEjecutivo(
+    @Args('input') input: CreditoProductividadEjecutivoInput,
+  ) {
+    return this._creditoService.getProductividadGraficasEjecutivo(input);
+  }
+
+  @Query(() => CreditoProductividadTipoAutorizacionOutput, {
+    name: 'creditoProductividadTipoAutorizacion',
+  })
+  public getProductividadTipoAutorizacion(
+    @Args('input') input: CreditoProductividadEjecutivoInput,
+  ) {
+    return this._creditoService.getProductividadTipoAutorizacion(input);
+  }
+
+  @Query(() => CreditoProductividadTipoPagoOutput, {
+    name: 'creditoProductividadTipoPago',
+  })
+  public async creditoProductividadTipoPago(
+    @Args('input') input: CreditoProductividadEjecutivoInput,
+  ) {
+    return this._creditoService.getProductividadTipoPago(input);
+  }
+
+  @Query(() => CreditoProductividadTipoSocioOutput, {
+    name: 'creditoProductividadTipoSocio',
+  })
+  public getProductividadTipoSocio(
+    @Args('input') input: CreditoProductividadEjecutivoInput,
+  ) {
+    return this._creditoService.getProductividadTipoSocio(input);
+  }
+
+  @Query(() => CreditoProductividadClasificacionOutput, {
+    name: 'creditoProductividadClasificacion',
+  })
+  public getProductividadClasificacion(
+    @Args('input') input: CreditoProductividadEjecutivoInput,
+  ) {
+    return this._creditoService.getProductividadClasificacion(input);
+  }
+
+  @Query(() => CreditoProductividadSituacionOutput, {
+    name: 'creditoProductividadSituacion',
+  })
+  public getProductividadSituacion(
+    @Args('input') input: CreditoProductividadEjecutivoInput,
+  ) {
+    return this._creditoService.getProductividadSituacion(input);
+  }
+
+  @Query(() => CreditoProductividadComportamientoOutput, {
+    name: 'creditoProductividadComportamiento',
+  })
+  public getProductividadComportamiento(
+    @Args('input') input: CreditoProductividadEjecutivoInput,
+  ) {
+    return this._creditoService.getProductividadComportamiento(input);
+  }
+
+  @Query(() => CreditoProductividadRankingResumenOutput, {
+    name: 'creditoProductividadRankingResumen',
+  })
+  public getProductividadRankingResumen(
+    @Args('input') input: CreditoProductividadEjecutivoInput,
+  ) {
+    return this._creditoService.getProductividadRankingResumen(input);
+  }
+
+  @Query(() => CreditoProductividadRankingMensualOutput, {
+    name: 'creditoProductividadRankingMensual',
+  })
+  public getProductividadRankingMensual(
+    @Args('input') input: CreditoProductividadRankingPageInput,
+  ) {
+    return this._creditoService.getProductividadRankingMensual(input);
+  }
+
+  @Query(() => CreditoProductividadRankingAcumuladoOutput, {
+    name: 'creditoProductividadRankingAcumulado',
+  })
+  public getProductividadRankingAcumulado(
+    @Args('input') input: CreditoProductividadRankingPageInput,
+  ) {
+    return this._creditoService.getProductividadRankingAcumulado(input);
   }
 }
