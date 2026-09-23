@@ -53,6 +53,10 @@ export const operacionesPatterns = {
     'operaciones.credito.getProductividadRankingMensual',
   GET_PRODUCTIVIDAD_RANKING_ACUMULADO:
     'operaciones.credito.getProductividadRankingAcumulado',
+  GET_PERSONAS_RELACIONADAS_RESUMEN:
+    'operaciones.credito.getPersonasRelacionadasResumen',
+  GET_PERSONAS_RELACIONADAS_CREDITOS:
+    'operaciones.credito.getPersonasRelacionadasCreditos',
 
   CREATE_USUARIO_ALIAS: 'operaciones.usuarios-alias.createAlias',
   GET_USUARIOS_ALIAS: 'operaciones.usuarios-alias.getAliases',

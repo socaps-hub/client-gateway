@@ -69,6 +69,14 @@ import {
   CreditoProductividadRankingAcumuladoOutput
 } from './dto/inputs/credito-productividad-ranking-acumulado.output';
 import { CreditoCumplimientoMensualColocacionInput } from './dto/inputs/credito-cumplimiento-mensual-colocacion.input';
+import {
+  CreditoPersonasRelacionadasCreditosInput,
+  CreditoPersonasRelacionadasInput,
+} from './dto/inputs/credito-presonas-relacionadas.input';
+import {
+  CreditoPersonasRelacionadasCreditosOutput,
+  CreditoPersonasRelacionadasResumenOutput,
+} from './dto/outputs/credito-personas-relacionadas.output';
 
 @Injectable()
 export class CreditoService {
@@ -299,18 +307,42 @@ export class CreditoService {
   public getProductividadRankingResumen(
     input: CreditoProductividadEjecutivoInput,
   ) {
-    return this._client.send<CreditoProductividadRankingResumenOutput>(operacionesPatterns.GET_PRODUCTIVIDAD_RANKING_RESUMEN, input);
+    return this._client.send<CreditoProductividadRankingResumenOutput>(
+      operacionesPatterns.GET_PRODUCTIVIDAD_RANKING_RESUMEN,
+      input,
+    );
   }
 
   public getProductividadRankingMensual(
     input: CreditoProductividadRankingPageInput,
   ) {
-    return this._client.send<CreditoProductividadRankingMensualOutput>(operacionesPatterns.GET_PRODUCTIVIDAD_RANKING_MENSUAL, input);
+    return this._client.send<CreditoProductividadRankingMensualOutput>(
+      operacionesPatterns.GET_PRODUCTIVIDAD_RANKING_MENSUAL,
+      input,
+    );
   }
 
   public getProductividadRankingAcumulado(
     input: CreditoProductividadRankingPageInput,
   ) {
-    return this._client.send<CreditoProductividadRankingAcumuladoOutput>(operacionesPatterns.GET_PRODUCTIVIDAD_RANKING_ACUMULADO, input);
+    return this._client.send<CreditoProductividadRankingAcumuladoOutput>(
+      operacionesPatterns.GET_PRODUCTIVIDAD_RANKING_ACUMULADO,
+      input,
+    );
+  }
+
+  // =================================
+  // PERSONAS RELACIONADAS
+  // =================================
+  public getPersonasRelacionadasResumen(
+    input: CreditoPersonasRelacionadasInput,
+  ) {
+    return this._client.send<CreditoPersonasRelacionadasResumenOutput>(operacionesPatterns.GET_PERSONAS_RELACIONADAS_RESUMEN, input);
+  }
+
+  public getPersonasRelacionadasCreditos(
+    input: CreditoPersonasRelacionadasCreditosInput,
+  ) {
+    return this._client.send<CreditoPersonasRelacionadasCreditosOutput>(operacionesPatterns.GET_PERSONAS_RELACIONADAS_CREDITOS, input);
   }
 }

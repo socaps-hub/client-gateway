@@ -71,6 +71,14 @@ import { CreditoProductividadRankingPageInput } from './dto/inputs/credito-produ
 import {
   CreditoProductividadRankingAcumuladoOutput
 } from './dto/inputs/credito-productividad-ranking-acumulado.output';
+import {
+  CreditoPersonasRelacionadasCreditosOutput,
+  CreditoPersonasRelacionadasResumenOutput,
+} from './dto/outputs/credito-personas-relacionadas.output';
+import {
+  CreditoPersonasRelacionadasCreditosInput,
+  CreditoPersonasRelacionadasInput,
+} from './dto/inputs/credito-presonas-relacionadas.input';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -370,5 +378,26 @@ export class CreditoResolver {
     @Args('input') input: CreditoProductividadRankingPageInput,
   ) {
     return this._creditoService.getProductividadRankingAcumulado(input);
+  }
+
+  // =================================
+  // PERSONAS RELACIONADAS
+  // =================================
+  @Query(() => CreditoPersonasRelacionadasResumenOutput, {
+    name: 'creditoPersonasRelacionadasResumen',
+  })
+  public creditoPersonasRelacionadasResumen(
+    @Args('input') input: CreditoPersonasRelacionadasInput,
+  ) {
+    return this._creditoService.getPersonasRelacionadasResumen(input);
+  }
+
+  @Query(() => CreditoPersonasRelacionadasCreditosOutput, {
+    name: 'creditoPersonasRelacionadasCreditos',
+  })
+  public creditoPersonasRelacionadasCreditos(
+    @Args('input') input: CreditoPersonasRelacionadasCreditosInput,
+  ) {
+    return this._creditoService.getPersonasRelacionadasCreditos(input);
   }
 }
