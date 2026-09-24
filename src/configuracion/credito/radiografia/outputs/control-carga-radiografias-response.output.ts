@@ -4,36 +4,36 @@ import { RadioAreaEnum } from "../enums/control-carga-radio-area.enum";
 
 @ObjectType()
 export class ControlCargaRadiografiaDto {
-    @Field(() => Int)
-    C01Id: number;
+  @Field(() => Int)
+  C01Id: number;
 
-    @Field(() => String)
-    C01CooperativaCodigo: string;
+  @Field(() => String)
+  C01CooperativaCodigo: string;
 
-    @Field(() => String)
-    C01CooperativaNombre: string;
+  @Field(() => String)
+  C01CooperativaNombre: string;
 
-    @Field(() => String, { nullable: true })
-    C01Archivo?: string;
+  @Field(() => String, { nullable: true })
+  C01Archivo?: string;
 
-    @Field( () => String)
-    C01FechaCarga: String;
+  @Field(() => String)
+  C01FechaCarga: String;
 
-    @Field(() => Int)
-    C01PeriodoMes: number;
-    
-    @Field(() => Int)
-    C01PeriodoAnio: number;
+  @Field(() => Int)
+  C01PeriodoMes: number;
 
-    @Field(() => RadioAreaEnum)
-    C01Area: RadioAreaEnum;
+  @Field(() => Int)
+  C01PeriodoAnio: number;
 
-    // Relación inversa con RA01Credito
-    @Field(() => [RA01Credito], { nullable: true })
-    creditos?: RA01Credito[];
+  @Field(() => RadioAreaEnum)
+  C01Area: RadioAreaEnum;
 
-    @Field(() => Int)
-    totalCreditos: number;
+  // Relación inversa con RA01Credito
+  // @Field(() => [RA01Credito], { nullable: true })
+  // creditos?: RA01Credito[];
+
+  @Field(() => Int)
+  totalRegistros: number;
 }
 
 

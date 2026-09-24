@@ -22,30 +22,36 @@ import { Usuario } from 'src/configuracion/usuarios/entities/usuario.entity';
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
 export class RadiografiaResolver {
-
   constructor(
     private readonly radiografiaService: RadiografiaService,
     private readonly excelService: ExcelService,
     private readonly awsS3Service: AwsS3Service,
-  ) { }
+  ) {}
 
-  @Query(() => ControlCargaRadiografiasResponse, { name: 'getAllControlCargasRadiografias' })
+  @Query(() => ControlCargaRadiografiasResponse, {
+    name: 'getAllControlCargasRadiografias',
+  })
   controlCargaRadiografias(
-    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
+    @GetUser({ type: 'graphql', roles: [ValidRoles.superUser] }) user: Usuario,
   ) {
-    return this.radiografiaService.getAllControlCargaRadiografias()
+    return this.radiografiaService.getAllControlCargaRadiografias();
   }
 
-  @Mutation(() => BooleanResponse, { name: 'cargarRadiografiaCreditoDesdeExcel' })
+  @Mutation(() => BooleanResponse, {
+    name: 'cargarRadiografiaCreditoDesdeExcel',
+  })
   async cargarRadiografiaDesdeExcel(
     @Args({ name: 'file', type: () => GraphQLUpload }) file: FileUpload,
     @Args('cooperativaCodigo') cooperativaCodigo: string,
-    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
+    @GetUser({ type: 'graphql', roles: [ValidRoles.superUser] }) user: Usuario,
   ) {
     try {
       // 🧠 1️⃣ Subir archivo a S3
       const { key } = await this.awsS3Service.uploadExcel(file, 'radiografias');
-      this.radiografiaService.crearCargaMasivaRadiografiaCredito(key, cooperativaCodigo);
+      this.radiografiaService.crearCargaMasivaRadiografiaCredito(
+        key,
+        cooperativaCodigo,
+      );
 
       return { success: true, message: 'Procesamiento iniciado' };
     } catch (error) {
@@ -54,17 +60,22 @@ export class RadiografiaResolver {
     }
   }
 
-  @Mutation(() => BooleanResponse, { name: 'cargarRadiografiaCreditoFromExcel' })
+  @Mutation(() => BooleanResponse, { name: 'cargarRadiografiaFromExcel' })
   async cargarRadiografiaFromExcel(
     @Args({ name: 'file', type: () => GraphQLUpload }) file: FileUpload,
     @Args('cooperativaCodigo') cooperativaCodigo: string,
     @Args({ name: 'area', type: () => RadioAreaEnum }) area: RadioAreaEnum,
-    @GetUser({type: 'graphql', roles: [ ValidRoles.superUser ]}) user: Usuario,
+    @GetUser({ type: 'graphql', roles: [ValidRoles.superUser] }) user: Usuario,
   ) {
     try {
       // 🧠 1️⃣ Subir archivo a S3
       const { key } = await this.awsS3Service.uploadExcel(file, 'radiografias');
-      this.radiografiaService.crearCargaMasivaRadiografia(key, cooperativaCodigo, area, user);
+      this.radiografiaService.crearCargaMasivaRadiografia(
+        key,
+        cooperativaCodigo,
+        area,
+        user,
+      );
 
       return { success: true, message: 'Procesamiento iniciado' };
     } catch (error) {
@@ -72,6 +83,4 @@ export class RadiografiaResolver {
       return { success: false, message: error.message };
     }
   }
-
-
 }
