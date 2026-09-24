@@ -77,6 +77,12 @@ import {
   CreditoPersonasRelacionadasCreditosOutput,
   CreditoPersonasRelacionadasResumenOutput,
 } from './dto/outputs/credito-personas-relacionadas.output';
+import { CreditoMayoresSaldosInput } from './dto/inputs/credito-mayores-saldos.input';
+import { CreditoMayoresSaldosOutput } from './dto/outputs/credito-mayores-saldos.output';
+import { CreditoSociosMayormenteAcreditadosInput } from './dto/inputs/credito-socio-mayormente-acreditados.input';
+import { CreditoSociosMayormenteAcreditadosOutput } from './dto/outputs/credito-socios-mayormente-acreditados.output';
+import { CreditoSociosMayoresSaldosInput } from './dto/inputs/credito-socios-mayores-saldos.input';
+import { CreditoSociosMayoresSaldosOutput } from './dto/outputs/credito-socios-mayores-saldos.output';
 
 @Injectable()
 export class CreditoService {
@@ -337,12 +343,44 @@ export class CreditoService {
   public getPersonasRelacionadasResumen(
     input: CreditoPersonasRelacionadasInput,
   ) {
-    return this._client.send<CreditoPersonasRelacionadasResumenOutput>(operacionesPatterns.GET_PERSONAS_RELACIONADAS_RESUMEN, input);
+    return this._client.send<CreditoPersonasRelacionadasResumenOutput>(
+      operacionesPatterns.GET_PERSONAS_RELACIONADAS_RESUMEN,
+      input,
+    );
   }
 
   public getPersonasRelacionadasCreditos(
     input: CreditoPersonasRelacionadasCreditosInput,
   ) {
-    return this._client.send<CreditoPersonasRelacionadasCreditosOutput>(operacionesPatterns.GET_PERSONAS_RELACIONADAS_CREDITOS, input);
+    return this._client.send<CreditoPersonasRelacionadasCreditosOutput>(
+      operacionesPatterns.GET_PERSONAS_RELACIONADAS_CREDITOS,
+      input,
+    );
+  }
+
+  // ====================================
+  // 20+
+  // ====================================
+  public getMayoresSaldos(input: CreditoMayoresSaldosInput) {
+    return this._client.send<CreditoMayoresSaldosOutput>(
+      operacionesPatterns.GET_MAYORES_SALDOS,
+      input,
+    );
+  }
+
+  public getSociosMayormenteAcreditados(
+    input: CreditoSociosMayormenteAcreditadosInput,
+  ) {
+    return this._client.send<CreditoSociosMayormenteAcreditadosOutput>(
+      operacionesPatterns.GET_SOCIOS_MAYORMENTE_ACREDITADOS,
+      input,
+    );
+  }
+
+  public getSociosMayoresSaldos(input: CreditoSociosMayoresSaldosInput) {
+    return this._client.send<CreditoSociosMayoresSaldosOutput>(
+      operacionesPatterns.GET_SOCIOS_MAYORMENTE_SALDOS,
+      input,
+    );
   }
 }

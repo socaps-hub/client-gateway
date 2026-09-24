@@ -57,6 +57,11 @@ export const operacionesPatterns = {
     'operaciones.credito.getPersonasRelacionadasResumen',
   GET_PERSONAS_RELACIONADAS_CREDITOS:
     'operaciones.credito.getPersonasRelacionadasCreditos',
+  GET_MAYORES_SALDOS: 'operaciones.credito.getMayoresSaldos',
+  GET_SOCIOS_MAYORMENTE_ACREDITADOS:
+    'operaciones.credito.getSociosMayormenteAcreditados',
+  GET_SOCIOS_MAYORMENTE_SALDOS:
+    'operaciones.credito.getSociosMayoresSaldos',
 
   CREATE_USUARIO_ALIAS: 'operaciones.usuarios-alias.createAlias',
   GET_USUARIOS_ALIAS: 'operaciones.usuarios-alias.getAliases',

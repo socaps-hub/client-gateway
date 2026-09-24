@@ -79,6 +79,12 @@ import {
   CreditoPersonasRelacionadasCreditosInput,
   CreditoPersonasRelacionadasInput,
 } from './dto/inputs/credito-presonas-relacionadas.input';
+import { CreditoMayoresSaldosOutput } from './dto/outputs/credito-mayores-saldos.output';
+import { CreditoMayoresSaldosInput } from './dto/inputs/credito-mayores-saldos.input';
+import { CreditoSociosMayormenteAcreditadosOutput } from './dto/outputs/credito-socios-mayormente-acreditados.output';
+import { CreditoSociosMayormenteAcreditadosInput } from './dto/inputs/credito-socio-mayormente-acreditados.input';
+import { CreditoSociosMayoresSaldosOutput } from './dto/outputs/credito-socios-mayores-saldos.output';
+import { CreditoSociosMayoresSaldosInput } from './dto/inputs/credito-socios-mayores-saldos.input';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -399,5 +405,33 @@ export class CreditoResolver {
     @Args('input') input: CreditoPersonasRelacionadasCreditosInput,
   ) {
     return this._creditoService.getPersonasRelacionadasCreditos(input);
+  }
+
+  // ====================================
+  // 20+
+  // ====================================
+  @Query(() => CreditoMayoresSaldosOutput, {
+    name: 'creditoMayoresSaldos',
+  })
+  public creditoMayoresSaldos(@Args('input') input: CreditoMayoresSaldosInput) {
+    return this._creditoService.getMayoresSaldos(input);
+  }
+
+  @Query(() => CreditoSociosMayormenteAcreditadosOutput, {
+    name: 'creditoSociosMayormenteAcreditados',
+  })
+  public creditoSociosMayormenteAcreditados(
+    @Args('input') input: CreditoSociosMayormenteAcreditadosInput,
+  ) {
+    return this._creditoService.getSociosMayormenteAcreditados(input);
+  }
+
+  @Query(() => CreditoSociosMayoresSaldosOutput, {
+    name: 'creditoSociosMayoresSaldos',
+  })
+  public creditoSociosMayoresSaldos(
+    @Args('input') input: CreditoSociosMayoresSaldosInput,
+  ) {
+    return this._creditoService.getSociosMayoresSaldos(input);
   }
 }
