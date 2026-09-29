@@ -83,6 +83,8 @@ import { CreditoSociosMayormenteAcreditadosInput } from './dto/inputs/credito-so
 import { CreditoSociosMayormenteAcreditadosOutput } from './dto/outputs/credito-socios-mayormente-acreditados.output';
 import { CreditoSociosMayoresSaldosInput } from './dto/inputs/credito-socios-mayores-saldos.input';
 import { CreditoSociosMayoresSaldosOutput } from './dto/outputs/credito-socios-mayores-saldos.output';
+import { CreditoSocioDetalleInput } from './dto/inputs/credito-socio-detalle.input';
+import { CreditoSocioDetalleOutput } from './dto/outputs/credito-socio-detalle-credito.output';
 
 @Injectable()
 export class CreditoService {
@@ -380,6 +382,13 @@ export class CreditoService {
   public getSociosMayoresSaldos(input: CreditoSociosMayoresSaldosInput) {
     return this._client.send<CreditoSociosMayoresSaldosOutput>(
       operacionesPatterns.GET_SOCIOS_MAYORMENTE_SALDOS,
+      input,
+    );
+  }
+
+  public getSocioDetalle(input: CreditoSocioDetalleInput) {
+    return this._client.send<CreditoSocioDetalleOutput>(
+      operacionesPatterns.GET_SOCIO_DETALLE,
       input,
     );
   }

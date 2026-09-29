@@ -60,8 +60,8 @@ export const operacionesPatterns = {
   GET_MAYORES_SALDOS: 'operaciones.credito.getMayoresSaldos',
   GET_SOCIOS_MAYORMENTE_ACREDITADOS:
     'operaciones.credito.getSociosMayormenteAcreditados',
-  GET_SOCIOS_MAYORMENTE_SALDOS:
-    'operaciones.credito.getSociosMayoresSaldos',
+  GET_SOCIOS_MAYORMENTE_SALDOS: 'operaciones.credito.getSociosMayoresSaldos',
+  GET_SOCIO_DETALLE: 'operaciones.credito.getSocioDetalle',
 
   CREATE_USUARIO_ALIAS: 'operaciones.usuarios-alias.createAlias',
   GET_USUARIOS_ALIAS: 'operaciones.usuarios-alias.getAliases',
