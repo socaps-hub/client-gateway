@@ -8,6 +8,8 @@ import { ProductosModule } from './productos/productos.module';
 import { CreditoModule } from './credito/credito.module';
 import { MigracionModule } from './migracion/migracion.module';
 import { ModulosModule } from './modulos/modulos.module';
+import { CategoriasCaptacionModule } from './categorias-captacion/categorias-captacion.module';
+import { ProductosCaptacionModule } from './productos-captacion/productos-captacion.module';
 
 @Module({
     imports: [
@@ -20,6 +22,8 @@ import { ModulosModule } from './modulos/modulos.module';
         CreditoModule,
         MigracionModule,
         ModulosModule,
+        CategoriasCaptacionModule,
+        ProductosCaptacionModule,
     ]
 })
 export class ConfiguracionModule {}
