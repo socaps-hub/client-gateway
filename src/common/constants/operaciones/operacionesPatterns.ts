@@ -1,5 +1,6 @@
 
 export const operacionesPatterns = {
+  // CREDITO
   GET_COLOCACION_TOTAL_CREDITO:
     'operaciones.credito.getColocacionTotalDashboard',
 
@@ -62,6 +63,13 @@ export const operacionesPatterns = {
     'operaciones.credito.getSociosMayormenteAcreditados',
   GET_SOCIOS_MAYORMENTE_SALDOS: 'operaciones.credito.getSociosMayoresSaldos',
   GET_SOCIO_DETALLE: 'operaciones.credito.getSocioDetalle',
+
+  // CAPTACION
+  GET_TABLA_SALDOS: 'operaciones.captacion.getTablaSaldos',
+  GET_POSICION_CAPTACION: 'operaciones.captacion.getPosicion',
+  GET_COMPOSICION_CAPTACION: 'operaciones.captacion.getComposicion',
+  GET_CUENTAS_VISTA_CAPTACION: 'operaciones.captacion.getCuentasVista',
+  GET_CUENTAS_PLAZO_CAPTACION: 'operaciones.captacion.getCuentasPlazo',
 
   CREATE_USUARIO_ALIAS: 'operaciones.usuarios-alias.createAlias',
   GET_USUARIOS_ALIAS: 'operaciones.usuarios-alias.getAliases',
