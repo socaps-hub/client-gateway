@@ -10,6 +10,7 @@ import { ValidRoles } from '../../auth/enums/valid-roles.enum';
 import { Usuario } from '../../configuracion/usuarios/entities/usuario.entity';
 import { DetalleMetaOutput } from './dto/outputs/detalle-meta.output';
 import { AwsS3Service } from '../../common/aws/services/aws-s3.service';
+import { DetalleMetaCaptacionOutput } from './dto/outputs/detalle-meta-captacion.output';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -62,5 +63,17 @@ export class MetasResolver {
     user: Usuario,
   ): Promise<string> {
     return this._awsS3Service.getSignedDownloadUrl(key);
+  }
+
+  @Query(() => DetalleMetaCaptacionOutput, {
+    name: 'detalleMetaCaptacion',
+  })
+  @UseGuards(AuthGraphQLGuard)
+  public getDetalleMetaCaptacion(
+    @Args('controlId', {
+      type: () => Int,
+    }) controlId: number,
+  ) {
+    return this._service.getDetalleMetaCaptacion(controlId);
   }
 }

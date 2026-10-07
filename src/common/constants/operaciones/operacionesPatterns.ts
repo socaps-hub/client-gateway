@@ -1,12 +1,12 @@
 
 export const operacionesPatterns = {
+  GET_CONTROLES_METAS: 'operaciones.metas.getControles',
+
   // CREDITO
   GET_COLOCACION_TOTAL_CREDITO:
     'operaciones.credito.getColocacionTotalDashboard',
 
   UPLOAD_METAS_COLOCACION: 'operaciones.credito.metas.upload',
-
-  GET_CONTROLES_METAS: 'operaciones.metas.getControles',
   GET_DETALLE_META: 'operaciones.metas.getDetalle',
   GET_MEDICION_ANUAL: 'operaciones.credito.getMedicionAnual',
   GET_MEDICION_MENSUAL: 'operaciones.credito.getMedicionMensual',
@@ -65,6 +65,8 @@ export const operacionesPatterns = {
   GET_SOCIO_DETALLE: 'operaciones.credito.getSocioDetalle',
 
   // CAPTACION
+  UPLOAD_METAS_CAPTACION: 'operaciones.captacion.metas.upload',
+  GET_DETALLE_META_CAPTACION: 'operaciones.metas.getDetalleCaptacion',
   GET_TABLA_SALDOS: 'operaciones.captacion.getTablaSaldos',
   GET_POSICION_CAPTACION: 'operaciones.captacion.getPosicion',
   GET_COMPOSICION_CAPTACION: 'operaciones.captacion.getComposicion',

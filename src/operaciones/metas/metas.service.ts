@@ -7,6 +7,7 @@ import { operacionesPatterns } from '../../common/constants/operaciones/operacio
 import { GetControlesMetasInput } from './dto/inputs/get-controles-metas.input';
 import { ControlMetaOutput } from './dto/outputs/control-meta.output';
 import { DetalleMetaOutput } from './dto/outputs/detalle-meta.output';
+import { DetalleMetaCaptacionOutput } from './dto/outputs/detalle-meta-captacion.output';
 
 @Injectable()
 export class MetasService {
@@ -28,6 +29,14 @@ export class MetasService {
       {
         controlId,
       },
+    );
+  }
+
+  public getDetalleMetaCaptacion(
+    controlId: number,
+  ) {
+    return this._client.send< DetalleMetaCaptacionOutput >(
+      operacionesPatterns .GET_DETALLE_META_CAPTACION, { controlId },
     );
   }
 }
