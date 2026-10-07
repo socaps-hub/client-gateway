@@ -5,24 +5,16 @@ import { ParseUUIDPipe, UseGuards } from '@nestjs/common';
 import { firstValueFrom } from 'rxjs';
 
 import { GetUser } from 'src/auth/decorators/user.decorator';
-
 import { AuthGraphQLGuard } from 'src/auth/guards/auth-graphql.guard';
-
 import { ValidRoles } from 'src/auth/enums/valid-roles.enum';
-
 import { BooleanResponse } from 'src/common/dto/boolean-response.object';
-
 import { Usuario } from '../usuarios/entities/usuario.entity';
-
 import { ProductoCaptacion } from './entities/producto-captacion.entity';
-
 import { CreateProductoCaptacionInput } from './dto/inputs/create-producto-captacion.input';
-
 import { UpdateProductoCaptacionInput } from './dto/inputs/update-producto-captacion.input';
-
 import { CreateManyProductosCaptacionFromExcelArgs } from './dto/args/create-many-productos-captacion-from-excel.arg';
-
 import { ProductosCaptacionService } from './productos-captacion.service';
+import { SyncProductosCaptacionInfantilesInput } from './dto/inputs/sync-productos-captacion-infantiles.input';
 
 @Resolver(() => ProductoCaptacion)
 @UseGuards(AuthGraphQLGuard)
@@ -194,6 +186,20 @@ export class ProductosCaptacionResolver {
     user: Usuario,
   ) {
     return this.productosCaptacionService.desactivate(id, coopId, user);
+  }
+
+  @Mutation(() => BooleanResponse)
+  public syncProductosCaptacionInfantiles(
+    @Args('input')
+    input: SyncProductosCaptacionInfantilesInput,
+
+    @GetUser({
+      type: 'graphql',
+      roles: [ValidRoles.superUser],
+    })
+    user: Usuario,
+  ) {
+    return this.productosCaptacionService.syncInfantiles(input, user);
   }
 
   @Mutation(() => BooleanResponse)

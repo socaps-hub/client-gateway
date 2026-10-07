@@ -11,6 +11,7 @@ import { UpdateProductoCaptacionInput } from './dto/inputs/update-producto-capta
 import { CreateProductoCaptacionImportDto } from './dto/inputs/create-producto-captacion-import.dto';
 import { ProductoCaptacion } from './entities/producto-captacion.entity';
 import { productosCaptacionPatterns } from '../../common/constants';
+import { SyncProductosCaptacionInfantilesInput } from './dto/inputs/sync-productos-captacion-infantiles.input';
 
 @Injectable()
 export class ProductosCaptacionService {
@@ -104,6 +105,21 @@ export class ProductosCaptacionService {
       {
         id,
         coopId,
+        user,
+      },
+    );
+  }
+
+  public syncInfantiles(
+    input: SyncProductosCaptacionInfantilesInput,
+    user: Usuario,
+  ): Observable<BooleanResponse> {
+
+    return this._client.send<BooleanResponse>(
+      productosCaptacionPatterns
+        .SYNC_INFANTILES,
+      {
+        input,
         user,
       },
     );
