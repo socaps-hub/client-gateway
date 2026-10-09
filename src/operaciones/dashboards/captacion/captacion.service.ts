@@ -11,11 +11,18 @@ import { CaptacionPosicionOutput } from './dto/outputs/saldos/captacion-posicion
 import { CaptacionComposicionOutput } from './dto/outputs/saldos/captacion-composicion.output';
 import { CaptacionProductoInput } from './dto/inputs/captacion-producto.input';
 import { CaptacionProductosAnalisisOutput } from './dto/outputs/saldos/captacion-productos-analisis.output';
+import { CaptacionCumplimientoPresupuestoInput } from './dto/inputs/captacion-cumplimiento-presupuesto.input';
+import {
+  CaptacionCumplimientoPresupuestoOutput
+} from './dto/outputs/cumplimiento-metas/captacion-cumplimiento-presupuesto.output';
 
 @Injectable()
 export class CaptacionService {
   constructor(@Inject(NATS_SERVICE) private readonly _client: ClientProxy) {}
 
+  //   ====================================
+  //   SALDOS
+  //   ====================================
   public getTablaSaldos(
     input: CaptacionPeriodoInput,
   ): Observable<CaptacionTablaSaldosOutput> {
@@ -59,5 +66,17 @@ export class CaptacionService {
       CaptacionProductosAnalisisOutput,
       CaptacionProductoInput
     >(operacionesPatterns.GET_CUENTAS_PLAZO_CAPTACION, input);
+  }
+
+  //   ====================================
+  //   CUMPLIMIENTO-METAS
+  //   ====================================
+  public getCumplimientoPresupuesto(
+    input: CaptacionCumplimientoPresupuestoInput,
+  ): Observable<CaptacionCumplimientoPresupuestoOutput> {
+    return this._client.send<
+      CaptacionCumplimientoPresupuestoOutput,
+      CaptacionCumplimientoPresupuestoInput
+    >(operacionesPatterns.CUMPLIMIENTO_PRESUPUESTO, input);
   }
 }

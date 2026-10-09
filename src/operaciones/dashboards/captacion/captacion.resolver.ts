@@ -10,11 +10,20 @@ import { CaptacionBaseInput } from './dto/inputs/captacion-base.input';
 import {CaptacionComposicionOutput} from "./dto/outputs/saldos/captacion-composicion.output";
 import { CaptacionProductosAnalisisOutput } from './dto/outputs/saldos/captacion-productos-analisis.output';
 import { CaptacionProductoInput } from './dto/inputs/captacion-producto.input';
+import {
+  CaptacionCumplimientoPresupuestoOutput
+} from './dto/outputs/cumplimiento-metas/captacion-cumplimiento-presupuesto.output';
+import { CaptacionCumplimientoPresupuestoInput } from './dto/inputs/captacion-cumplimiento-presupuesto.input';
+import { Observable } from 'rxjs';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
 export class CaptacionResolver {
   constructor(private readonly _captacionService: CaptacionService) {}
+
+  //   ====================================
+  //   SALDOS
+  //   ====================================
 
   @Query(() => CaptacionTablaSaldosOutput, {
     name: 'captacionTablaSaldos',
@@ -49,5 +58,17 @@ export class CaptacionResolver {
   })
   public getCuentasPlazo(@Args('input') input: CaptacionProductoInput) {
     return this._captacionService.getCuentasPlazo(input);
+  }
+
+  //   ====================================
+  //   CUMPLIMIENTO-METAS
+  //   ====================================
+  @Query(() => CaptacionCumplimientoPresupuestoOutput, {
+    name: 'captacionCumplimientoPresupuesto',
+  })
+  public getCumplimientoPresupuesto(
+    @Args('input') input: CaptacionCumplimientoPresupuestoInput,
+  ): Observable<CaptacionCumplimientoPresupuestoOutput> {
+    return this._captacionService.getCumplimientoPresupuesto(input);
   }
 }

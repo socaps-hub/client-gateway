@@ -1,0 +1,12 @@
+import { registerEnumType } from '@nestjs/graphql';
+
+export enum CaptacionPresupuestoAnalisisEnum {
+  CAPTACION_TOTAL = 'CAPTACION_TOTAL',
+  CUENTAS_PLAZO = 'CUENTAS_PLAZO',
+  CUENTAS_VISTA = 'CUENTAS_VISTA',
+  AHORRADOR_MENOR = 'AHORRADOR_MENOR',
+}
+
+registerEnumType(CaptacionPresupuestoAnalisisEnum, {
+  name: 'CaptacionPresupuestoAnalisisEnum',
+});

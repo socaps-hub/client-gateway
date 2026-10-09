@@ -72,6 +72,7 @@ export const operacionesPatterns = {
   GET_COMPOSICION_CAPTACION: 'operaciones.captacion.getComposicion',
   GET_CUENTAS_VISTA_CAPTACION: 'operaciones.captacion.getCuentasVista',
   GET_CUENTAS_PLAZO_CAPTACION: 'operaciones.captacion.getCuentasPlazo',
+  CUMPLIMIENTO_PRESUPUESTO: 'operaciones.captacion.cumplimientoPresupuesto',
 
   CREATE_USUARIO_ALIAS: 'operaciones.usuarios-alias.createAlias',
   GET_USUARIOS_ALIAS: 'operaciones.usuarios-alias.getAliases',
