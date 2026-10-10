@@ -74,6 +74,10 @@ export const operacionesPatterns = {
   GET_CUENTAS_PLAZO_CAPTACION: 'operaciones.captacion.getCuentasPlazo',
   CUMPLIMIENTO_PRESUPUESTO: 'operaciones.captacion.cumplimientoPresupuesto',
 
+  // AFILIACION
+  UPLOAD_METAS_AFILIACION: 'operaciones.afiliacion.metas.upload',
+  GET_DETALLE_META_AFILIACION: 'operaciones.metas.getDetalleAfiliacion',
+
   CREATE_USUARIO_ALIAS: 'operaciones.usuarios-alias.createAlias',
   GET_USUARIOS_ALIAS: 'operaciones.usuarios-alias.getAliases',
   UPDATE_USUARIO_ALIAS: 'operaciones.usuarios-alias.updateAlias',

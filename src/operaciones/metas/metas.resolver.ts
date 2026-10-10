@@ -11,6 +11,8 @@ import { Usuario } from '../../configuracion/usuarios/entities/usuario.entity';
 import { DetalleMetaOutput } from './dto/outputs/detalle-meta.output';
 import { AwsS3Service } from '../../common/aws/services/aws-s3.service';
 import { DetalleMetaCaptacionOutput } from './dto/outputs/detalle-meta-captacion.output';
+import { DetalleMetaAfiliacionOutput } from './dto/outputs/detalle-meta-afiliacion.output';
+import { firstValueFrom } from 'rxjs';
 
 @Resolver()
 @UseGuards(AuthGraphQLGuard)
@@ -72,8 +74,21 @@ export class MetasResolver {
   public getDetalleMetaCaptacion(
     @Args('controlId', {
       type: () => Int,
-    }) controlId: number,
+    })
+    controlId: number,
   ) {
     return this._service.getDetalleMetaCaptacion(controlId);
+  }
+
+  @Query(() => DetalleMetaAfiliacionOutput, {
+    name: 'detalleMetaAfiliacion',
+  })
+  public async getDetalleMetaAfiliacion(
+    @Args('controlId', { type: () => Int })
+    controlId: number,
+  ): Promise<DetalleMetaAfiliacionOutput> {
+    return firstValueFrom(
+      this._service.getDetalleMetaAfiliacion(controlId),
+    );
   }
 }
